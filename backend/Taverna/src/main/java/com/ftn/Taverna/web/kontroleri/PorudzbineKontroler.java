@@ -5,19 +5,18 @@ import com.ftn.Taverna.repository.ArtikalRepository;
 import com.ftn.Taverna.repository.PorudzbinaRepository;
 import com.ftn.Taverna.repository.StavkaRepository;
 import com.ftn.Taverna.model.*;
+import com.ftn.Taverna.servisi.*;
 import com.ftn.Taverna.web.kontroleri.DTO.KomentarDTO;
 import com.ftn.Taverna.web.kontroleri.DTO.PorudzbinaDTO;
 import com.ftn.Taverna.web.kontroleri.DTO.PorudzbinaDTO2;
 import com.ftn.Taverna.web.kontroleri.DTO.porudzbine.PorucivanjeDTO;
 import com.ftn.Taverna.web.kontroleri.DTO.porudzbine.StavkaDTO;
 import com.ftn.Taverna.web.kontroleri.DTO.post.KomentarPOSTDTO;
-import com.ftn.Taverna.servisi.ArtikliServis;
-import com.ftn.Taverna.servisi.KupacServis;
-import com.ftn.Taverna.servisi.PorudzbinaServis;
-import com.ftn.Taverna.servisi.ProdavacServis;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
@@ -49,6 +48,8 @@ public class PorudzbineKontroler {
 
     @Autowired
     StavkaRepository stavkaRepository;
+    @Autowired
+    KorisnikServis korisnikServis;
 
     @GetMapping
     public ResponseEntity<Collection<PorudzbinaDTO>> findAllPorudzbine() {
@@ -75,10 +76,13 @@ public class PorudzbineKontroler {
     }
 
 
-    @GetMapping(value = "/porudzbine-korisnika/{id}")
-    public ResponseEntity<Collection<PorudzbinaDTO>> getPorudzbineKupca(@PathVariable("id") Integer id){
-
-        List<Porudzbina> porudzbine = porudzbinaServis.findByKupacId(id);
+    @GetMapping(value = "/porudzbine-korisnika")
+    public ResponseEntity<Collection<PorudzbinaDTO>> getPorudzbineKupca(Authentication authentication){
+        UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
+        String username = userPrincipal.getUsername();
+        System.out.println("Ovo jeee" + username);
+        Korisnik korisnik = korisnikServis.findByUsername(username);
+        List<Porudzbina> porudzbine = porudzbinaServis.findByKupacId(korisnik.getId());
         List<PorudzbinaDTO> porudzbinaDTOS = new ArrayList<>();
         for (Porudzbina p: porudzbine) {
                 if(p.getKomentar()==null)
@@ -110,8 +114,11 @@ public class PorudzbineKontroler {
     }
 
 
-    @PostMapping(value = "/porucivanje/{id}")
-    public ResponseEntity<PorudzbinaDTO2> napraviPorudzbinu(@RequestBody PorucivanjeDTO porucivanjeDTO,@PathVariable("id") Integer id){
+    @PostMapping(value = "/porucivanje")
+    public ResponseEntity<PorudzbinaDTO2> napraviPorudzbinu(@RequestBody PorucivanjeDTO porucivanjeDTO,Authentication authentication){
+        UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
+        String username = userPrincipal.getUsername();
+        Kupac kupac = kupacServis.findByUsername(username);
         ArrayList<Stavka> stavkas = new ArrayList<>();
         System.out.println(porucivanjeDTO);
         Porudzbina porudzbina = new Porudzbina();
@@ -121,7 +128,7 @@ public class PorudzbineKontroler {
         int result = r.nextInt(high-low) + low;
         porudzbina.setId(result);
         porudzbina.setSatnica(Date.valueOf(LocalDate.now()));
-        porudzbina.setKupac(kupacServis.findOne(id));
+        porudzbina.setKupac(kupac);
         porudzbina.setDostavljeno(false);
         porudzbina.setAnonimanKomentar(false);
         porudzbina.setAnonimanKomentar(false);
@@ -190,9 +197,6 @@ public class PorudzbineKontroler {
 
 
         }
-
-
-
 
 
     @PostMapping("/komentar-arhiviraj/{id}")

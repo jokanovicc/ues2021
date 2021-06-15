@@ -61,7 +61,7 @@ public class Porudzbine extends AppCompatActivity {
     private void getPorudzbine() {
 
         porudzbineApiService = ServiceUtil.porudzbineApiService;
-        Call<List<PorudzbinePrikaz>> call = porudzbineApiService.getDospele(sharedPreferences.getInt(String.valueOf(MainActivity.ID),1));
+        Call<List<PorudzbinePrikaz>> call = porudzbineApiService.getDospele();
         call.enqueue(new Callback<List<PorudzbinePrikaz>>() {
 
 

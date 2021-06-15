@@ -28,4 +28,8 @@ public class KupacServis {
     public void deleteKupac(Kupac kupac){
         kupacRepository.delete(kupac);
     }
+
+    public Kupac findByUsername(String username){
+        return kupacRepository.findByKorisnik_Korisnicko(username);
+    }
 }

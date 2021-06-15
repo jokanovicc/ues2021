@@ -50,7 +50,6 @@ public class EditProfilActivity extends AppCompatActivity {
 
         editIme = findViewById(R.id.imeEdit);
         editPrezime = findViewById(R.id.prezimeEdit);
-        editSifra = findViewById(R.id.sifraEdit);
         editAdresa = findViewById(R.id.adresaEdit);
 
 
@@ -68,8 +67,6 @@ public class EditProfilActivity extends AppCompatActivity {
                 EditText prezime = findViewById(R.id.prezimeEdit);
                 prezime.setText(korisnik.getPrezime());
 
-                EditText sifra = findViewById(R.id.sifraEdit);
-                sifra.setText(korisnik.getSifra());
 
                 EditText adresa = findViewById(R.id.adresaEdit);
                 adresa.setText(korisnik.getAdresa());
@@ -111,8 +108,6 @@ public class EditProfilActivity extends AppCompatActivity {
                 String imePost = editIme.getText().toString();
                 String prezimePost = editPrezime.getText().toString();
                 String adresaPost = editAdresa.getText().toString();
-                String sifraPost = editSifra.getText().toString();
-
                 if(imePost.length()==0){
                     editIme.requestFocus();
                     editIme.setError("ИМЕ НЕ СМЕ БИТИ ПРАЗНО");
@@ -125,10 +120,6 @@ public class EditProfilActivity extends AppCompatActivity {
                     editAdresa.requestFocus();
                     editAdresa.setError("АДРЕСА НЕ СМЕ БИТИ ПРАЗНО");
                 }
-                if(sifraPost.length()==0){
-                    editSifra.requestFocus();
-                    editSifra.setError("ШИФРА НЕ СМЕ БИТИ ПРАЗНО");
-                }
 
                 else {
 
@@ -136,7 +127,6 @@ public class EditProfilActivity extends AppCompatActivity {
                     korisnik.setIme(imePost);
                     korisnik.setPrezime(prezimePost);
                     korisnik.setAdresa(adresaPost);
-                    korisnik.setSifra(sifraPost);
 
                 }
             }

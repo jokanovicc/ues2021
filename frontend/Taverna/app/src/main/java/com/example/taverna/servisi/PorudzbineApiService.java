@@ -16,8 +16,8 @@ import retrofit2.http.Path;
 
 public interface PorudzbineApiService {
 
-    @GET("porudzbine/porudzbine-korisnika/{id}")
-    Call<List<PorudzbinePrikaz>> getDospele(@Path("id") Integer id);
+    @GET("porudzbine/porudzbine-korisnika")
+    Call<List<PorudzbinePrikaz>> getDospele();
 
     @GET("porudzbine/stiglo/{id}")
     Call<PorudzbinePrikaz> getStiglo(@Path("id") Integer id);
@@ -25,8 +25,8 @@ public interface PorudzbineApiService {
     @POST("porudzbine/komentar")
     Call<Void> dodavanjeRecenzije(@Body DodavanjeKomentara dodavanjeKomentara);
 
-    @POST("porudzbine/porucivanje/{id}")
-    Call<Void> napraviPorudzbinu(@Body PorucivanjeDTO porucivanjeDTO,@Path("id") Integer id);
+    @POST("porudzbine/porucivanje")
+    Call<Void> napraviPorudzbinu(@Body PorucivanjeDTO porucivanjeDTO);
 
 
 }

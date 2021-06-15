@@ -15,9 +15,6 @@ import java.util.List;
 public class ArtikalDTOPost implements Serializable {
 
     private Integer id;
-
-    @NotEmpty
-    private Integer prodavacId;
     @NotBlank
     private String naziv;
     @NotBlank
@@ -32,7 +29,6 @@ public class ArtikalDTOPost implements Serializable {
 
     public ArtikalDTOPost(Artikal artikal){
         this.id = artikal.getId();
-        this.prodavacId = artikal.getProdavac().getId();
         this.naziv = artikal.getNaziv();
         this.opis = artikal.getOpis();
         this.cena = artikal.getCena();

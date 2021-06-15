@@ -154,7 +154,7 @@ public class ArtikliListaAdapter extends RecyclerView.Adapter<ArtikliListaAdapte
                         AlertDialog.Builder builder = new AlertDialog.Builder(v.getRootView().getContext());
 
                         builder.setTitle("Потврда поруџбине");
-                        builder.setMessage("Сигурни сте да желите да завршите поруџбину?");
+                        builder.setMessage("Сигурни сте да желите да завршите поруџбину?" + lista + " " +cena);
 
                         builder.setPositiveButton("Да", new DialogInterface.OnClickListener() {
 
@@ -192,7 +192,7 @@ public class ArtikliListaAdapter extends RecyclerView.Adapter<ArtikliListaAdapte
     public void zavrsitiKupovinu(View v){
 
         porudzbineApiService = ServiceUtil.porudzbineApiService;
-        Call<Void> call = porudzbineApiService.napraviPorudzbinu(porucivanjeDTO,Prodavci.sharedPreferences.getInt(String.valueOf(MainActivity.ID),1));
+        Call<Void> call = porudzbineApiService.napraviPorudzbinu(porucivanjeDTO);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {

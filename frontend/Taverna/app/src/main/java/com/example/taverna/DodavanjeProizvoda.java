@@ -151,14 +151,10 @@ public class DodavanjeProizvoda extends AppCompatActivity{
                 opis.setError("ОПИС НЕ СМЕ БИТИ ПРАЗАН");
 
             } else {
-
-
                 artikal.setPhoto(bitmap);
                 artikal.setCena(cenaInt);
                 artikal.setNaziv(nazivJela);
                 artikal.setOpis(opisJela);
-                artikal.setProdavacId(sharedPreferences.getInt(String.valueOf(MainActivity.ID), 1)); // za sad ovako
-
 
                 artikliApiService = ServiceUtil.artikliApiService;
                 Call<Artikal> call = artikliApiService.saveArtikal(artikal);
