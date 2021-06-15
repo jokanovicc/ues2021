@@ -1,0 +1,48 @@
+<resources>
+    <string name="app_name">Т А В Е Р Н А</string>
+    <string name="login_form_title">Логовање</string>
+    <string name="login_form_username">Корисничко име</string>
+    <string name="login_form_password">Шифра</string>
+    <string name="login_form_login">Улогуј се</string>
+
+    <string name="register_form_ime">Име</string>
+    <string name="register_form_prezime">Презиме</string>
+    <string name="register_form_email">Имејл</string>
+    <string name="register_form_adresa">Адреса</string>
+    <string name="register_form_register">Регуструј се</string>
+    <string name="register_form_title">Регистрација</string>
+    <string name="title_activity_drawer">Drawer</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Коментари</string>
+    <string name="menu_gallery">Акције</string>
+    <string name="menu_slideshow">Ваш Профил</string>
+
+    <string-array name="jela">
+        <item>Карађорђева шницла</item>
+        <item>Пуњена паприка</item>
+        <item>Лесковачка мућкалица</item>
+        <item>Рижото</item>
+    </string-array>
+
+    <string-array name="uloga">
+        <item>ПРОДАВАЦ</item>
+        <item>КУПАЦ</item>
+    </string-array>
+    <string name="title_activity_prodavac__drawer">Prodavac_Drawer</string>
+    <string name="title_activity_prodavac_drawer">Prodavac_Drawer</string>
+
+        <string-array name="ocena_array">
+            <item>1</item>
+            <item>2</item>
+            <item>3</item>
+            <item>4</item>
+            <item>5</item>
+        </string-array>
+
+</resources>

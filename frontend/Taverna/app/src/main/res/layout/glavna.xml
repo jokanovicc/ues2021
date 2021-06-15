@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@drawable/login">
+
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginBottom="10dp"
+            android:layout_margin="20dp">
+
+            <LinearLayout
+                android:padding="20dp"
+                android:layout_width="400dp"
+                android:layout_height="250dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:textAlignment="center"
+                    style="@style/TextAppearance.MaterialComponents.Headline6"
+                    android:layout_width="336dp"
+                    android:layout_height="wrap_content"
+                    android:text="Т А В Е Р Н А"
+                    android:textSize="30sp" />
+
+                <TextView
+                    style="@style/TextAppearance.MaterialComponents.Headline6"
+                    android:layout_width="336dp"
+                    android:layout_height="wrap_content"
+                    android:text="Здраво,"
+                    android:textSize="30sp" />
+                <TextView
+                    android:layout_marginLeft="20dp"
+                    android:id="@+id/userName"
+                    android:layout_width="336dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="#C0424E"
+                    android:text="User"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    style="@style/TextAppearance.MaterialComponents.Headline6"
+                    android:layout_width="336dp"
+                    android:layout_height="wrap_content"
+                    android:text="УЛОГА"
+                    android:textSize="21sp" />
+                <TextView
+                    android:layout_marginLeft="20dp"
+                    android:id="@+id/rola"
+                    android:layout_width="336dp"
+                    android:layout_height="wrap_content"
+                    android:text="User"
+                    android:textColor="#C0424E"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:textAlignment="center"
+                    android:layout_width="336dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="АНДРОИД АПЛИКАЦИЈА" />
+
+
+
+
+            </LinearLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvProdavciListaPocetna"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </LinearLayout>
+</ScrollView>

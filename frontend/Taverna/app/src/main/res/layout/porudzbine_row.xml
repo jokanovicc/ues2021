@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="25dp"
+        android:clickable="true"
+        android:onClick="recenzisiKlik"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/login" />
+
+            <LinearLayout
+                android:layout_gravity="center"
+                android:layout_width="371dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/TextAppearance.MaterialComponents.Headline6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Поруџбина бр."
+                    android:layout_marginBottom="5dp"/>
+
+                <TextView
+                    android:id="@+id/tekstArtikli"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="Бечке шницле"
+                    android:textSize="18dp" />
+
+
+
+
+                <TextView
+                    android:id="@+id/porudzbinaSatnica"
+                    android:layout_gravity="right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:text="28.04.2021. 18:44"
+                    android:textSize="20dp" />
+                <Button
+                    android:id="@+id/porudzbinaDugme"
+                    android:layout_width="140dp"
+                    android:layout_height="50dp"
+                    android:text="Stiglo" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:layout_marginBottom="10dp"
+        android:layout_margin="10dp">
+
+        <LinearLayout
+            android:padding="20dp"
+            android:layout_width="400dp"
+            android:layout_height="170dp"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/naziv"
+                style="@style/TextAppearance.MaterialComponents.Headline6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ресторан Галија" />
+
+            <TextView
+                android:id="@+id/datum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="sans-serif-light"
+                android:text="од 1982." />
+
+
+            <TextView
+                android:id="@+id/adresa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:text="Ресторан домаће хране на добро познатој адреси " />
+            <TextView
+                android:id="@+id/ocenaProdavca"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#C0424E"
+                android:textSize="27dp"
+                android:layout_marginBottom="2dp"
+                android:text="5" />
+
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>
