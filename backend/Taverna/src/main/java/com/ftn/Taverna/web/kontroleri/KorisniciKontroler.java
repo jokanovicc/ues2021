@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,6 +48,7 @@ public class KorisniciKontroler {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+
     //CRUD operacije za kupca
 
     @RequestMapping(value = "/lista-kupaca", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -73,6 +75,25 @@ public class KorisniciKontroler {
         }
         return new ResponseEntity<>(korisnikDTOS,HttpStatus.OK);
     }
+
+    @PutMapping("izmena-sifre")
+    private ResponseEntity<Boolean> izmeniSifru(@RequestBody IzmenaSifreDTO izmenaSifreDTO, Authentication authentication){
+        System.out.println("STIGAO");
+        UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
+        Korisnik korisnik = korisnikServis.findByUsername(userPrincipal.getUsername());
+        boolean podudaravanje = BCrypt.checkpw(izmenaSifreDTO.getStaraSifra(),korisnik.getSifra());
+        if(!podudaravanje){
+            return new ResponseEntity<>(false,HttpStatus.OK);
+        }
+        korisnik.setSifra(passwordEncoder.encode(izmenaSifreDTO.getNovaSifra()));
+        korisnikServis.save(korisnik);
+        return new ResponseEntity<>(true,HttpStatus.OK);
+
+
+    }
+
+
+
 
     @GetMapping("/usernamovi")
     public ResponseEntity<Collection<String>> getSvaKorisnicka(){

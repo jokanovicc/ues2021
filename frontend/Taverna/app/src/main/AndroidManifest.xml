@@ -23,7 +23,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Taverna"
         android:usesCleartextTraffic="true">
-        <activity android:name=".EditProfilActivity"></activity>
+        <activity android:name=".IzmenaSifreActivity"></activity>
+        <activity android:name=".EditProfilActivity" />
         <activity android:name=".ProdavacGlavnaActivity" />
         <activity android:name=".prodavacProzori.ProdavacGlavnaActivity" />
         <activity android:name=".EditArtikalActivity" />

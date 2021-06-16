@@ -1,5 +1,6 @@
 package com.example.taverna;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -39,6 +40,7 @@ public class ProfilKorisnika extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
 
     private Button izmeniButton;
+    private Button sifraButton;
 
 
     @Override
@@ -60,6 +62,15 @@ public class ProfilKorisnika extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ProfilKorisnika.this,EditProfilActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        sifraButton = findViewById(R.id.izmeniButtonSifru);
+        sifraButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(ProfilKorisnika.this,IzmenaSifreActivity.class);
+                startActivity(intent1);
             }
         });
 

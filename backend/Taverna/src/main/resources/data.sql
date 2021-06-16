@@ -14,12 +14,12 @@ INSERT INTO PRODAVAC(korisnik_id,naziv, posluje_od,imejl) VALUES (4,'РОШТИ�
 INSERT INTO PRODAVAC(korisnik_id,naziv, posluje_od,imejl) VALUES (5,'Ресторан Галија','2014-05-10','jankovic@gmail.com');
 
 
- insert into artikal(cena,naziv,opis,prodavac_korisnik_id,obrisan) values (500,'Пуњена вешалица','Сочна и пуна сира',3,false);
-insert into artikal(cena,naziv,opis,prodavac_korisnik_id,obrisan) values (750,'Карађорђева шницла','600г најукуснија и најбоља',3,false);
-insert into artikal(cena,naziv,opis,prodavac_korisnik_id,obrisan) values (350,'Мусака','Најбоље из Србија',4,false);
-insert into artikal(cena,naziv,opis,prodavac_korisnik_id,obrisan) values (250,'Лесковачки ћевапи','Печени на јаком жару',4,false);
- insert into artikal(cena,naziv,opis,prodavac_korisnik_id,obrisan) values (500,'Пуњене паприке','Од паприка са наших њива',5,false);
-insert into artikal(cena,naziv,opis,prodavac_korisnik_id,obrisan) values (80,'Бурек','Бурек са домаћим сиром и јогуртом',5,false);
+ insert into artikal(cena,naziv,opis,prodavac_korisnik_id,obrisan) values (500,'Пуњена вешалица','Donec feugiat tellus at diam dignissim, sagittis vestibulum ligula semper. Nullam sagittis elit et mauris mattis, id imperdiet justo blandit. Nullam tempus auctor consectetur. Nam non ante libero.',3,false);
+insert into artikal(cena,naziv,opis,prodavac_korisnik_id,obrisan) values (750,'Карађорђева шницла','Mauris vulputate risus risus. Phasellus at erat sollicitudin, sollicitudin sapien convallis, suscipit quam. Curabitur mollis a felis in scelerisque. Suspendisse potenti.',3,false);
+insert into artikal(cena,naziv,opis,prodavac_korisnik_id,obrisan) values (350,'Мусака','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tincidunt faucibus justo facilisis fringilla. Etiam tellus purus, cursus in ligula et, lobortis accumsan orci.',4,false);
+insert into artikal(cena,naziv,opis,prodavac_korisnik_id,obrisan) values (250,'Лесковачки ћевапи','Phasellus varius finibus nisi sed semper. Donec quis facilisis metus. Suspendisse dictum metus a posuere fermentum. Suspendisse vel pellentesque nunc. Ut non justo sapien.',4,false);
+ insert into artikal(cena,naziv,opis,prodavac_korisnik_id,obrisan) values (500,'Пуњене паприке','Suspendisse quis hendrerit odio. Integer eu euismod velit. Fusce nec mi vitae justo varius pellentesque. Maecenas et leo nunc. Suspendisse sagittis nisi a libero rutrum, quis semper nulla dictum. Fusce volutpat aliquet vehicula.',5,false);
+insert into artikal(cena,naziv,opis,prodavac_korisnik_id,obrisan) values (80,'Бурек','Sed vitae vulputate orci. Sed a facilisis sapien. Nulla facilisi. Phasellus ut pellentesque ante. Nulla facilisi. Cras eget lacinia felis, in fermentum nulla.м',5,false);
 
  insert into porudzbina(id,dostavljeno,satnica,kupac_korisnik_id,anoniman_komentar,arhiviran_komentar,komentar,ocena) values (1,true,'2021-05-01',1,false,false,'У суштини јако добар ресторан, мала замерка јелте, мало више прилога следеће пут молим вас лепо!',4);
  insert into porudzbina(id,dostavljeno,satnica,kupac_korisnik_id,anoniman_komentar,arhiviran_komentar,komentar,ocena) values (2,true,'2021-05-01',2,true,false,'Jako dobro odradjeno iskreno',5);

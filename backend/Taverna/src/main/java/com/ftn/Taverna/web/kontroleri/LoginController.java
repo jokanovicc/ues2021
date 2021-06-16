@@ -45,8 +45,6 @@ public class LoginController {
         if (korisnik!=null && korisnik.isBlokiran()) {
             return ResponseEntity.notFound().build();
         }
-
-
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(userDto.getKorisnicko(), userDto.getSifra());
         Authentication authentication = authenticationManager.authenticate(authenticationToken);

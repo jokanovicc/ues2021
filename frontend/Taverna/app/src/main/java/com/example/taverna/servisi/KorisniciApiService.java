@@ -1,5 +1,6 @@
 package com.example.taverna.servisi;
 
+import com.example.taverna.model.IzmenaSifreDTO;
 import com.example.taverna.model.Korisnik;
 import com.example.taverna.model.Kupac;
 import com.example.taverna.model.Login;
@@ -51,5 +52,7 @@ public interface KorisniciApiService {
     @GET("/porudzbine/prosecna-ocena/{id}")
     Call<Double> getProsecnaOcena(@Path("id") int id);
 
+    @PUT("/korisnici/izmena-sifre")
+    Call<Boolean> izmeniSifru(@Body IzmenaSifreDTO izmenaSifreDTO);
 
 }

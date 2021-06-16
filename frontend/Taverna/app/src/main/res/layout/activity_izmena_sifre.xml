@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    tools:context=".EditArtikalActivity"
+    tools:context=".IzmenaSifreActivity"
     android:orientation="vertical"
     android:background="#044855">
 
@@ -12,7 +12,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="530dp"
+        android:layout_height="440dp"
         android:layout_margin="30dp"
         card_view:cardCornerRadius="10dp"
         card_view:cardElevation="8dp"
@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:paddingBottom="10dp"
-                android:text="Измена производа"
+                android:text="Измена шифре"
                 android:textAlignment="center"
                 android:textSize="25dp"
                 android:layout_marginBottom="20dp"/>
@@ -38,46 +38,34 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Назив"
-                android:textSize="18sp" />
+                android:text="Стара шифра"
+                android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/nazivEdit"
+                android:id="@+id/staraSifra"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text" />
+                android:inputType="textPassword"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Опис"
-                android:textSize="18sp"
+                android:text="Нова шифра"
+                android:textSize="20sp"
                 />
 
             <EditText
-                android:id="@+id/opisEdit"
+                android:id="@+id/novaSifra"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textMultiLine" />
+                android:inputType="textPassword"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Цeна"
-                android:textSize="18sp" />
-
-            <EditText
-                android:id="@+id/cenaEdit"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:inputType="number"
-                android:layout_marginBottom="20dp"/>
 
             <Button
-                android:id="@+id/editProizvoda"
+                android:id="@+id/editSifre"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="40dp"
                 android:text="Измени"
                 android:textSize="15sp" />
 
