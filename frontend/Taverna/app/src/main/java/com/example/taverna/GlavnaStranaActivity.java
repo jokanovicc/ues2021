@@ -96,7 +96,6 @@ public class GlavnaStranaActivity extends AppCompatActivity {
 
 
         if(rola1.equals("PRODAVAC")){
-            navigationView.getMenu().findItem(R.id.nav_korpa).setVisible(false);
             navigationView.getMenu().findItem(R.id.nav_poruzbina).setVisible(false);
             navigationView.getMenu().findItem(R.id.nav_korisnici).setVisible(false);
 
@@ -113,7 +112,6 @@ public class GlavnaStranaActivity extends AppCompatActivity {
         if(rola1.equals("ADMIN")){
             navigationView.getMenu().findItem(R.id.nav_home).setVisible(false);
             navigationView.getMenu().findItem(R.id.nav_artikli).setVisible(false);
-            navigationView.getMenu().findItem(R.id.nav_korpa).setVisible(false);
             navigationView.getMenu().findItem(R.id.nav_poruzbina).setVisible(false);
         }
 
@@ -138,11 +136,6 @@ public class GlavnaStranaActivity extends AppCompatActivity {
                 if(item.getItemId()==R.id.nav_home){
                     Intent i = new Intent(GlavnaStranaActivity.this, Komentari.class);
                     startActivity(i);
-                }
-                if(item.getItemId()==R.id.nav_korpa){
-                    Intent i7 = new Intent(GlavnaStranaActivity.this, KorpaAktiviti.class);
-                    startActivity(i7);
-
                 }
 
                 if(item.getItemId()==R.id.nav_poruzbina){
@@ -173,11 +166,13 @@ public class GlavnaStranaActivity extends AppCompatActivity {
 
                 if(item.getItemId()==R.id.nav_odjava){
                     ServiceUtil.setToken("");
-                    SharedPreferences preferences =getSharedPreferences("MyPre",Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
+                    SharedPreferences sharedPreferences1 = getSharedPreferences(MainActivity.MyPres, Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences1.edit();
                     editor.clear();
                     editor.apply();
                     finish();
+                    System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAA " +  sharedPreferences1.getString(MainActivity.Username, ""));
+
                     Intent i6 = new Intent(GlavnaStranaActivity.this, MainActivity.class);
                     startActivity(i6);
                 }

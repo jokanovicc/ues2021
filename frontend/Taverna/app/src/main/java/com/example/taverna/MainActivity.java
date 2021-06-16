@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String MyPres = "MyPre";
     public static final String Username = "usernameKey";
+    public static final String Token = "tokenKey";
     public static final String Role = "role";
     public static final Integer ID = 1;
 
@@ -197,6 +198,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, GlavnaStranaActivity.class);
                     ServiceUtil.setToken(korisnik.getToken());
                     SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString(Token,korisnik.getToken());
                     editor.putString(Username,korisnik.getKorisnicko());
                     editor.putString(Role,korisnik.getRole());
                     editor.putInt(String.valueOf(ID),korisnik.getId());

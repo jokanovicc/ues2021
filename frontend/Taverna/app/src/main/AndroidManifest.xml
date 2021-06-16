@@ -32,7 +32,6 @@
         <activity android:name=".RegisterProdavac" />
         <activity android:name=".DodavanjeRecenzije" />
         <activity android:name=".Porudzbine" />
-        <activity android:name=".KorpaAktiviti" />
         <activity android:name=".Korisnici" />
         <activity android:name=".ProfilKorisnika" />
         <activity android:name=".DodavanjeAkcije" />

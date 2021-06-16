@@ -29,7 +29,7 @@
             <LinearLayout
                 android:padding="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <ImageView
                     android:layout_gravity="center"
@@ -39,54 +39,99 @@
                     android:src="@drawable/profil"/>
 
                 <TextView
+                    style="@style/TextAppearance.MaterialComponents.Headline6"
+                    android:layout_width="wrap_content"
+                    android:textColor="#C0424E"
+                    android:textSize="12dp"
+                    android:layout_height="wrap_content"
+                    android:text="Име и презиме" />
+
+
+                <TextView
                     android:id="@+id/imeProfil"
                     style="@style/TextAppearance.MaterialComponents.Headline6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:text="Петар" />
 
-
+                <TextView
+                    style="@style/TextAppearance.MaterialComponents.Headline6"
+                    android:layout_width="wrap_content"
+                    android:textColor="#C0424E"
+                    android:textSize="12dp"
+                    android:layout_height="wrap_content"
+                    android:text="Адреса" />
                 <TextView
                     android:id="@+id/adresaProfil"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:textSize="20dp"
+                    android:textSize="22dp"
+                    android:layout_marginBottom="10dp"
                     android:text="Милетићева 21а, 23000 Зрењанин" />
+                <TextView
+                    style="@style/TextAppearance.MaterialComponents.Headline6"
+                    android:layout_width="wrap_content"
+                    android:textColor="#C0424E"
+                    android:textSize="12dp"
+                    android:layout_height="wrap_content"
+                    android:text="Корисничко име" />
 
                 <TextView
                     android:id="@+id/korisnickoProfil"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="petarp"
-                    android:textSize="20dp"/>
+                    android:layout_marginBottom="10dp"
+                    android:textSize="22dp"/>
+                <TextView
+                    style="@style/TextAppearance.MaterialComponents.Headline6"
+                    android:layout_width="wrap_content"
+                    android:textColor="#C0424E"
+                    android:textSize="12dp"
+                    android:layout_height="wrap_content"
+                    android:text="Корисничкa улога" />
+
+
                 <TextView
                     android:id="@+id/rolaProfil"
-                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="PRODAVAC"
-                    android:textColor="#C0424E"
                     android:textSize="20dp"/>
 
 
-
-
-                <Button
-                    android:id="@+id/izmeniButtonProfila"
+                <LinearLayout
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/opcijeProdavac"
+                    android:layout_width="wrap_content"
+                    android:layout_height="80dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:layout_width="140dp"
-                    android:layout_height="50dp"
-                    android:text="Измени" />
+                    android:layout_marginBottom="30dp"
+                    >
 
-                <Button
-                    android:id="@+id/izmeniButtonSifru"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:layout_width="150dp"
-                    android:layout_height="50dp"
-                    android:text="Измени шифру" />
+                    <Button
+                        android:id="@+id/izmeniButtonProfila"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:layout_width="140dp"
+                        android:layout_height="50dp"
+                        android:text="Измени инфо" />
+
+                    <Button
+                        android:layout_marginLeft="20dp"
+                        android:id="@+id/izmeniButtonSifru"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:layout_width="150dp"
+                        android:layout_height="50dp"
+                        android:text="Измени шифру" />
+
+
+                </LinearLayout>
+
+
+
 
             </LinearLayout>
 

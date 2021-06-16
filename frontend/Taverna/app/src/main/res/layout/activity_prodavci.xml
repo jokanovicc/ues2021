@@ -13,7 +13,10 @@
         >
 
         <TextView
-            android:layout_margin="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
             style="@style/TextAppearance.MaterialComponents.Headline6"
             android:fontFamily="sans-serif-light"
             android:background="@color/cardview_light_background"
@@ -22,6 +25,24 @@
             android:text="//ПОНУДА РЕСТОРАНА"
             android:textColor="@color/black"
             />
+        <TextView
+            android:textColor="#C0424E"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:layout_marginLeft="20dp"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ПРОСЕК" />
+        <TextView
+            android:id="@+id/prosekProdavac"
+            android:textColor="#C0424E"
+            android:layout_marginBottom="8dp"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:layout_marginLeft="20dp"
+            android:textSize="30sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5" />
 
 
         <androidx.recyclerview.widget.RecyclerView
@@ -29,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="1dp"
             android:layout_marginBottom="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -53,22 +74,7 @@
             android:layout_height="wrap_content"
             android:text="//КОМЕНТАРИ ПРОДАВЦА"
             android:textColor="@color/black"/>
-        <TextView
-            android:textColor="#C0424E"
-            android:layout_marginLeft="20dp"
-            android:textSize="12sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ПРОСЕК" />
-        <TextView
-            android:id="@+id/prosekProdavac"
-            android:textColor="#C0424E"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="20dp"
-            android:textSize="25sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="5" />
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvKomentariLista"

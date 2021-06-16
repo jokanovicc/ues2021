@@ -24,8 +24,6 @@ public class ProdavacDTO implements Serializable {
     private String naziv;
     @NotBlank
     private String ime;
-    @NotBlank
-    private String sifra;
     private String prezime;
     private String korisnicko;
     private boolean blokiran;
@@ -42,7 +40,6 @@ public class ProdavacDTO implements Serializable {
         this.setPoslujeOd(prodavac.getPoslujeOd());
         this.setImejl(prodavac.getImejl());
         this.setNaziv(prodavac.getNaziv());
-        this.setSifra(prodavac.getKorisnik().getSifra());
 
 
     }

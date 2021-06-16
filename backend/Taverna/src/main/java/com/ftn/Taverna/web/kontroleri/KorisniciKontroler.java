@@ -84,6 +84,8 @@ public class KorisniciKontroler {
         boolean podudaravanje = BCrypt.checkpw(izmenaSifreDTO.getStaraSifra(),korisnik.getSifra());
         if(!podudaravanje){
             return new ResponseEntity<>(false,HttpStatus.OK);
+
+
         }
         korisnik.setSifra(passwordEncoder.encode(izmenaSifreDTO.getNovaSifra()));
         korisnikServis.save(korisnik);
@@ -92,6 +94,14 @@ public class KorisniciKontroler {
 
     }
 
+
+    public ResponseEntity<ProdavacDTO> nadjiInformacijaOdProdavca(Authentication authentication){
+        UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
+        Prodavac prodavac = prodavacServis.findByUsername(userPrincipal.getUsername());
+        return new ResponseEntity<>(new ProdavacDTO(prodavac),HttpStatus.OK);
+
+
+    }
 
 
 

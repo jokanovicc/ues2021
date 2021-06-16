@@ -6,12 +6,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.text.InputType;
 import android.text.SpannableStringBuilder;
 import android.text.style.RelativeSizeSpan;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,25 +17,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.taverna.DodavanjeProizvoda;
-import com.example.taverna.GlavnaStranaActivity;
 import com.example.taverna.JeloAktiviti;
-import com.example.taverna.KorpaAktiviti;
-import com.example.taverna.MainActivity;
-import com.example.taverna.Porudzbine;
 import com.example.taverna.Prodavci;
 import com.example.taverna.R;
 import com.example.taverna.model.Artikal;
 import com.example.taverna.model.PorucivanjeDTO;
-import com.example.taverna.model.Prodavac;
 import com.example.taverna.model.StavkaDTO;
-import com.example.taverna.servisi.ArtikliApiService;
 import com.example.taverna.servisi.PorudzbineApiService;
 import com.example.taverna.servisi.ServiceUtil;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -154,7 +141,7 @@ public class ArtikliListaAdapter extends RecyclerView.Adapter<ArtikliListaAdapte
                         AlertDialog.Builder builder = new AlertDialog.Builder(v.getRootView().getContext());
 
                         builder.setTitle("Потврда поруџбине");
-                        builder.setMessage("Сигурни сте да желите да завршите поруџбину?" + lista + " " +cena);
+                        builder.setMessage("\n Сигурни сте да желите да завршите поруџбину?\n" + lista + " \n " +cena);
 
                         builder.setPositiveButton("Да", new DialogInterface.OnClickListener() {
 

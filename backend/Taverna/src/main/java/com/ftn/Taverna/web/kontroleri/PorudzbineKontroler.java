@@ -134,10 +134,12 @@ public class PorudzbineKontroler {
         porudzbina.setAnonimanKomentar(false);
         porudzbinaRepository.save(porudzbina);
         for (StavkaDTO stavkaDTO:porucivanjeDTO.getListaStavki()) {
+
+
                 Stavka stavka = new Stavka();
                 stavka.setKolicina(stavkaDTO.getKolicina());
-                stavka.setArtikal(artikalRepository.findById(stavkaDTO.getArtikalId()).orElse(null));
-                stavka.setPorudzbina(porudzbinaRepository.findById(porudzbina.getId()).orElse(null));
+                stavka.setArtikal(artikliServis.findOne(stavkaDTO.getArtikalId()));
+                stavka.setPorudzbina(porudzbina);
                 stavkas.add(stavka);
                 stavkaRepository.save(stavka);
 
