@@ -10,10 +10,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.taverna.model.Artikal;
 import com.example.taverna.model.Korisnik;
+import com.example.taverna.model.Prodavac;
 import com.example.taverna.servisi.ArtikliApiService;
 import com.example.taverna.servisi.KorisniciApiService;
 import com.example.taverna.servisi.ServiceUtil;
@@ -27,8 +29,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ProfilKorisnika extends AppCompatActivity {
 
     static final String TAG = ProfilKorisnika.class.getSimpleName();
-    static final String BASE_URL = "http://192.168.1.4:8080/";
-    static Retrofit retrofit = null;
 
     private KorisniciApiService korisniciApiService;
     private TextView imeProfil;
@@ -41,6 +41,9 @@ public class ProfilKorisnika extends AppCompatActivity {
 
     private Button izmeniButton;
     private Button sifraButton;
+    LinearLayout prodavacLayout;
+    private Prodavac prodavac;
+    private TextView prodavacInfo;
 
 
     @Override
@@ -54,6 +57,13 @@ public class ProfilKorisnika extends AppCompatActivity {
         korisnickoProfil = findViewById(R.id.korisnickoProfil);
         rolaProfil = findViewById(R.id.rolaProfil);
         sharedPreferences = getSharedPreferences(MainActivity.MyPres, Context.MODE_PRIVATE);
+        prodavacLayout = findViewById(R.id.prodavacPogled);
+        prodavacInfo = findViewById(R.id.prodavacInfo);
+
+
+        if(sharedPreferences.getString(MainActivity.Role,"").equals("KUPAC") || sharedPreferences.getString(MainActivity.Role,"").equals("ADMIN")){
+            prodavacInfo.setAlpha(0);
+        }
 
 
         izmeniButton = findViewById(R.id.izmeniButtonProfila);
@@ -82,7 +92,33 @@ public class ProfilKorisnika extends AppCompatActivity {
     public void onResume(){
         super.onResume();
         getSelectedKorisnik();
+        if(sharedPreferences.getString(MainActivity.Role,"").equals("PRODAVAC")){
+            ocitajZaProdavca();
+        }
     }
+
+    public void ocitajZaProdavca(){
+        korisniciApiService = ServiceUtil.korisniciApiService;
+        Call<Prodavac> call = korisniciApiService.getInfoProdavca();
+        call.enqueue(new Callback<Prodavac>() {
+            @Override
+            public void onResponse(Call<Prodavac> call, Response<Prodavac> response) {
+                prodavac = response.body();
+                String ispis = prodavac.getNaziv() + "|"+prodavac.getPoslujeOd() + "|" + prodavac.getImejl();
+                prodavacInfo.setText(ispis);
+            }
+
+            @Override
+            public void onFailure(Call<Prodavac> call, Throwable t) {
+
+            }
+        });
+
+
+
+    }
+
+    
 
 
     private void getSelectedKorisnik(){
@@ -101,6 +137,10 @@ public class ProfilKorisnika extends AppCompatActivity {
                 adresaProfil.setText(response.body().getAdresa());
                 korisnickoProfil.setText(response.body().getKorisnicko());
                 rolaProfil.setText(response.body().getRole());
+                if(sharedPreferences.getString(MainActivity.Role,"").equals("PRODAVAC")){
+
+                }
+
 
 
             }

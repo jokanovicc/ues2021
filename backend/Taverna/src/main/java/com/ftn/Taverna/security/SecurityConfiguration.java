@@ -72,6 +72,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter  {
                 .antMatchers(HttpMethod.POST, "/korisnici/lista-kupaca").permitAll()
                 .antMatchers(HttpMethod.GET, "/korisnici/usernamovi").permitAll()
                 .antMatchers(HttpMethod.GET, "/korisnici/imejlovi").permitAll()
+                .antMatchers(HttpMethod.POST, "/artikli/akcije").permitAll()
 
 
                 .anyRequest().authenticated();

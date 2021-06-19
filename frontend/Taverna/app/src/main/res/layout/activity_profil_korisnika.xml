@@ -105,15 +105,14 @@
                     android:layout_marginTop="10dp"
                     android:id="@+id/opcijeProdavac"
                     android:layout_width="wrap_content"
-                    android:layout_height="80dp"
+                    android:layout_height="50dp"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="30dp"
+                    android:layout_marginBottom="10dp"
                     >
 
                     <Button
                         android:id="@+id/izmeniButtonProfila"
                         android:layout_gravity="center"
-                        android:layout_marginTop="20dp"
                         android:layout_width="140dp"
                         android:layout_height="50dp"
                         android:text="Измени инфо" />
@@ -122,13 +121,32 @@
                         android:layout_marginLeft="20dp"
                         android:id="@+id/izmeniButtonSifru"
                         android:layout_gravity="center"
-                        android:layout_marginTop="20dp"
                         android:layout_width="150dp"
                         android:layout_height="50dp"
                         android:text="Измени шифру" />
 
 
                 </LinearLayout>
+            <LinearLayout
+                android:id="@+id/prodavacPogled"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/prodavacInfo"
+                    style="@style/TextAppearance.MaterialComponents.Headline6"
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_height="wrap_content"
+                    android:text="Taverna | 2020-10-10 | taverna@gmail.com"
+                    android:textSize="18dp"/>
+
+
+
+            </LinearLayout>
 
 
 

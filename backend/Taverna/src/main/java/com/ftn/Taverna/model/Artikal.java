@@ -23,7 +23,7 @@ public class Artikal {
     private String naziv;
     private String opis;
     private Double cena;
-    @ManyToMany(mappedBy = "artikli")
+    @ManyToMany(mappedBy = "artikli",fetch = FetchType.LAZY)
     private Set<Akcija> akcije = new HashSet<Akcija>();
     @Lob
     private byte[] photo;

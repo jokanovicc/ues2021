@@ -55,4 +55,7 @@ public interface KorisniciApiService {
     @PUT("/korisnici/izmena-sifre")
     Call<Boolean> izmeniSifru(@Body IzmenaSifreDTO izmenaSifreDTO);
 
+    @GET("/korisnici/prodavac-info")
+    Call<Prodavac> getInfoProdavca();
+
 }

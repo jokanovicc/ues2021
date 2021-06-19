@@ -95,6 +95,7 @@ public class KorisniciKontroler {
     }
 
 
+    @GetMapping(value = "/prodavac-info")
     public ResponseEntity<ProdavacDTO> nadjiInformacijaOdProdavca(Authentication authentication){
         UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
         Prodavac prodavac = prodavacServis.findByUsername(userPrincipal.getUsername());

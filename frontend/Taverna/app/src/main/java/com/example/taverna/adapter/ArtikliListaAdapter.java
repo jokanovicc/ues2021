@@ -141,7 +141,7 @@ public class ArtikliListaAdapter extends RecyclerView.Adapter<ArtikliListaAdapte
                         AlertDialog.Builder builder = new AlertDialog.Builder(v.getRootView().getContext());
 
                         builder.setTitle("Потврда поруџбине");
-                        builder.setMessage("\n Сигурни сте да желите да завршите поруџбину?\n" + lista + " \n " +cena);
+                        builder.setMessage("\nСигурни сте да желите да завршите поруџбину?\n" + lista + " \n " +cena);
 
                         builder.setPositiveButton("Да", new DialogInterface.OnClickListener() {
 

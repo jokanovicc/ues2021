@@ -23,10 +23,10 @@ public class Akcija {
     @ManyToOne
     private Prodavac prodavac;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
     @JoinTable(name="artikli_akcije", joinColumns = {@JoinColumn(name = "akcija_id")},
     inverseJoinColumns = {@JoinColumn(name = "artikal_id")})
-    private Set<Artikal> artikli = new HashSet<>();
+    private List<Artikal> artikli = new ArrayList<>();
 
     private Integer procenat;
     private Date odKad;

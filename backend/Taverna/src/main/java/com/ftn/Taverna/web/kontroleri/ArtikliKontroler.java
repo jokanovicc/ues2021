@@ -4,7 +4,6 @@ import com.ftn.Taverna.model.Akcija;
 import com.ftn.Taverna.model.Artikal;
 import com.ftn.Taverna.web.kontroleri.DTO.AkcijaDTO;
 import com.ftn.Taverna.web.kontroleri.DTO.ArtikalDTO;
-import com.ftn.Taverna.web.kontroleri.DTO.post.AkcijaDTOPost;
 import com.ftn.Taverna.web.kontroleri.DTO.post.ArtikalDTOPost;
 import com.ftn.Taverna.model.Prodavac;
 import com.ftn.Taverna.servisi.AkcijaServis;
@@ -14,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
@@ -127,58 +127,27 @@ public class ArtikliKontroler {
         }
     }
 
-    @PostMapping(value = "/lista-akcija")
-    public ResponseEntity<AkcijaDTO> saveAkcija(@RequestBody AkcijaDTOPost akcijaDTOPost){
+    @PostMapping(value = "/akcije")
+    public ResponseEntity<Void> napraviAkciju(@RequestBody AkcijaDTO akcijaDTO){
         Akcija akcija = new Akcija();
-        Prodavac prodavac = prodavacServis.findOne(akcijaDTOPost.getProdavac());
-        akcija.setProdavac(prodavac);
-        akcija.setDoKad(akcijaDTOPost.getDoKad());
-        akcija.setOdKad(akcijaDTOPost.getOdKad());
-        akcija.setTekst(akcijaDTOPost.getTekst());
-        akcija.setProcenat(akcijaDTOPost.getProcenat());
-        akcija = akcijaServis.saveAkcija(akcija);
+        akcija.setDoKad(akcijaDTO.getDoKad());
+        akcija.setOdKad(akcija.getDoKad());
+        akcija.setProcenat(akcijaDTO.getPopust());
+        akcija.setTekst(akcijaDTO.getOpis());
+        akcija.setProdavac(prodavacServis.findOne(3));
 
-        return new ResponseEntity<AkcijaDTO>(new AkcijaDTO(akcija), HttpStatus.CREATED);
 
+        for(Integer i: akcijaDTO.getArtikli()){
+            Artikal artikal = artikliServis.findOne(i);
+            akcija.getArtikli().add(artikal);
+        }
+
+        akcijaServis.saveAkcija(akcija);
+        return new ResponseEntity<Void>(HttpStatus.OK);
 
 
     }
 
-
-    //METODE ZA AKCIJU
-    @GetMapping("/lista-akcija")
-    public ResponseEntity<Collection<AkcijaDTO>> findAllAkcije(){
-        List<Akcija> akcije = akcijaServis.findAll();
-        List<AkcijaDTO> akcijaDTO = new ArrayList<>();
-        for(Akcija a: akcije){
-            akcijaDTO.add(new AkcijaDTO(a));
-        }
-        return new ResponseEntity<>(akcijaDTO, HttpStatus.OK);
-
-
-
-    }
-
-
-
-    @GetMapping("/artikli-na-akciji")
-    public ResponseEntity<Collection<ArtikalDTO>> findArtikliNaAkciji(){
-        List<Akcija> akcije = akcijaServis.findAll();
-        List<Artikal> artikli = new ArrayList<>();
-        List<ArtikalDTO> artikalDTOS = new ArrayList<>();
-        for(Akcija a: akcije){
-            for(Artikal artikal: a.getArtikli()){
-                artikli.add(artikal);
-            }
-        }
-
-        for (Artikal a: artikli){
-            artikalDTOS.add(new ArtikalDTO(a));
-        }
-
-        return new ResponseEntity<>(artikalDTOS, HttpStatus.OK);
-
-    }
 
 
 

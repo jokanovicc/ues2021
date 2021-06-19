@@ -34,8 +34,3 @@ insert into porudzbina(id,dostavljeno,satnica,kupac_korisnik_id,anoniman_komenta
   insert into stavka(kolicina,artikal_id,porudzbina_id) values (5,2,3);
   insert into stavka(kolicina,artikal_id,porudzbina_id) values (3,1,3);
 insert into stavka(kolicina,artikal_id,porudzbina_id) values (3,1,4);
-
-
-
-  insert into akcija(do_kad,od_kad,procenat,tekst,prodavac_korisnik_id) values ('2021-05-10','2021-07-10',20,'Majski popust',1);
-  insert into artikli_akcije(akcija_id,artikal_id) values (1,1);

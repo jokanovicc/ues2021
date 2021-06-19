@@ -96,40 +96,35 @@ public class DodavanjeRecenzije extends AppCompatActivity implements AdapterView
         if(komentarKomentara.length()==0){
             komentar.requestFocus();
             komentar.setError("Морате унети текст рецензије");
+        }else {
+            recenzija.setAnoniman(anoniman.isChecked());
+            recenzija.setKomentar(komentarKomentara);
+            recenzija.setOcena(ocena1);
+            recenzija.setKupac(sharedPreferences.getInt(String.valueOf(MainActivity.ID), 1));
+            recenzija.setPorudzbina(id);
+
+
+            porudzbineApiService = ServiceUtil.porudzbineApiService;
+            Call<Void> call = porudzbineApiService.dodavanjeRecenzije(recenzija);
+            call.enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    Toast.makeText(DodavanjeRecenzije.this, "Успешно додат производ", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(DodavanjeRecenzije.this, GlavnaStranaActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    Toast.makeText(DodavanjeRecenzije.this, "ГРЕШКА", Toast.LENGTH_SHORT).show();
+
+
+                }
+            });
+
+
         }
-
-        recenzija.setAnoniman(anoniman.isChecked());
-
-        recenzija.setKomentar(komentarKomentara);
-        recenzija.setOcena(ocena1);
-        recenzija.setKupac(sharedPreferences.getInt(String.valueOf(MainActivity.ID),1));
-        recenzija.setPorudzbina(id);
-
-
-
-        porudzbineApiService = ServiceUtil.porudzbineApiService;
-        Call<Void> call = porudzbineApiService.dodavanjeRecenzije(recenzija);
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                Toast.makeText(DodavanjeRecenzije.this, "Успешно додат производ", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(DodavanjeRecenzije.this,GlavnaStranaActivity.class);
-                startActivity(intent);
-                finish();
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(DodavanjeRecenzije.this, "ГРЕШКА", Toast.LENGTH_SHORT).show();
-
-
-            }
-        });
-
-
-
-
-
 
 
 
