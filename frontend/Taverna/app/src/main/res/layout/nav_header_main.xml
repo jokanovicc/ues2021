@@ -32,18 +32,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:shadowColor="@color/black"
-        android:textColor="#C0424E"
+        android:textColor="#C34DE9FF"
         android:textStyle="bold"
         android:paddingTop="5dp"
-        android:textSize="20dp"
+        android:textSize="24dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:text="Навигација апликације"/>
+        android:text="Т А В Е Р Н А"/>
 
     <TextView
+        android:textSize="18dp"
         android:id="@+id/ulogaHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        />
+        android:text="достава хране"/>
+
+    />
 
 
 </LinearLayout>

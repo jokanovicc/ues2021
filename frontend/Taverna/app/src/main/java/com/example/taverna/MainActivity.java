@@ -18,17 +18,14 @@ import android.widget.Toast;
 
 import com.example.taverna.model.Korisnik;
 import com.example.taverna.model.Login;
-import com.example.taverna.servisi.ArtikliApiService;
 import com.example.taverna.servisi.KorisniciApiService;
-import com.example.taverna.servisi.ServiceUtil;
+import com.example.taverna.servisi.RetrofitClient;
 
 import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
     private EditText usernameEditText;
@@ -185,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
     public void doLogin(final String username, final String password){
 
 
-        korisniciApiService = ServiceUtil.korisniciApiService;
+        korisniciApiService = RetrofitClient.korisniciApiService;
         Login login = new Login();
         login.setKorisnicko(username);
         login.setSifra(password);
@@ -196,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
                 if(response.body()!=null) {
                     Korisnik korisnik = response.body();
                     Intent intent = new Intent(MainActivity.this, GlavnaStranaActivity.class);
-                    ServiceUtil.setToken(korisnik.getToken());
+                    RetrofitClient.setToken(korisnik.getToken());
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString(Token,korisnik.getToken());
                     editor.putString(Username,korisnik.getKorisnicko());

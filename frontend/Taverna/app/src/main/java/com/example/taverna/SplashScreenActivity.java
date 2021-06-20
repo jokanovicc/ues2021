@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import com.example.taverna.servisi.ServiceUtil;
+import com.example.taverna.servisi.RetrofitClient;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -28,7 +28,7 @@ public class SplashScreenActivity extends Activity {
                 System.out.println("bbbbbbbbbbbbbb " +  sharedPreferences.getString(MainActivity.Username, ""));
 
                 if(!sharedPreferences.getString(MainActivity.Username, "").equals("")){
-                    ServiceUtil.setToken(sharedPreferences.getString(MainActivity.Token, ""));
+                    RetrofitClient.setToken(sharedPreferences.getString(MainActivity.Token, ""));
                     startActivity(new Intent(SplashScreenActivity.this, GlavnaStranaActivity.class));
                 }else {
                     startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));

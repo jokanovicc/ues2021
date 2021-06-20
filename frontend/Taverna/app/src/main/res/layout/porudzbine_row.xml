@@ -37,7 +37,7 @@
                     style="@style/TextAppearance.MaterialComponents.Headline6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Поруџбина бр."
+                    android:text="Поруџбина: "
                     android:layout_marginBottom="5dp"/>
 
                 <TextView
@@ -62,8 +62,9 @@
                     android:textSize="20dp" />
                 <Button
                     android:id="@+id/porudzbinaDugme"
-                    android:layout_width="140dp"
-                    android:layout_height="50dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                    android:padding="15dp"
                     android:text="Stiglo" />
 
 

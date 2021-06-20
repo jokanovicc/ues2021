@@ -1,7 +1,6 @@
 package com.example.taverna;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,15 +10,13 @@ import android.util.Log;
 import com.example.taverna.adapter.ProdavciListaAdapter;
 import com.example.taverna.model.Prodavac;
 import com.example.taverna.servisi.KorisniciApiService;
-import com.example.taverna.servisi.ServiceUtil;
+import com.example.taverna.servisi.RetrofitClient;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ListaProdavaca extends AppCompatActivity {
 
@@ -49,7 +46,7 @@ public class ListaProdavaca extends AppCompatActivity {
     private void getProdavci(){
 
 
-        korisniciApiService = ServiceUtil.korisniciApiService;
+        korisniciApiService = RetrofitClient.korisniciApiService;
         Call<List<Prodavac>> call = korisniciApiService.getProdavci();
         call.enqueue(new Callback<List<Prodavac>>() {
             @Override

@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -16,23 +15,18 @@ import android.util.JsonWriter;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.taverna.model.Artikal;
 import com.example.taverna.servisi.ArtikliApiService;
-import com.example.taverna.servisi.ServiceUtil;
+import com.example.taverna.servisi.RetrofitClient;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class DodavanjeProizvoda extends AppCompatActivity{
 
@@ -156,7 +150,7 @@ public class DodavanjeProizvoda extends AppCompatActivity{
                 artikal.setNaziv(nazivJela);
                 artikal.setOpis(opisJela);
 
-                artikliApiService = ServiceUtil.artikliApiService;
+                artikliApiService = RetrofitClient.artikliApiService;
                 Call<Artikal> call = artikliApiService.saveArtikal(artikal);
                 call.enqueue(new Callback<Artikal>() {
                     @Override

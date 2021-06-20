@@ -13,14 +13,11 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.taverna.DodavanjeRecenzije;
-import com.example.taverna.Komentari;
-import com.example.taverna.Porudzbine;
-import com.example.taverna.Prodavci;
+import com.example.taverna.PorudzbineActivity;
 import com.example.taverna.R;
-import com.example.taverna.model.Komentar;
 import com.example.taverna.model.PorudzbinePrikaz;
 import com.example.taverna.servisi.PorudzbineApiService;
-import com.example.taverna.servisi.ServiceUtil;
+import com.example.taverna.servisi.RetrofitClient;
 
 import java.util.List;
 
@@ -77,7 +74,7 @@ public class PorudzbineAdapter extends RecyclerView.Adapter<PorudzbineAdapter.Vi
                 public void onClick(View v) {
                     stigloJe(porudzbina.getId());
                     notifyDataSetChanged();
-                    Intent intent = new Intent(context, Porudzbine.class);
+                    Intent intent = new Intent(context, PorudzbineActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
 
@@ -112,7 +109,7 @@ public class PorudzbineAdapter extends RecyclerView.Adapter<PorudzbineAdapter.Vi
 
     public void stigloJe(int id){
 
-        porudzbineApiService = ServiceUtil.porudzbineApiService;
+        porudzbineApiService = RetrofitClient.porudzbineApiService;
         Call<PorudzbinePrikaz> call = porudzbineApiService.getStiglo(id);
         call.enqueue(new Callback<PorudzbinePrikaz>() {
             @Override

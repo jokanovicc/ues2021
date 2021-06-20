@@ -11,7 +11,7 @@ import android.widget.EditText;
 
 import com.example.taverna.model.Korisnik;
 import com.example.taverna.servisi.KorisniciApiService;
-import com.example.taverna.servisi.ServiceUtil;
+import com.example.taverna.servisi.RetrofitClient;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -53,7 +53,7 @@ public class EditProfilActivity extends AppCompatActivity {
         editAdresa = findViewById(R.id.adresaEdit);
 
 
-        korisniciApiService = ServiceUtil.korisniciApiService;
+        korisniciApiService = RetrofitClient.korisniciApiService;
         Call<Korisnik> call = korisniciApiService.getMyInfo();
 
         call.enqueue(new Callback<Korisnik>() {
@@ -98,7 +98,7 @@ public class EditProfilActivity extends AppCompatActivity {
 
     public void updateKorisnik(){
 
-        korisniciApiService = ServiceUtil.korisniciApiService;
+        korisniciApiService = RetrofitClient.korisniciApiService;
         Call<Korisnik> call = korisniciApiService.updateInfo(korisnik);
 
 

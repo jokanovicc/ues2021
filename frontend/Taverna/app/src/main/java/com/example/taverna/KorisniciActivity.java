@@ -8,16 +8,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.Switch;
-import android.widget.Toast;
 
 import com.example.taverna.adapter.KorisniciAdapter;
-import com.example.taverna.adapter.ProdavciListaAdapter;
 import com.example.taverna.model.Korisnik;
-import com.example.taverna.model.Prodavac;
 import com.example.taverna.servisi.KorisniciApiService;
-import com.example.taverna.servisi.ServiceUtil;
+import com.example.taverna.servisi.RetrofitClient;
 
 import java.util.List;
 
@@ -25,7 +20,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Korisnici extends AppCompatActivity {
+public class KorisniciActivity extends AppCompatActivity {
 
    // Switch switchDugme;
     static final String TAG = GlavnaStranaActivity.class.getSimpleName();
@@ -70,14 +65,14 @@ public class Korisnici extends AppCompatActivity {
     }
 
     public void profilKlik(View view) {
-        Intent i = new Intent(Korisnici.this, ProfilKorisnika.class);
+        Intent i = new Intent(KorisniciActivity.this, ProfilActivity.class);
         startActivity(i);
     }
 
 
     private void getKorisnici(){
 
-        korisniciApiService = ServiceUtil.korisniciApiService;
+        korisniciApiService = RetrofitClient.korisniciApiService;
         Call<List<Korisnik>> call = korisniciApiService.getKorisnici();
         call.enqueue(new Callback<List<Korisnik>>() {
             @Override

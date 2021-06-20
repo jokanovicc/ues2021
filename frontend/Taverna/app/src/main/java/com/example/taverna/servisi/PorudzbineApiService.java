@@ -1,7 +1,5 @@
 package com.example.taverna.servisi;
 
-import com.example.taverna.DodavanjeRecenzije;
-import com.example.taverna.Porudzbine;
 import com.example.taverna.model.DodavanjeKomentara;
 import com.example.taverna.model.PorucivanjeDTO;
 import com.example.taverna.model.PorudzbinePrikaz;

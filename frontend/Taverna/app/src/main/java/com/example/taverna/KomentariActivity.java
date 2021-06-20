@@ -9,11 +9,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.example.taverna.adapter.KomentariAdapter;
 import com.example.taverna.adapter.KomentariUpravljanjeAdapter;
 import com.example.taverna.model.Komentar;
 import com.example.taverna.servisi.ArtikliApiService;
-import com.example.taverna.servisi.ServiceUtil;
+import com.example.taverna.servisi.RetrofitClient;
 
 import java.util.List;
 
@@ -21,10 +20,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Komentari extends AppCompatActivity {
+public class KomentariActivity extends AppCompatActivity {
 
     private int id;
-    static final String TAG = Komentari.class.getSimpleName();
+    static final String TAG = KomentariActivity.class.getSimpleName();
     private RecyclerView recyclerView;
     private ArtikliApiService artikliApiService;
     SharedPreferences sharedPreferences;
@@ -57,7 +56,7 @@ public class Komentari extends AppCompatActivity {
 
     private void getKomentari() {
 
-        artikliApiService = ServiceUtil.artikliApiService;
+        artikliApiService = RetrofitClient.artikliApiService;
         Call<List<Komentar>> call = artikliApiService.komentariProdavca(sharedPreferences.getInt(String.valueOf(MainActivity.ID),1));
         call.enqueue(new Callback<List<Komentar>>() {
 

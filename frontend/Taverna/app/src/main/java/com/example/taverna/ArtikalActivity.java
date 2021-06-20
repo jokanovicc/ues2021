@@ -13,21 +13,18 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.taverna.model.Artikal;
 import com.example.taverna.servisi.ArtikliApiService;
-import com.example.taverna.servisi.ServiceUtil;
+import com.example.taverna.servisi.RetrofitClient;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
-public class JeloAktiviti extends AppCompatActivity {
+public class ArtikalActivity extends AppCompatActivity {
 
-    static final String TAG = JeloAktiviti.class.getSimpleName();
+    static final String TAG = ArtikalActivity.class.getSimpleName();
     private RecyclerView recyclerView;
     int id;
     int id2;
@@ -65,7 +62,7 @@ public class JeloAktiviti extends AppCompatActivity {
         buttonIzmeni.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent2 = new Intent(JeloAktiviti.this,EditArtikalActivity.class);
+                Intent intent2 = new Intent(ArtikalActivity.this,EditArtikalActivity.class);
                 Bundle b2 = new Bundle();
                 b2.putInt("ID2",id2);
                 intent2.putExtras(b2);
@@ -96,7 +93,7 @@ public class JeloAktiviti extends AppCompatActivity {
 
     private void getSelectedArtikal(){
 
-        artikliApiService = ServiceUtil.artikliApiService;
+        artikliApiService = RetrofitClient.artikliApiService;
         Call<Artikal> call = artikliApiService.getArtikalById(id);
 
 

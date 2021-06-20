@@ -5,18 +5,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 
-import com.example.taverna.adapter.KomentariAdapter;
 import com.example.taverna.adapter.PorudzbineAdapter;
-import com.example.taverna.model.Komentar;
 import com.example.taverna.model.PorudzbinePrikaz;
 import com.example.taverna.servisi.PorudzbineApiService;
-import com.example.taverna.servisi.ServiceUtil;
+import com.example.taverna.servisi.RetrofitClient;
 
 import java.util.List;
 
@@ -24,7 +20,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Porudzbine extends AppCompatActivity {
+public class PorudzbineActivity extends AppCompatActivity {
 
     private int id;
     static final String TAG = GlavnaStranaActivity.class.getSimpleName();
@@ -60,7 +56,7 @@ public class Porudzbine extends AppCompatActivity {
 
     private void getPorudzbine() {
 
-        porudzbineApiService = ServiceUtil.porudzbineApiService;
+        porudzbineApiService = RetrofitClient.porudzbineApiService;
         Call<List<PorudzbinePrikaz>> call = porudzbineApiService.getDospele();
         call.enqueue(new Callback<List<PorudzbinePrikaz>>() {
 

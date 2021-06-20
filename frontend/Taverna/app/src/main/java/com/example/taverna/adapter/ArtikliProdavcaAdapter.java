@@ -2,36 +2,22 @@ package com.example.taverna.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.SpannableStringBuilder;
-import android.text.style.RelativeSizeSpan;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.taverna.GlavnaStranaActivity;
-import com.example.taverna.JeloAktiviti;
-import com.example.taverna.Komentari;
-import com.example.taverna.MainActivity;
+import com.example.taverna.ArtikalActivity;
 import com.example.taverna.ProdavacGlavnaActivity;
-import com.example.taverna.Prodavci;
 import com.example.taverna.R;
 import com.example.taverna.model.Artikal;
-import com.example.taverna.model.PorucivanjeDTO;
-import com.example.taverna.model.StavkaDTO;
 import com.example.taverna.servisi.ArtikliApiService;
-import com.example.taverna.servisi.PorudzbineApiService;
-import com.example.taverna.servisi.ServiceUtil;
+import com.example.taverna.servisi.RetrofitClient;
 
 import java.util.List;
 
@@ -91,7 +77,7 @@ public class ArtikliProdavcaAdapter extends RecyclerView.Adapter<ArtikliProdavca
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, JeloAktiviti.class);
+                Intent intent = new Intent(context, ArtikalActivity.class);
                 Bundle b = new Bundle();
                 b.putInt("ID",artikal.getId());
                 intent.putExtras(b);
@@ -116,7 +102,7 @@ public class ArtikliProdavcaAdapter extends RecyclerView.Adapter<ArtikliProdavca
     private void obrisiProizvod(int id){
 
 
-        artikliApiService = ServiceUtil.artikliApiService;
+        artikliApiService = RetrofitClient.artikliApiService;
         Call<Artikal> call = artikliApiService.obrisiArtikal(id);
 
         call.enqueue(new Callback<Artikal>() {

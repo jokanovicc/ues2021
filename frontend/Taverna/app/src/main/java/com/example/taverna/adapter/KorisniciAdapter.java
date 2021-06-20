@@ -1,9 +1,6 @@
 package com.example.taverna.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.telephony.ServiceState;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,13 +12,10 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.taverna.Prodavci;
 import com.example.taverna.R;
-import com.example.taverna.model.Komentar;
 import com.example.taverna.model.Korisnik;
-import com.example.taverna.model.Prodavac;
 import com.example.taverna.servisi.KorisniciApiService;
-import com.example.taverna.servisi.ServiceUtil;
+import com.example.taverna.servisi.RetrofitClient;
 
 import java.util.List;
 
@@ -86,7 +80,7 @@ public class KorisniciAdapter extends RecyclerView.Adapter<KorisniciAdapter.View
     }
 
     public void blokirajKorisnika(int id){
-        korisniciApiService = ServiceUtil.korisniciApiService;
+        korisniciApiService = RetrofitClient.korisniciApiService;
         Call<Korisnik> call = korisniciApiService.blokirajKorisnika(id);
         call.enqueue(new Callback<Korisnik>() {
             @Override

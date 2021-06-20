@@ -31,18 +31,18 @@
         <activity android:name=".ListaProdavaca" />
         <activity android:name=".RegisterProdavac" />
         <activity android:name=".DodavanjeRecenzije" />
-        <activity android:name=".Porudzbine" />
-        <activity android:name=".Korisnici" />
-        <activity android:name=".ProfilKorisnika" />
+        <activity android:name=".PorudzbineActivity" />
+        <activity android:name=".KorisniciActivity" />
+        <activity android:name=".ProfilActivity" />
         <activity android:name=".DodavanjeAkcije" />
         <activity android:name=".Akcije" />
         <activity android:name=".DodavanjeProizvoda" />
-        <activity android:name=".Komentari" />
+        <activity android:name=".KomentariActivity" />
         <activity
-            android:name=".JeloAktiviti"
+            android:name=".ArtikalActivity"
             android:theme="@style/Theme.Taverna.NoActionBar" />
         <activity
-            android:name=".Prodavci"
+            android:name=".IzabraniProdavacActivity"
             android:theme="@style/Theme.Taverna.NoActionBar" />
         <activity
             android:name=".DrawerActivity"

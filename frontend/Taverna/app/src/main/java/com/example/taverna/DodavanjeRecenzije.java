@@ -3,7 +3,6 @@ package com.example.taverna;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,7 +18,7 @@ import android.widget.Toast;
 
 import com.example.taverna.model.DodavanjeKomentara;
 import com.example.taverna.servisi.PorudzbineApiService;
-import com.example.taverna.servisi.ServiceUtil;
+import com.example.taverna.servisi.RetrofitClient;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -104,7 +103,7 @@ public class DodavanjeRecenzije extends AppCompatActivity implements AdapterView
             recenzija.setPorudzbina(id);
 
 
-            porudzbineApiService = ServiceUtil.porudzbineApiService;
+            porudzbineApiService = RetrofitClient.porudzbineApiService;
             Call<Void> call = porudzbineApiService.dodavanjeRecenzije(recenzija);
             call.enqueue(new Callback<Void>() {
                 @Override

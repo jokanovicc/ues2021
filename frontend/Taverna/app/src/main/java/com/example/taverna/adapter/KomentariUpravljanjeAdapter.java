@@ -2,7 +2,6 @@ package com.example.taverna.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,15 +11,11 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.taverna.GlavnaStranaActivity;
-import com.example.taverna.JeloAktiviti;
-import com.example.taverna.Komentari;
-import com.example.taverna.Korisnici;
+import com.example.taverna.KomentariActivity;
 import com.example.taverna.R;
-import com.example.taverna.model.Artikal;
 import com.example.taverna.model.Komentar;
 import com.example.taverna.servisi.ArtikliApiService;
-import com.example.taverna.servisi.ServiceUtil;
+import com.example.taverna.servisi.RetrofitClient;
 
 import java.util.List;
 
@@ -84,7 +79,7 @@ public class KomentariUpravljanjeAdapter extends RecyclerView.Adapter<KomentariU
             @Override
             public void onClick(View v) {
                 arhivirajKomentar(komentar.getId());
-                Intent intent = new Intent(context, Komentari.class);
+                Intent intent = new Intent(context, KomentariActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }
@@ -100,7 +95,7 @@ public class KomentariUpravljanjeAdapter extends RecyclerView.Adapter<KomentariU
 
     public void arhivirajKomentar(int id){
 
-        artikliApiService = ServiceUtil.artikliApiService;
+        artikliApiService = RetrofitClient.artikliApiService;
         Call<Komentar> call = artikliApiService.arhivirajKomentar(id);
         call.enqueue(new Callback<Komentar>() {
             @Override

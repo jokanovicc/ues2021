@@ -9,11 +9,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.taverna.JeloAktiviti;
-import com.example.taverna.Prodavci;
+import com.example.taverna.IzabraniProdavacActivity;
 import com.example.taverna.R;
 import com.example.taverna.model.Prodavac;
 
@@ -62,7 +60,7 @@ public class ProdavciListaAdapter extends RecyclerView.Adapter<ProdavciListaAdap
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, Prodavci.class);
+                Intent intent = new Intent(context, IzabraniProdavacActivity.class);
                 Bundle b = new Bundle();
                 b.putInt("ID",prodavac.getId());
                 intent.putExtras(b);

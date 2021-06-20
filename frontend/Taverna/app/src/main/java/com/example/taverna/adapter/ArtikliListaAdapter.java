@@ -19,14 +19,14 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.taverna.JeloAktiviti;
-import com.example.taverna.Prodavci;
+import com.example.taverna.ArtikalActivity;
+import com.example.taverna.IzabraniProdavacActivity;
 import com.example.taverna.R;
 import com.example.taverna.model.Artikal;
 import com.example.taverna.model.PorucivanjeDTO;
 import com.example.taverna.model.StavkaDTO;
 import com.example.taverna.servisi.PorudzbineApiService;
-import com.example.taverna.servisi.ServiceUtil;
+import com.example.taverna.servisi.RetrofitClient;
 
 import java.util.List;
 
@@ -95,7 +95,7 @@ public class ArtikliListaAdapter extends RecyclerView.Adapter<ArtikliListaAdapte
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, JeloAktiviti.class);
+                Intent intent = new Intent(context, ArtikalActivity.class);
                 Bundle b = new Bundle();
                 b.putInt("ID",artikal.getId());
                 intent.putExtras(b);
@@ -130,7 +130,7 @@ public class ArtikliListaAdapter extends RecyclerView.Adapter<ArtikliListaAdapte
 
 
 
-            Prodavci.dugmeZavrsi.setOnClickListener(new View.OnClickListener() {
+            IzabraniProdavacActivity.dugmeZavrsi.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
@@ -178,7 +178,7 @@ public class ArtikliListaAdapter extends RecyclerView.Adapter<ArtikliListaAdapte
 
     public void zavrsitiKupovinu(View v){
 
-        porudzbineApiService = ServiceUtil.porudzbineApiService;
+        porudzbineApiService = RetrofitClient.porudzbineApiService;
         Call<Void> call = porudzbineApiService.napraviPorudzbinu(porucivanjeDTO);
         call.enqueue(new Callback<Void>() {
             @Override

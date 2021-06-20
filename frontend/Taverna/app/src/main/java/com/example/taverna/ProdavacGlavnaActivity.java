@@ -10,13 +10,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 
-import com.example.taverna.adapter.ArtikliListaAdapter;
 import com.example.taverna.adapter.ArtikliProdavcaAdapter;
 import com.example.taverna.model.Artikal;
 import com.example.taverna.servisi.ArtikliApiService;
-import com.example.taverna.servisi.ServiceUtil;
+import com.example.taverna.servisi.RetrofitClient;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -24,8 +22,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ProdavacGlavnaActivity extends AppCompatActivity {
 
@@ -75,7 +71,7 @@ public class ProdavacGlavnaActivity extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences(MainActivity.MyPres, Context.MODE_PRIVATE);
 
-        artikliApiService = ServiceUtil.artikliApiService;
+        artikliApiService = RetrofitClient.artikliApiService;
 
         Call<List<Artikal>> call = artikliApiService.getArtikliProdavaca(sharedPreferences.getInt(String.valueOf(MainActivity.ID),1));
         call.enqueue(new Callback<List<Artikal>>() {

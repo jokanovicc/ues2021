@@ -2,24 +2,22 @@ package com.example.taverna.servisi;
 
 import android.graphics.Bitmap;
 
-import com.example.taverna.util.ImageSerialization;
+import com.example.taverna.util.SerijalizacijaSlike;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ServiceUtil {
+public class RetrofitClient {
 
-    public static final String SERVICE_API_PATH = "http://192.168.83.19:8080/";
+    public static final String SERVICE_API_PATH = "http://192.168.1.2:8080/";
     public static String token;
 
     public static String getToken() {
@@ -27,10 +25,10 @@ public class ServiceUtil {
     }
 
     public static void setToken(String token) {
-        ServiceUtil.token = token;
+        RetrofitClient.token = token;
     }
 
-    static Gson gson = new GsonBuilder().registerTypeAdapter(Bitmap.class, ImageSerialization.getBitmapTypeAdapter())
+    static Gson gson = new GsonBuilder().registerTypeAdapter(Bitmap.class, SerijalizacijaSlike.getBitmapTypeAdapter())
             .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
 
 

@@ -11,10 +11,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.taverna.model.Kupac;
 import com.example.taverna.model.Prodavac;
 import com.example.taverna.servisi.KorisniciApiService;
-import com.example.taverna.servisi.ServiceUtil;
+import com.example.taverna.servisi.RetrofitClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +21,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RegisterProdavac extends AppCompatActivity {
 
@@ -78,7 +75,7 @@ public class RegisterProdavac extends AppCompatActivity {
 
     public void dodajKorisnika() {
 
-        korisniciApiService = ServiceUtil.korisniciApiService;
+        korisniciApiService = RetrofitClient.korisniciApiService;
         final Prodavac prodavac = new Prodavac();
         String imen = ime.getText().toString();
         String prezimen = prezime.getText().toString();
@@ -157,7 +154,7 @@ public class RegisterProdavac extends AppCompatActivity {
     }
 
     public void validateKorisnicko() {
-        korisniciApiService = ServiceUtil.korisniciApiService;
+        korisniciApiService = RetrofitClient.korisniciApiService;
         Call<List<String>> call = korisniciApiService.getKorisnicka();
         call.enqueue(new Callback<List<String>>() {
             @Override
@@ -174,7 +171,7 @@ public class RegisterProdavac extends AppCompatActivity {
 
 
     public void validateImejl() {
-        korisniciApiService = ServiceUtil.korisniciApiService;
+        korisniciApiService = RetrofitClient.korisniciApiService;
         Call<List<String>> call = korisniciApiService.getMejlovi();
         call.enqueue(new Callback<List<String>>() {
             @Override

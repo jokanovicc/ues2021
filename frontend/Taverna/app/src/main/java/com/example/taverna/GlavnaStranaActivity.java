@@ -4,19 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -27,19 +23,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.taverna.adapter.ProdavciListaAdapter;
 import com.example.taverna.model.Prodavac;
 import com.example.taverna.servisi.KorisniciApiService;
-import com.example.taverna.servisi.ServiceUtil;
-import com.example.taverna.ui.porudzbine.PorudzbinaViewModel;
+import com.example.taverna.servisi.RetrofitClient;
 import com.google.android.material.navigation.NavigationView;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class GlavnaStranaActivity extends AppCompatActivity {
@@ -105,6 +96,8 @@ public class GlavnaStranaActivity extends AppCompatActivity {
             navigationView.getMenu().findItem(R.id.nav_korisnici).setVisible(false);
             navigationView.getMenu().findItem(R.id.nav_home).setVisible(false);
             navigationView.getMenu().findItem(R.id.nav_artikli).setVisible(false);
+            navigationView.getMenu().findItem(R.id.nav_akcije).setVisible(false);
+
 
         }
 
@@ -113,6 +106,8 @@ public class GlavnaStranaActivity extends AppCompatActivity {
             navigationView.getMenu().findItem(R.id.nav_home).setVisible(false);
             navigationView.getMenu().findItem(R.id.nav_artikli).setVisible(false);
             navigationView.getMenu().findItem(R.id.nav_poruzbina).setVisible(false);
+            navigationView.getMenu().findItem(R.id.nav_akcije).setVisible(false);
+
         }
 
 
@@ -134,18 +129,18 @@ public class GlavnaStranaActivity extends AppCompatActivity {
 
 
                 if(item.getItemId()==R.id.nav_home){
-                    Intent i = new Intent(GlavnaStranaActivity.this, Komentari.class);
+                    Intent i = new Intent(GlavnaStranaActivity.this, KomentariActivity.class);
                     startActivity(i);
                 }
 
                 if(item.getItemId()==R.id.nav_poruzbina){
-                    Intent i5 = new Intent(GlavnaStranaActivity.this, Porudzbine.class);
+                    Intent i5 = new Intent(GlavnaStranaActivity.this, PorudzbineActivity.class);
                     startActivity(i5);
                 }
 
 
                 if(item.getItemId()==R.id.nav_korisnici){
-                    Intent i4 = new Intent(GlavnaStranaActivity.this, Korisnici.class);
+                    Intent i4 = new Intent(GlavnaStranaActivity.this, KorisniciActivity.class);
                     startActivity(i4);
                 }
 
@@ -154,18 +149,18 @@ public class GlavnaStranaActivity extends AppCompatActivity {
                     startActivity(i4);
                 }
 
-                if(item.getItemId()==R.id.nav_gallery){
+                if(item.getItemId()==R.id.nav_akcije){
                     Intent i2 = new Intent(GlavnaStranaActivity.this, Akcije.class);
                     startActivity(i2);
                 }
                 if(item.getItemId()==R.id.nav_slideshow){
-                    Intent i3 = new Intent(GlavnaStranaActivity.this, ProfilKorisnika.class);
+                    Intent i3 = new Intent(GlavnaStranaActivity.this, ProfilActivity.class);
                     startActivity(i3);
 
                 }
 
                 if(item.getItemId()==R.id.nav_odjava){
-                    ServiceUtil.setToken("");
+                    RetrofitClient.setToken("");
                     SharedPreferences sharedPreferences1 = getSharedPreferences(MainActivity.MyPres, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences1.edit();
                     editor.clear();
@@ -196,7 +191,7 @@ public class GlavnaStranaActivity extends AppCompatActivity {
 
     private void getProdavci(){
 
-        korisniciApiService = ServiceUtil.korisniciApiService;
+        korisniciApiService = RetrofitClient.korisniciApiService;
         Call<List<Prodavac>> call = korisniciApiService.getProdavci();
         call.enqueue(new Callback<List<Prodavac>>() {
             @Override

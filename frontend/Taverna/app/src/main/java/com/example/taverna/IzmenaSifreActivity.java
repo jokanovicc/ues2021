@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.example.taverna.model.IzmenaSifreDTO;
 import com.example.taverna.servisi.KorisniciApiService;
-import com.example.taverna.servisi.ServiceUtil;
+import com.example.taverna.servisi.RetrofitClient;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -74,7 +74,7 @@ public class IzmenaSifreActivity extends AppCompatActivity {
             izmenaSifreDTO.setNovaSifra(novaSifraIzmena);
             izmenaSifreDTO.setStaraSifra(staraSifraIzmena);
 
-            korisniciApiService = ServiceUtil.korisniciApiService;
+            korisniciApiService = RetrofitClient.korisniciApiService;
             Call<Boolean> call = korisniciApiService.izmeniSifru(izmenaSifreDTO);
             call.enqueue(new Callback<Boolean>() {
                 @Override

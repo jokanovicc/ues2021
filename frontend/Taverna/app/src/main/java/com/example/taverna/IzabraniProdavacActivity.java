@@ -5,12 +5,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.taverna.adapter.ArtikliListaAdapter;
@@ -19,7 +17,7 @@ import com.example.taverna.model.Artikal;
 import com.example.taverna.model.Komentar;
 import com.example.taverna.servisi.ArtikliApiService;
 import com.example.taverna.servisi.KorisniciApiService;
-import com.example.taverna.servisi.ServiceUtil;
+import com.example.taverna.servisi.RetrofitClient;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
@@ -27,10 +25,8 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
-public class Prodavci extends AppCompatActivity {
+public class IzabraniProdavacActivity extends AppCompatActivity {
 
     private int id;
     static final String TAG = GlavnaStranaActivity.class.getSimpleName();
@@ -74,7 +70,7 @@ public class Prodavci extends AppCompatActivity {
 
     private void getKomentari() {
 
-        artikliApiService = ServiceUtil.artikliApiService;
+        artikliApiService = RetrofitClient.artikliApiService;
         Call<List<Komentar>> call = artikliApiService.komentariProdavca(id);
         call.enqueue(new Callback<List<Komentar>>() {
 
@@ -94,7 +90,7 @@ public class Prodavci extends AppCompatActivity {
 
     private void getOcena() {
 
-        korisniciApiService = ServiceUtil.korisniciApiService;
+        korisniciApiService = RetrofitClient.korisniciApiService;
         Call<Double> call = korisniciApiService.getProsecnaOcena(id);
         call.enqueue(new Callback<Double>() {
             @Override
@@ -115,7 +111,7 @@ public class Prodavci extends AppCompatActivity {
 
     private void getArtikli() {
 
-        artikliApiService = ServiceUtil.artikliApiService;
+        artikliApiService = RetrofitClient.artikliApiService;
         Call<List<Artikal>> call = artikliApiService.getArtikliProdavaca(id);
         call.enqueue(new Callback<List<Artikal>>() {
 

@@ -13,22 +13,18 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.taverna.model.Artikal;
 import com.example.taverna.model.Korisnik;
 import com.example.taverna.model.Prodavac;
-import com.example.taverna.servisi.ArtikliApiService;
 import com.example.taverna.servisi.KorisniciApiService;
-import com.example.taverna.servisi.ServiceUtil;
+import com.example.taverna.servisi.RetrofitClient;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ProfilKorisnika extends AppCompatActivity {
+public class ProfilActivity extends AppCompatActivity {
 
-    static final String TAG = ProfilKorisnika.class.getSimpleName();
+    static final String TAG = ProfilActivity.class.getSimpleName();
 
     private KorisniciApiService korisniciApiService;
     private TextView imeProfil;
@@ -70,7 +66,7 @@ public class ProfilKorisnika extends AppCompatActivity {
         izmeniButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ProfilKorisnika.this,EditProfilActivity.class);
+                Intent intent = new Intent(ProfilActivity.this,EditProfilActivity.class);
                 startActivity(intent);
             }
         });
@@ -79,7 +75,7 @@ public class ProfilKorisnika extends AppCompatActivity {
         sifraButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1 = new Intent(ProfilKorisnika.this,IzmenaSifreActivity.class);
+                Intent intent1 = new Intent(ProfilActivity.this,IzmenaSifreActivity.class);
                 startActivity(intent1);
             }
         });
@@ -98,7 +94,7 @@ public class ProfilKorisnika extends AppCompatActivity {
     }
 
     public void ocitajZaProdavca(){
-        korisniciApiService = ServiceUtil.korisniciApiService;
+        korisniciApiService = RetrofitClient.korisniciApiService;
         Call<Prodavac> call = korisniciApiService.getInfoProdavca();
         call.enqueue(new Callback<Prodavac>() {
             @Override
@@ -124,7 +120,7 @@ public class ProfilKorisnika extends AppCompatActivity {
     private void getSelectedKorisnik(){
 
 
-        korisniciApiService = ServiceUtil.korisniciApiService;
+        korisniciApiService = RetrofitClient.korisniciApiService;
         Call<Korisnik> call = korisniciApiService.getMyInfo();
 
 

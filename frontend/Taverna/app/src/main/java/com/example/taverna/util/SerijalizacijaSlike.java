@@ -2,7 +2,6 @@ package com.example.taverna.util;
 
 import android.graphics.Bitmap;
 
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
 
@@ -15,14 +14,16 @@ import com.google.gson.stream.JsonWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-public class ImageSerialization extends TypeAdapter<Bitmap> {
+public class SerijalizacijaSlike extends TypeAdapter<Bitmap> {
 
 
-    private static final TypeAdapter<Bitmap> bitmapTypeAdapter = new ImageSerialization();
+    private static final TypeAdapter<Bitmap> bitmapTypeAdapter = new SerijalizacijaSlike();
 
-    private ImageSerialization() {
+    private SerijalizacijaSlike() {
 
     }
+
+    //metode za upis i citanja Base64 slike koja dolazi do aplikacija.
 
     @Override
     public void write(JsonWriter out, Bitmap bitmap) throws IOException {

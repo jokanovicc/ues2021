@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.taverna.model.Kupac;
 import com.example.taverna.servisi.KorisniciApiService;
-import com.example.taverna.servisi.ServiceUtil;
+import com.example.taverna.servisi.RetrofitClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,7 +71,7 @@ public class RegisterActivity extends AppCompatActivity {
     public void dodajKorisnika() {
 
 
-        korisniciApiService = ServiceUtil.korisniciApiService;
+        korisniciApiService = RetrofitClient.korisniciApiService;
         final Kupac kupac = new Kupac();
         String imen = ime.getText().toString();
         String prezimen = prezime.getText().toString();
@@ -135,7 +135,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
     public void validateImejl() {
-        korisniciApiService = ServiceUtil.korisniciApiService;
+        korisniciApiService = RetrofitClient.korisniciApiService;
         Call<List<String>> call = korisniciApiService.getKorisnicka();
         call.enqueue(new Callback<List<String>>() {
             @Override
