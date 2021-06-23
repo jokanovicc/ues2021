@@ -1,5 +1,6 @@
 package com.example.taverna.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +29,7 @@ public class KorisniciAdapter extends RecyclerView.Adapter<KorisniciAdapter.View
     private Context context;
     private Button button;
     private KorisniciApiService korisniciApiService;
+    String blokiran;
 
     public KorisniciAdapter(List<Korisnik> data, Context context) {
         this.mData = data;
@@ -66,12 +68,45 @@ public class KorisniciAdapter extends RecyclerView.Adapter<KorisniciAdapter.View
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 blokirajKorisnika(korisnik.getId());
-                Toast.makeText(context, "ЧИНИЧНО СТАЊЕ КОРИСНИКА ПРОМЕЊЕНО", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Измењен статус корисника", Toast.LENGTH_SHORT).show();
 
             }
         });
 
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displejInfo(korisnik.getId(),v);
+            }
+        });
+
+
+    }
+
+    public void displejInfo(int id,View v){
+        korisniciApiService = RetrofitClient.korisniciApiService;
+        Call<Korisnik> call = korisniciApiService.getInfoKorisnika(id);
+        call.enqueue(new Callback<Korisnik>() {
+            @Override
+            public void onResponse(Call<Korisnik> call, Response<Korisnik> response) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(v.getRootView().getContext());
+                alert.setTitle("Информације");
+                if(!response.body().getBlokiran()){
+                    blokiran = "Није блокиран";
+                }else{
+                    blokiran = "блокиран";
+                }
+                alert.setMessage(response.body().getIme() + " "+response.body().getPrezime() +"\n" + response.body().getAdresa() + "\n" + response.body().getRole() + "\n" + blokiran);
+                alert.setPositiveButton("OK",null);
+                alert.show();
+            }
+
+            @Override
+            public void onFailure(Call<Korisnik> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override

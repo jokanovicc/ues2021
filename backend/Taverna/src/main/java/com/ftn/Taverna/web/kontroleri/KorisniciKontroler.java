@@ -104,6 +104,12 @@ public class KorisniciKontroler {
 
     }
 
+    @GetMapping(value = "/korisnik-informacije/{id}")
+    public ResponseEntity<KorisnikDTO> nadjiInformacijeKorisnika(@PathVariable("id") int id){
+        Korisnik korisnik = korisnikServis.findOne(id);
+        return new ResponseEntity<KorisnikDTO>(new KorisnikDTO(korisnik),HttpStatus.OK);
+
+    }
 
 
     @GetMapping("/usernamovi")

@@ -100,7 +100,7 @@ public class ProfilActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Prodavac> call, Response<Prodavac> response) {
                 prodavac = response.body();
-                String ispis = prodavac.getNaziv() + "|"+prodavac.getPoslujeOd() + "|" + prodavac.getImejl();
+                String ispis = "Назив фирме: " +prodavac.getNaziv() + "\nKојa послује од: "+prodavac.getPoslujeOd() + "\nИмејл: " + prodavac.getImejl();
                 prodavacInfo.setText(ispis);
             }
 

@@ -124,7 +124,7 @@ public class PorudzbineKontroler {
         Porudzbina porudzbina = new Porudzbina();
         Random r = new Random();
         int low = 10;
-        int high = 500;
+        int high = 1000;
         int result = r.nextInt(high-low) + low;
         porudzbina.setId(result);
         porudzbina.setSatnica(Date.valueOf(LocalDate.now()));

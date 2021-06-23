@@ -20,6 +20,7 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.taverna.ArtikalActivity;
+import com.example.taverna.GlavnaStranaActivity;
 import com.example.taverna.IzabraniProdavacActivity;
 import com.example.taverna.R;
 import com.example.taverna.model.Artikal;
@@ -122,7 +123,7 @@ public class ArtikliListaAdapter extends RecyclerView.Adapter<ArtikliListaAdapte
                     SpannableStringBuilder biggerText = new SpannableStringBuilder(text2);
                     biggerText.setSpan(new RelativeSizeSpan(1.30f), 0, text2.length(), 0);
                     Toast.makeText(context, biggerText, Toast.LENGTH_SHORT).show();
-                    lista+=artikal.getNaziv() + " x " +kolicin1a +" -> " +zajedno + "\n";
+                    lista+=artikal.getNaziv() + " x " +kolicin1a +" => " +zajedno + "\n";
                     porucivanjeDTO.getListaStavki().add(stavkaDTO);
                 }
             }
@@ -141,7 +142,7 @@ public class ArtikliListaAdapter extends RecyclerView.Adapter<ArtikliListaAdapte
                         AlertDialog.Builder builder = new AlertDialog.Builder(v.getRootView().getContext());
 
                         builder.setTitle("Потврда поруџбине");
-                        builder.setMessage("\nСигурни сте да желите да завршите поруџбину?\n" + lista + " \n " +cena);
+                        builder.setMessage("Сигурни сте да желите да завршите поруџбину?\n" + lista + "\nУкупна цена је " +cena);
 
                         builder.setPositiveButton("Да", new DialogInterface.OnClickListener() {
 
@@ -186,7 +187,14 @@ public class ArtikliListaAdapter extends RecyclerView.Adapter<ArtikliListaAdapte
                 AlertDialog.Builder alert = new AlertDialog.Builder(v.getRootView().getContext());
                 alert.setTitle("Потврђена поруџбина");
                 alert.setMessage(lista +"\n" + "УКУПНА ЦЕНА ЈЕ " + cena);
-                alert.setPositiveButton("OK",null);
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(context, GlavnaStranaActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(intent);
+                    }
+                });
                 alert.show();
                 cena = 0;
                 lista = "";

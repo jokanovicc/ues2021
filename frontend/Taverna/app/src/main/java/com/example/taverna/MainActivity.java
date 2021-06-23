@@ -69,6 +69,12 @@ public class MainActivity extends AppCompatActivity {
 
         sharedPreferences = getSharedPreferences(MyPres, Context.MODE_PRIVATE);
 
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        Objects.requireNonNull(mSensorManager).registerListener(mSensorListener, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
+                SensorManager.SENSOR_DELAY_NORMAL);
+        mAccel = 10f;
+        mAccelCurrent = SensorManager.GRAVITY_EARTH;
+        mAccelLast = SensorManager.GRAVITY_EARTH;
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
                     doLogin(korisnicko,sifra);
 
                 }
-
 
 
             }
@@ -105,13 +110,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        Objects.requireNonNull(mSensorManager).registerListener(mSensorListener, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER),
-                SensorManager.SENSOR_DELAY_NORMAL);
-        mAccel = 10f;
-        mAccelCurrent = SensorManager.GRAVITY_EARTH;
-        mAccelLast = SensorManager.GRAVITY_EARTH;
 
 
 
@@ -201,6 +199,8 @@ public class MainActivity extends AppCompatActivity {
                     editor.putInt(String.valueOf(ID),korisnik.getId());
                     editor.commit();
                     startActivity(intent);
+                    finish();
+
 
 
                 }else{

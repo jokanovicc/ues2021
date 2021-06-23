@@ -58,4 +58,7 @@ public interface KorisniciApiService {
     @GET("/korisnici/prodavac-info")
     Call<Prodavac> getInfoProdavca();
 
+    @GET("korisnici/korisnik-informacije/{id}")
+    Call<Korisnik> getInfoKorisnika(@Path("id") int id);
+
 }

@@ -115,9 +115,12 @@ public class RegisterProdavac extends AppCompatActivity {
                 } else if (preduzece.length() == 0) {
                     naziv.requestFocus();
                     naziv.setError("НАЗИВ ПРЕДУЗЕЋА НЕ СМЕ БИТИ ПРАЗАН");
-                } else if (email.length() == 0 && !email.contains("@")) {
+                } else if (email.length() == 0) {
                     imejl.requestFocus();
                     imejl.setError("ПОГРЕШАН ИЛИ ПРАЗАН ИМЕЈЛ");
+                }else if(email.contains("@")==false){
+                    imejl.requestFocus();
+                    imejl.setError("ПОГРЕШАН  ИМЕЈЛ");
                 } else {
 
 
