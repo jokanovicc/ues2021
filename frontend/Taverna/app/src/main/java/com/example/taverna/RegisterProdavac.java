@@ -1,5 +1,6 @@
 package com.example.taverna;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -69,8 +70,6 @@ public class RegisterProdavac extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        validateImejl();
-        validateKorisnicko();
     }
 
     public void dodajKorisnika() {
@@ -84,17 +83,6 @@ public class RegisterProdavac extends AppCompatActivity {
         String korisnickoIme = korisnicko.getText().toString();
         String email = imejl.getText().toString();
         String preduzece = naziv.getText().toString();
-
-
-        if (imena.contains(korisnickoIme)) {
-            korisnicko.requestFocus();
-            korisnicko.setError("Корисничко име већ заузето");
-        } else {
-
-            if (imejlovi.contains(email)) {
-                imejl.requestFocus();
-                imejl.setError("Имејл већ заузет");
-            } else {
 
                 if (korisnickoIme.length() == 0) {
                     korisnicko.requestFocus();
@@ -122,8 +110,6 @@ public class RegisterProdavac extends AppCompatActivity {
                     imejl.requestFocus();
                     imejl.setError("ПОГРЕШАН  ИМЕЈЛ");
                 } else {
-
-
                     prodavac.setAdresa(adress);
                     prodavac.setPrezime(prezimen);
                     prodavac.setIme(imen);
@@ -133,19 +119,27 @@ public class RegisterProdavac extends AppCompatActivity {
                     prodavac.setNaziv(preduzece);
 
 
-                    Call<Prodavac> call = korisniciApiService.registerProdavac(prodavac);
-                    call.enqueue(new Callback<Prodavac>() {
+                    Call<Boolean> call = korisniciApiService.registerProdavac(prodavac);
+                    call.enqueue(new Callback<Boolean>() {
                         @Override
-                        public void onResponse(Call<Prodavac> call, Response<Prodavac> response) {
-                            Toast.makeText(RegisterProdavac.this, "Успешно регистрован", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(RegisterProdavac.this, MainActivity.class);
-                            startActivity(intent);
-                            finish();
+                        public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                            if (!response.body()) {
+                                AlertDialog.Builder alert = new AlertDialog.Builder(RegisterProdavac.this);
+                                alert.setTitle("Информације");
+                                alert.setMessage("Корисничко име или имејл су већ заузети. Молим Вас изаберите неки други!");
+                                alert.setPositiveButton("OK", null);
+                                alert.show();
+                            } else {
+                                Toast.makeText(RegisterProdavac.this, "Успешно регистрован", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(RegisterProdavac.this, MainActivity.class);
+                                startActivity(intent);
+                                finish();
 
+                            }
                         }
 
                         @Override
-                        public void onFailure(Call<Prodavac> call, Throwable t) {
+                        public void onFailure(Call<Boolean> call, Throwable t) {
                             Toast.makeText(RegisterProdavac.this, "ПУКЛА ВЕЗА", Toast.LENGTH_SHORT).show();
 
                         }
@@ -154,40 +148,4 @@ public class RegisterProdavac extends AppCompatActivity {
 
             }
         }
-    }
 
-    public void validateKorisnicko() {
-        korisniciApiService = RetrofitClient.korisniciApiService;
-        Call<List<String>> call = korisniciApiService.getKorisnicka();
-        call.enqueue(new Callback<List<String>>() {
-            @Override
-            public void onResponse(Call<List<String>> call, Response<List<String>> response) {
-                imena = response.body();
-            }
-
-            @Override
-            public void onFailure(Call<List<String>> call, Throwable t) {
-
-            }
-        });
-    }
-
-
-    public void validateImejl() {
-        korisniciApiService = RetrofitClient.korisniciApiService;
-        Call<List<String>> call = korisniciApiService.getMejlovi();
-        call.enqueue(new Callback<List<String>>() {
-            @Override
-            public void onResponse(Call<List<String>> call, Response<List<String>> response) {
-                imejlovi = response.body();
-            }
-
-            @Override
-            public void onFailure(Call<List<String>> call, Throwable t) {
-
-            }
-        });
-    }
-
-
-}

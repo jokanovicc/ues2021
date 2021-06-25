@@ -1,5 +1,6 @@
 package com.example.taverna;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -65,7 +66,6 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        validateImejl();
     }
 
     public void dodajKorisnika() {
@@ -78,14 +78,6 @@ public class RegisterActivity extends AppCompatActivity {
         String pass = sifra.getText().toString();
         String adress = adresa.getText().toString();
         String korisnickoIme = korisnicko.getText().toString();
-
-
-
-
-        if (imena.contains(korisnickoIme)) {
-            korisnicko.requestFocus();
-            korisnicko.setError("Већ заузето корисничко име");
-        } else {
 
             if (korisnickoIme.length() == 0) {
                 korisnicko.requestFocus();
@@ -112,42 +104,35 @@ public class RegisterActivity extends AppCompatActivity {
                 kupac.setSifra(pass);
                 kupac.setKorisnicko(korisnickoIme);
 
-                Call<Kupac> call = korisniciApiService.registerKupca(kupac);
-                call.enqueue(new Callback<Kupac>() {
+                Call<Boolean> call = korisniciApiService.registerKupca(kupac);
+                call.enqueue(new Callback<Boolean>() {
                     @Override
-                    public void onResponse(Call<Kupac> call, Response<Kupac> response) {
-                        Toast.makeText(RegisterActivity.this, "Успешно регистрован", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
+                    public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                        if(response.body()) {
+                            Toast.makeText(RegisterActivity.this, "Успешно регистрован", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }else if(!response.body()){
+                            AlertDialog.Builder alert = new AlertDialog.Builder(RegisterActivity.this);
+                            alert.setTitle("Грешка");
+                            alert.setMessage("Корисничко име " + korisnickoIme + " је заузето. Молим изаберите неко друго!");
+                            alert.setPositiveButton("OK",null);
+                            alert.show();
+                        }
 
                     }
 
                     @Override
-                    public void onFailure(Call<Kupac> call, Throwable t) {
+                    public void onFailure(Call<Boolean> call, Throwable t) {
                         Toast.makeText(RegisterActivity.this, "ПУКЛА ВЕЗА", Toast.LENGTH_SHORT).show();
 
                     }
                 });
             }
-        }
+
     }
 
 
-    public void validateImejl() {
-        korisniciApiService = RetrofitClient.korisniciApiService;
-        Call<List<String>> call = korisniciApiService.getKorisnicka();
-        call.enqueue(new Callback<List<String>>() {
-            @Override
-            public void onResponse(Call<List<String>> call, Response<List<String>> response) {
-                imena = response.body();
-            }
-
-            @Override
-            public void onFailure(Call<List<String>> call, Throwable t) {
-
-            }
-        });
-    }
 
 }

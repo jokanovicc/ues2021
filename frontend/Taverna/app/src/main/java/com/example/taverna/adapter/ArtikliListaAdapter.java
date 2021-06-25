@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.text.SpannableStringBuilder;
 import android.text.style.RelativeSizeSpan;
 import android.view.LayoutInflater;
@@ -113,6 +114,8 @@ public class ArtikliListaAdapter extends RecyclerView.Adapter<ArtikliListaAdapte
                     holder.editText.requestFocus();
                     holder.editText.setError("Одаберите количину");
                 }else {
+                    Vibrator v1 = (Vibrator)context.getSystemService(Context.VIBRATOR_SERVICE);
+                    v1.vibrate(300);
                     StavkaDTO stavkaDTO = new StavkaDTO();
                     stavkaDTO.setArtikalId(artikal.getId());
                     stavkaDTO.setKolicina(Integer.parseInt(kolicin1a));
@@ -184,6 +187,8 @@ public class ArtikliListaAdapter extends RecyclerView.Adapter<ArtikliListaAdapte
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
+                Vibrator v1 = (Vibrator)context.getSystemService(Context.VIBRATOR_SERVICE);
+                v1.vibrate(1000);
                 AlertDialog.Builder alert = new AlertDialog.Builder(v.getRootView().getContext());
                 alert.setTitle("Потврђена поруџбина");
                 alert.setMessage(lista +"\n" + "УКУПНА ЦЕНА ЈЕ " + cena);

@@ -15,6 +15,7 @@ import com.ftn.Taverna.web.kontroleri.DTO.post.KomentarPOSTDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
@@ -51,32 +52,10 @@ public class PorudzbineKontroler {
     @Autowired
     KorisnikServis korisnikServis;
 
-    @GetMapping
-    public ResponseEntity<Collection<PorudzbinaDTO>> findAllPorudzbine() {
-        List<Porudzbina> porudzbine = porudzbinaServis.findAll();
-        List<PorudzbinaDTO> porudzbineDTO = new ArrayList<>();
-        for(Porudzbina p:porudzbine){
-            porudzbineDTO.add(new PorudzbinaDTO(p));
-        }
-        return new ResponseEntity<>(porudzbineDTO, HttpStatus.OK);
-    }
-
-
-
-
-
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<PorudzbinaDTO> getPorudzbinaById(@PathVariable("id") Integer id){
-        Porudzbina porudzbina = porudzbinaServis.findOne(id);
-        if(porudzbina == null){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-
-        }
-        return new ResponseEntity<>(new PorudzbinaDTO(porudzbina), HttpStatus.OK);
-    }
 
 
     @GetMapping(value = "/porudzbine-korisnika")
+    @PreAuthorize("hasAnyRole('KUPAC')")
     public ResponseEntity<Collection<PorudzbinaDTO>> getPorudzbineKupca(Authentication authentication){
         UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
         String username = userPrincipal.getUsername();
@@ -115,6 +94,7 @@ public class PorudzbineKontroler {
 
 
     @PostMapping(value = "/porucivanje")
+    @PreAuthorize("hasAnyRole('KUPAC')")
     public ResponseEntity<PorudzbinaDTO2> napraviPorudzbinu(@RequestBody PorucivanjeDTO porucivanjeDTO,Authentication authentication){
         UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
         String username = userPrincipal.getUsername();
@@ -158,16 +138,17 @@ public class PorudzbineKontroler {
 
 
     @GetMapping("/stiglo/{id}")
+    @PreAuthorize("hasAnyRole('KUPAC')")
     public ResponseEntity<Void> stiglaPorudzbina(@PathVariable("id") Integer id){
         Porudzbina porudzbina = porudzbinaServis.findOne(id);
         porudzbina.setDostavljeno(true);
         porudzbinaServis.save(porudzbina);
         return new ResponseEntity<>(HttpStatus.OK);
 
-
     }
 
     @PostMapping("komentar")
+    @PreAuthorize("hasAnyRole('KUPAC')")
     public ResponseEntity<KomentarDTO> dodavanjeKomentara(@RequestBody KomentarPOSTDTO komentarDTO){
         Porudzbina porudzbina = porudzbinaServis.findOne(komentarDTO.getPorudzbina());
         porudzbina.setKomentar(komentarDTO.getKomentar());
@@ -202,6 +183,7 @@ public class PorudzbineKontroler {
 
 
     @PostMapping("/komentar-arhiviraj/{id}")
+    @PreAuthorize("hasAnyRole('PRODAVAC')")
     public ResponseEntity<Void> arhivirajKomentar(@PathVariable("id") Integer id){
 
         Porudzbina komentar = porudzbinaServis.findOne(id);

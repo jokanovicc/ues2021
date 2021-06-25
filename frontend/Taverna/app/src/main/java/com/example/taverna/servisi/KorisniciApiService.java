@@ -22,10 +22,10 @@ public interface KorisniciApiService {
     Call<List<Prodavac>> getProdavci();
 
     @POST("korisnici/lista-kupaca")
-    Call<Kupac> registerKupca(@Body Kupac kupac);
+    Call<Boolean> registerKupca(@Body Kupac kupac);
 
     @POST("korisnici/lista-prodavaca")
-    Call<Prodavac> registerProdavac(@Body Prodavac prodavac);
+    Call<Boolean> registerProdavac(@Body Prodavac prodavac);
 
     @POST("users/login")
     Call<Korisnik> login(@Body Login login);
@@ -42,12 +42,6 @@ public interface KorisniciApiService {
     @POST("/korisnici/blokiraj/{id}")
     Call<Korisnik> blokirajKorisnika(@Path(("id")) int id);
 
-
-    @GET("/korisnici/imejlovi")
-    Call<List<String>> getMejlovi();
-
-    @GET("/korisnici/usernamovi")
-    Call<List<String>> getKorisnicka();
 
     @GET("/porudzbine/prosecna-ocena/{id}")
     Call<Double> getProsecnaOcena(@Path("id") int id);

@@ -18,21 +18,13 @@ public class SplashScreenActivity extends Activity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
-        SharedPreferences sharedPreferences = getSharedPreferences(MainActivity.MyPres, Context.MODE_PRIVATE);
         int SPLASH_TIME_OUT = 3000;
 
 
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
-                System.out.println("bbbbbbbbbbbbbb " +  sharedPreferences.getString(MainActivity.Username, ""));
-
-                if(!sharedPreferences.getString(MainActivity.Username, "").equals("")){
-                    RetrofitClient.setToken(sharedPreferences.getString(MainActivity.Token, ""));
-                    startActivity(new Intent(SplashScreenActivity.this, GlavnaStranaActivity.class));
-                }else {
-                    startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
-                }
+                startActivity(new Intent(SplashScreenActivity.this, MainActivity.class));
                 finish(); // da ne bi mogao da ode back na splash
             }
         }, SPLASH_TIME_OUT);

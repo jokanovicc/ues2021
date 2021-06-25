@@ -12,6 +12,7 @@ import com.ftn.Taverna.servisi.ProdavacServis;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.parameters.P;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -50,11 +51,21 @@ public class ArtikliKontroler {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<ArtikalDTO> getArtikalById(@PathVariable("id") Integer id){
+    public ResponseEntity<ArtikalDTO> getArtikalById(@PathVariable("id") Integer id,Authentication authentication){
         Artikal artikal = artikliServis.findOne(id);
-        if(artikal == null){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
+        String username = userPrincipal.getUsername();
+        Prodavac prodavac = prodavacServis.findByUsername(username);
+        if(prodavac!=null){
+            List<Artikal> artikli = artikliServis.findByProdavac(prodavac.getId());
+            if(!artikli.contains(artikal)){
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+        }else {
+            if (artikal == null) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
+            }
         }
         return new ResponseEntity<>(new ArtikalDTO(artikal), HttpStatus.OK);
     }
@@ -79,6 +90,7 @@ public class ArtikliKontroler {
 
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('PRODAVAC')")
     public ResponseEntity<ArtikalDTO> snimiArtikal(@RequestBody ArtikalDTOPost artikalDTO, Authentication authentication){
         Artikal artikal = new Artikal();
         UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
@@ -103,17 +115,25 @@ public class ArtikliKontroler {
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<ArtikalDTO> izmeniArtikal(@RequestBody ArtikalDTOPost artikalDTO,@PathVariable("id") Integer id){
+    @PreAuthorize("hasAnyRole('PRODAVAC')")
+    public ResponseEntity<ArtikalDTO> izmeniArtikal(@RequestBody ArtikalDTOPost artikalDTO,@PathVariable("id") Integer id,Authentication authentication){
         Artikal artikal = artikliServis.findOne(id);
-        artikal.setNaziv(artikalDTO.getNaziv());
-        artikal.setCena(artikalDTO.getCena());
-        artikal.setOpis(artikalDTO.getOpis());
-        artikliServis.saveArtikal(artikal);
-        return new ResponseEntity<>(new ArtikalDTO(artikal), HttpStatus.CREATED);
-
+        UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
+        Prodavac prodavac = prodavacServis.findByUsername(userPrincipal.getUsername());
+        List<Artikal> artikli = artikliServis.findByProdavac(prodavac.getId());
+        if(!artikli.contains(artikal)){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }else {
+            artikal.setNaziv(artikalDTO.getNaziv());
+            artikal.setCena(artikalDTO.getCena());
+            artikal.setOpis(artikalDTO.getOpis());
+            artikliServis.saveArtikal(artikal);
+            return new ResponseEntity<>(new ArtikalDTO(artikal), HttpStatus.CREATED);
+        }
     }
 
     @PostMapping(value = "/{id}")
+    @PreAuthorize("hasAnyRole('PRODAVAC')")
     public ResponseEntity<Void> obrisiArtikal(@PathVariable("id") Integer id){
         Artikal artikal = artikliServis.findOne(id);
         if(artikal!=null){
@@ -128,6 +148,7 @@ public class ArtikliKontroler {
     }
 
     @PostMapping(value = "/akcije")
+    @PreAuthorize("hasAnyRole('PRODAVAC')")
     public ResponseEntity<Void> napraviAkciju(@RequestBody AkcijaDTO akcijaDTO){
         Akcija akcija = new Akcija();
         akcija.setDoKad(akcijaDTO.getDoKad());
