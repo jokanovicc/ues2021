@@ -24,12 +24,22 @@ public class Artikal {
     @Expose
     private Integer cena;
 
+    @SerializedName("akcijskaCena")
+    @Expose
+    private Integer akcijskaCena;
+
     @SerializedName("photo")
     @Expose
     private Bitmap photo;
 
 
+    public Integer getAkcijskaCena() {
+        return akcijskaCena;
+    }
 
+    public void setAkcijskaCena(Integer akcijskaCena) {
+        this.akcijskaCena = akcijskaCena;
+    }
 
     public Integer getId() {
         return id;

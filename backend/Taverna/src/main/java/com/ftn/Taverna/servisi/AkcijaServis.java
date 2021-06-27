@@ -20,4 +20,12 @@ public class AkcijaServis {
     public Akcija saveAkcija(Akcija akcija){
         return akcijaRepository.save(akcija);
     }
+
+    public List<Akcija> akcijeProdavca(Integer id){
+        return akcijaRepository.getAkcijeProdavca(id);
+    }
+
+    public List<String> artikliNaAkcijiPrikaz(Integer id){
+        return akcijaRepository.artikliAkcijaPrikaz(id);
+    }
 }

@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,7 +46,7 @@ public class ArtikliListaAdapter extends RecyclerView.Adapter<ArtikliListaAdapte
     Button button2;
     private PorudzbineApiService porudzbineApiService;
     private PorucivanjeDTO porucivanjeDTO = new PorucivanjeDTO();
-    Integer cena = 0;
+    double cena = 0;
     String lista="";
 
 
@@ -64,6 +65,8 @@ public class ArtikliListaAdapter extends RecyclerView.Adapter<ArtikliListaAdapte
         ImageView slika;
         EditText editText;
         String kolicina;
+        LinearLayout linearLayout;
+        TextView akcijskaCena;
 
 
         ViewHolder(View itemView) {
@@ -75,6 +78,8 @@ public class ArtikliListaAdapter extends RecyclerView.Adapter<ArtikliListaAdapte
             slika = itemView.findViewById(R.id.slikaArtikla);
             button = (Button)itemView.findViewById(R.id.dodajUKorpu);
             editText = itemView.findViewById(R.id.korpaDodaj);
+            linearLayout = itemView.findViewById(R.id.akcijaLayout);
+            akcijskaCena = itemView.findViewById(R.id.cenaAkcijska);
 
         }
     }
@@ -106,6 +111,19 @@ public class ArtikliListaAdapter extends RecyclerView.Adapter<ArtikliListaAdapte
             }
         });
 
+        double cenaArtikla;
+
+        if(artikal.getAkcijskaCena()!=0.0){
+            holder.akcijskaCena.setText("Акцијска цена: "+artikal.getAkcijskaCena().toString() + " RSD");
+            cenaArtikla = artikal.getAkcijskaCena();
+        }else{
+            cenaArtikla = artikal.getCena();
+            holder.linearLayout.setAlpha(0);
+        }
+
+
+
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,9 +137,9 @@ public class ArtikliListaAdapter extends RecyclerView.Adapter<ArtikliListaAdapte
                     StavkaDTO stavkaDTO = new StavkaDTO();
                     stavkaDTO.setArtikalId(artikal.getId());
                     stavkaDTO.setKolicina(Integer.parseInt(kolicin1a));
-                    cena=cena+artikal.getCena()*Integer.parseInt(kolicin1a);
+                    cena=cena+cenaArtikla*Integer.parseInt(kolicin1a);
                     System.out.println("aaaaaaaaaaaaaaa "+stavkaDTO.getArtikalId() + "  " + stavkaDTO.getKolicina());
-                    double zajedno = artikal.getCena()*Double.parseDouble(kolicin1a);
+                    double zajedno = cenaArtikla*Double.parseDouble(kolicin1a);
                     String text2 = "Артикал додат у корпу.\n" + artikal.getNaziv() + " x " + kolicin1a +"\nЦена " + zajedno;
                     SpannableStringBuilder biggerText = new SpannableStringBuilder(text2);
                     biggerText.setSpan(new RelativeSizeSpan(1.30f), 0, text2.length(), 0);

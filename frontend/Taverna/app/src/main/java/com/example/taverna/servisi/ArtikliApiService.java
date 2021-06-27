@@ -1,5 +1,8 @@
 package com.example.taverna.servisi;
 
+import com.example.taverna.DodavanjeAkcije;
+import com.example.taverna.model.AkcijaDodaj;
+import com.example.taverna.model.AkcijaPrikaz;
 import com.example.taverna.model.Artikal;
 import com.example.taverna.model.Komentar;
 
@@ -41,5 +44,11 @@ public interface ArtikliApiService {
 
     @POST("porudzbine/komentar-arhiviraj/{id}")
     Call<Komentar> arhivirajKomentar(@Path("id") int id);
+
+    @GET("artikli/akcija_prodavca")
+    Call<List<AkcijaPrikaz>> prikazAkcija();
+
+    @POST("artikli/akcije")
+    Call<Void> dodajAkciju(@Body AkcijaDodaj akcijaDodaj);
 
 }

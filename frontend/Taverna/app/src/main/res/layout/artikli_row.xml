@@ -53,6 +53,21 @@
                     android:layout_marginBottom="8dp"
                     android:text="700 РСД"
                     android:textSize="20dp" />
+
+                <LinearLayout
+                    android:id="@+id/akcijaLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:textColor="#C0424E"
+                        android:id="@+id/cenaAkcijska"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:text="Danasnja cena : 600RSD"
+                        android:textSize="20dp" />
+                </LinearLayout>
+
                 <EditText
                     android:id="@+id/korpaDodaj"
                     android:layout_width="fill_parent"

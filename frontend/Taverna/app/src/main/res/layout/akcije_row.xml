@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
+        <LinearLayout
+            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/prikazAkcijeArtikli"
+                style="@style/TextAppearance.MaterialComponents.Headline6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Пуњена вешалица | Карађорђева шницла" />
+
+
+            <TextView
+                android:id="@+id/prikazPopust"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ПОПУСТ 35%"
+                android:textSize="20dp"/>
+
+            <TextView
+                android:id="@+id/prikazOdKad"
+                android:textColor="#C0424E"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:text="Од 20.04.2021."
+                android:textSize="22dp"
+
+                />
+            <TextView
+                android:id="@+id/prikazDoKad"
+                android:textColor="#C0424E"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:text="До 28.04.2021."
+                android:textSize="22dp"
+
+                />
+
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>

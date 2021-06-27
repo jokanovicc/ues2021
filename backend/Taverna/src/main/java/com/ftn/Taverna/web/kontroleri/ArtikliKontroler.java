@@ -3,6 +3,7 @@ package com.ftn.Taverna.web.kontroleri;
 import com.ftn.Taverna.model.Akcija;
 import com.ftn.Taverna.model.Artikal;
 import com.ftn.Taverna.web.kontroleri.DTO.AkcijaDTO;
+import com.ftn.Taverna.web.kontroleri.DTO.AkcijaPrikazDTO;
 import com.ftn.Taverna.web.kontroleri.DTO.ArtikalDTO;
 import com.ftn.Taverna.web.kontroleri.DTO.post.ArtikalDTOPost;
 import com.ftn.Taverna.model.Prodavac;
@@ -18,7 +19,10 @@ import org.springframework.security.core.parameters.P;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
 
@@ -71,15 +75,32 @@ public class ArtikliKontroler {
     }
 
 
+    public double getSnizenaCena(Integer id,double cenaStara){
+        double cena = 0.0;
+        Double popust = artikliServis.procenatPopusta(id,Date.valueOf(LocalDate.now()));
+        if(popust>80){
+            popust = 80.0;
+        }
+        if(popust!=0.0) {
+            cena = cenaStara - ((popust / 100) * cenaStara);
+        }
+        return cena;
+    }
+
+
 
 
     @GetMapping(value = "/prodavac/{id}")
     public ResponseEntity<Collection<ArtikalDTO>> gerArtikliProdavca(@PathVariable("id") Integer id){
+        System.out.println("Ovde sam");
         List<Artikal> artikli = artikliServis.findByProdavac(id);
         List<ArtikalDTO> artikalDTOS = new ArrayList<>();
         for (Artikal artikal:artikli) {
             if(!artikal.isObrisan())
                 artikalDTOS.add(new ArtikalDTO(artikal));
+                for(ArtikalDTO artikalDTO:artikalDTOS){
+                    artikalDTO.setAkcijskaCena(getSnizenaCena(artikalDTO.getId(),artikalDTO.getCena()));
+                }
 
         }
 
@@ -149,14 +170,16 @@ public class ArtikliKontroler {
 
     @PostMapping(value = "/akcije")
     @PreAuthorize("hasAnyRole('PRODAVAC')")
-    public ResponseEntity<Void> napraviAkciju(@RequestBody AkcijaDTO akcijaDTO){
+    public ResponseEntity<Void> napraviAkciju(@RequestBody AkcijaDTO akcijaDTO,Authentication authentication){
+        UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
+        Prodavac prodavac = prodavacServis.findByUsername(userPrincipal.getUsername());
         Akcija akcija = new Akcija();
+        System.out.println("to je " +akcijaDTO.getDoKad());
         akcija.setDoKad(akcijaDTO.getDoKad());
-        akcija.setOdKad(akcija.getDoKad());
+        akcija.setOdKad(akcijaDTO.getOdKad());
         akcija.setProcenat(akcijaDTO.getPopust());
         akcija.setTekst(akcijaDTO.getOpis());
-        akcija.setProdavac(prodavacServis.findOne(3));
-
+        akcija.setProdavac(prodavac);
 
         for(Integer i: akcijaDTO.getArtikli()){
             Artikal artikal = artikliServis.findOne(i);
@@ -165,6 +188,31 @@ public class ArtikliKontroler {
 
         akcijaServis.saveAkcija(akcija);
         return new ResponseEntity<Void>(HttpStatus.OK);
+
+
+    }
+
+
+    @GetMapping("/akcija_prodavca")
+    public ResponseEntity<Collection<AkcijaPrikazDTO>> getAkcijeProdavca(Authentication authentication){
+        UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
+        Prodavac prodavac = prodavacServis.findByUsername(userPrincipal.getUsername());
+        List<Akcija> akcije = akcijaServis.akcijeProdavca(prodavac.getId());
+        ArrayList<AkcijaPrikazDTO> prikazAkcije = new ArrayList<>();
+        for(Akcija a: akcije){
+            Date date = new Date(Calendar.getInstance().getTime().getTime());
+            if(date.before(a.getDoKad())) {
+                prikazAkcije.add(new AkcijaPrikazDTO(a));
+                for (AkcijaPrikazDTO akcijaPrikazDTO : prikazAkcije) {
+                    List<String> stringovi = akcijaServis.artikliNaAkcijiPrikaz(akcijaPrikazDTO.getId());
+                    String artikli = String.join(" | ", stringovi);
+                    akcijaPrikazDTO.setArtikli(artikli);
+                }
+            }
+
+        }
+
+        return new ResponseEntity<>(prikazAkcije, HttpStatus.OK);
 
 
     }

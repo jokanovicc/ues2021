@@ -23,6 +23,7 @@ public class ArtikalDTO implements Serializable {
     private String opis;
     @NotBlank
     private Double cena;
+    private Double akcijskaCena;
 
     private byte[] photo;
 

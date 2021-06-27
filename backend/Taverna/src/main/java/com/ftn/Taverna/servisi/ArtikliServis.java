@@ -5,6 +5,7 @@ import com.ftn.Taverna.model.Artikal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.util.List;
 
 @Service
@@ -31,5 +32,14 @@ public class ArtikliServis {
 
     public List<Artikal> findByProdavac(Integer id){
         return artikalRepository.findByProdavac_Id(id);
+    }
+
+    public Double procenatPopusta(Integer id, Date datum){
+        if(artikalRepository.getProcenatAkcije(id,datum)!=null){
+            return artikalRepository.getProcenatAkcije(id,datum);
+
+        }else{
+            return 0.0;
+        }
     }
 }

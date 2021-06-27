@@ -22,114 +22,17 @@
             android:textColor="@color/black"/>
 
 
-        <!-- A CardView that contains a TextView -->
-        <com.google.android.material.card.MaterialCardView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvAkcijePrikaz"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp">
-
-            <LinearLayout
-                android:padding="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    style="@style/TextAppearance.MaterialComponents.Headline6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Карађорђева шницла" />
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ПОПУСТ 35%"
-                    android:textSize="20dp"/>
-
-                <TextView
-                    android:textColor="#C0424E"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:text="Од 20.04.2021."
-                    android:textSize="22dp"
-
-                    />
-                <TextView
-                    android:textColor="#C0424E"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:text="До 28.04.2021."
-                    android:textSize="22dp"
-
-                    />
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
 
-            </LinearLayout>
-
-
-
-
-
-
-        </com.google.android.material.card.MaterialCardView>
-
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="10dp"
-                >
-
-                <TextView
-                    style="@style/TextAppearance.MaterialComponents.Headline6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Лесковачка мућкалица" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ПОПУСТ: 20%"
-                    android:textSize="20dp"/>
-                <TextView
-                    android:textColor="#C0424E"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:text="Од 20.04.2021."
-                    android:textSize="22dp"
-
-                    />
-                <TextView
-                    android:textColor="#C0424E"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:text="До 28.04.2021."
-                    android:textSize="22dp"
-
-                    />
-
-
-            </LinearLayout>
-
-
-
-
-
-
-
-        </com.google.android.material.card.MaterialCardView>
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab2"
             android:layout_width="wrap_content"
