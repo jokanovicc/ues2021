@@ -1,0 +1,2413 @@
+2021-06-28 11:25:34.392  INFO 10728 --- [main] c.f.T.TavernaApplication                 : Starting TavernaApplication using Java 11.0.10 on DESKTOP-RTJH6S2 with PID 10728 (C:\OSA ANDROID 2021\OSA-2020-21\backend\Taverna\target\classes started by vladi in C:\OSA ANDROID 2021\OSA-2020-21\backend\Taverna)
+2021-06-28 11:25:34.406  INFO 10728 --- [main] c.f.T.TavernaApplication                 : No active profile set, falling back to default profiles: default
+2021-06-28 11:25:35.344  INFO 10728 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-06-28 11:25:35.485  INFO 10728 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 131 ms. Found 7 JPA repository interfaces.
+2021-06-28 11:25:35.857  INFO 10728 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@21eee94f' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-28 11:25:35.864  INFO 10728 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-28 11:25:36.168  INFO 10728 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port(s): 8080 (http)
+2021-06-28 11:25:36.181  INFO 10728 --- [main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2021-06-28 11:25:36.182  INFO 10728 --- [main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/9.0.45]
+2021-06-28 11:25:36.313  INFO 10728 --- [main] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2021-06-28 11:25:36.313  INFO 10728 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1838 ms
+2021-06-28 11:25:36.397  WARN 10728 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-06-28 11:25:36.542  INFO 10728 --- [main] o.h.j.i.u.LogHelper                      : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-06-28 11:25:36.626  INFO 10728 --- [main] o.h.Version                              : HHH000412: Hibernate ORM core version 5.4.30.Final
+2021-06-28 11:25:36.830  INFO 10728 --- [main] o.h.a.c.Version                          : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-06-28 11:25:36.964  INFO 10728 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2021-06-28 11:25:36.967  WARN 10728 --- [main] c.z.h.u.DriverDataSource                 : Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2021-06-28 11:25:37.443  INFO 10728 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2021-06-28 11:25:37.469  INFO 10728 --- [main] o.h.d.Dialect                            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2021-06-28 11:25:38.404 DEBUG 10728 --- [main] o.h.SQL                                  : 
+    
+    drop table if exists akcija
+2021-06-28 11:25:38.442 DEBUG 10728 --- [main] o.h.SQL                                  : 
+    
+    drop table if exists artikal
+2021-06-28 11:25:38.454 DEBUG 10728 --- [main] o.h.SQL                                  : 
+    
+    drop table if exists artikli_akcije
+2021-06-28 11:25:38.462 DEBUG 10728 --- [main] o.h.SQL                                  : 
+    
+    drop table if exists korisnik
+2021-06-28 11:25:38.487 DEBUG 10728 --- [main] o.h.SQL                                  : 
+    
+    drop table if exists kupac
+2021-06-28 11:25:38.495 DEBUG 10728 --- [main] o.h.SQL                                  : 
+    
+    drop table if exists porudzbina
+2021-06-28 11:25:38.504 DEBUG 10728 --- [main] o.h.SQL                                  : 
+    
+    drop table if exists prodavac
+2021-06-28 11:25:38.512 DEBUG 10728 --- [main] o.h.SQL                                  : 
+    
+    drop table if exists stavka
+2021-06-28 11:25:38.523 DEBUG 10728 --- [main] o.h.SQL                                  : 
+    
+    create table akcija (
+       id integer not null auto_increment,
+        do_kad date,
+        od_kad date,
+        procenat integer,
+        tekst varchar(255),
+        prodavac_korisnik_id integer,
+        primary key (id)
+    ) engine=MyISAM
+2021-06-28 11:25:38.540 DEBUG 10728 --- [main] o.h.SQL                                  : 
+    
+    create table artikal (
+       id integer not null auto_increment,
+        cena double precision,
+        naziv varchar(255),
+        obrisan bit not null,
+        opis varchar(255),
+        photo longblob,
+        prodavac_korisnik_id integer,
+        primary key (id)
+    ) engine=MyISAM
+2021-06-28 11:25:38.550 DEBUG 10728 --- [main] o.h.SQL                                  : 
+    
+    create table artikli_akcije (
+       akcija_id integer not null,
+        artikal_id integer not null
+    ) engine=MyISAM
+2021-06-28 11:25:38.563 DEBUG 10728 --- [main] o.h.SQL                                  : 
+    
+    create table korisnik (
+       id integer not null auto_increment,
+        adresa varchar(255),
+        blokiran bit not null,
+        ime varchar(255),
+        korisnicko varchar(255),
+        prezime varchar(255),
+        roles varchar(255),
+        sifra varchar(255),
+        primary key (id)
+    ) engine=MyISAM
+2021-06-28 11:25:38.573 DEBUG 10728 --- [main] o.h.SQL                                  : 
+    
+    create table kupac (
+       korisnik_id integer not null,
+        primary key (korisnik_id)
+    ) engine=MyISAM
+2021-06-28 11:25:38.585 DEBUG 10728 --- [main] o.h.SQL                                  : 
+    
+    create table porudzbina (
+       id integer not null,
+        anoniman_komentar bit not null,
+        arhiviran_komentar bit not null,
+        dostavljeno bit not null,
+        komentar varchar(255),
+        ocena integer,
+        satnica date,
+        kupac_korisnik_id integer,
+        primary key (id)
+    ) engine=MyISAM
+2021-06-28 11:25:38.597 DEBUG 10728 --- [main] o.h.SQL                                  : 
+    
+    create table prodavac (
+       korisnik_id integer not null,
+        imejl varchar(255),
+        naziv varchar(255),
+        posluje_od date,
+        primary key (korisnik_id)
+    ) engine=MyISAM
+2021-06-28 11:25:38.607 DEBUG 10728 --- [main] o.h.SQL                                  : 
+    
+    create table stavka (
+       id integer not null auto_increment,
+        kolicina integer,
+        artikal_id integer,
+        porudzbina_id integer,
+        primary key (id)
+    ) engine=MyISAM
+2021-06-28 11:25:38.617 DEBUG 10728 --- [main] o.h.SQL                                  : 
+    
+    alter table prodavac 
+       add constraint UK_h4kcs7xr1g0fxorwwew3b73pb unique (imejl)
+2021-06-28 11:25:38.635  WARN 10728 --- [main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
+    alter table prodavac 
+       add constraint UK_h4kcs7xr1g0fxorwwew3b73pb unique (imejl)" via JDBC Statement
+
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
+    alter table prodavac 
+       add constraint UK_h4kcs7xr1g0fxorwwew3b73pb unique (imejl)" via JDBC Statement
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:67) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.applySqlString(SchemaCreatorImpl.java:439) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.applySqlStrings(SchemaCreatorImpl.java:423) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.createFromMetadata(SchemaCreatorImpl.java:348) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.performCreation(SchemaCreatorImpl.java:166) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.doCreation(SchemaCreatorImpl.java:135) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.doCreation(SchemaCreatorImpl.java:121) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:156) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:73) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:318) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:468) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1259) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:58) ~[spring-orm-5.3.6.jar:5.3.6]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365) ~[spring-orm-5.3.6.jar:5.3.6]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409) ~[spring-orm-5.3.6.jar:5.3.6]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-5.3.6.jar:5.3.6]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341) ~[spring-orm-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1845) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:602) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:524) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:233) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveNamedBean(DefaultListableBeanFactory.java:1273) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveNamedBean(DefaultListableBeanFactory.java:1234) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveBean(DefaultListableBeanFactory.java:494) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBean(DefaultListableBeanFactory.java:349) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBean(DefaultListableBeanFactory.java:342) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.orm.jpa.EntityManagerFactoryUtils.findEntityManagerFactory(EntityManagerFactoryUtils.java:121) ~[spring-orm-5.3.6.jar:5.3.6]
+	at org.springframework.orm.jpa.EntityManagerFactoryAccessor.setBeanFactory(EntityManagerFactoryAccessor.java:155) ~[spring-orm-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeAwareMethods(AbstractAutowireCapableBeanFactory.java:1808) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1773) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:602) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:524) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1380) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1300) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:887) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:541) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1334) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1177) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:564) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:524) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.addCandidateEntry(DefaultListableBeanFactory.java:1598) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:1562) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveMultipleBeans(DefaultListableBeanFactory.java:1451) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1338) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1300) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.resolveMethodArguments(AutowiredAnnotationBeanPostProcessor.java:760) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.inject(AutowiredAnnotationBeanPostProcessor.java:720) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1413) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:601) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:524) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:410) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1334) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1177) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:564) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:524) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1380) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1300) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.resolveMethodArguments(AutowiredAnnotationBeanPostProcessor.java:760) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.inject(AutowiredAnnotationBeanPostProcessor.java:720) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1413) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:601) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:524) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:410) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1334) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1177) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:564) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:524) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:213) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.getOrderedBeansOfType(ServletContextInitializerBeans.java:212) ~[spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:175) ~[spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:170) ~[spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAdaptableBeans(ServletContextInitializerBeans.java:155) ~[spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.<init>(ServletContextInitializerBeans.java:87) ~[spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.getServletContextInitializerBeans(ServletWebServerApplicationContext.java:259) ~[spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.selfInitialize(ServletWebServerApplicationContext.java:233) ~[spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.web.embedded.tomcat.TomcatStarter.onStartup(TomcatStarter.java:53) [spring-boot-2.4.5.jar:2.4.5]
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5161) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1384) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1374) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:264) [?:?]
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:140) [?:?]
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:909) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:843) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1384) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1374) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:264) [?:?]
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:140) [?:?]
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:909) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:262) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.core.StandardService.startInternal(StandardService.java:433) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:930) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.startup.Tomcat.start(Tomcat.java:486) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:123) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.<init>(TomcatWebServer.java:104) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getTomcatWebServer(TomcatServletWebServerFactory.java:450) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getWebServer(TomcatServletWebServerFactory.java:199) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:181) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:159) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:577) [spring-context-5.3.6.jar:5.3.6]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:144) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:782) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:774) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:339) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1340) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1329) [spring-boot-2.4.5.jar:2.4.5]
+	at com.ftn.Taverna.TavernaApplication.main(TavernaApplication.java:10) [classes/:?]
+Caused by: java.sql.SQLSyntaxErrorException: Specified key was too long; max key length is 1000 bytes
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120) ~[mysql-connector-java-8.0.23.jar:8.0.23]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-java-8.0.23.jar:8.0.23]
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:762) ~[mysql-connector-java-8.0.23.jar:8.0.23]
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:646) ~[mysql-connector-java-8.0.23.jar:8.0.23]
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:95) ~[HikariCP-3.4.5.jar:?]
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-3.4.5.jar:?]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	... 148 more
+
+2021-06-28 11:25:38.644 DEBUG 10728 --- [main] o.h.SQL                                  : 
+    
+    alter table akcija 
+       add constraint FKm0vv3a2tte30fe883l97yb97c 
+       foreign key (prodavac_korisnik_id) 
+       references prodavac (korisnik_id)
+2021-06-28 11:25:38.691 DEBUG 10728 --- [main] o.h.SQL                                  : 
+    
+    alter table artikal 
+       add constraint FKdc1ydqc7o7dl9ifprs47t74kc 
+       foreign key (prodavac_korisnik_id) 
+       references prodavac (korisnik_id)
+2021-06-28 11:25:38.752 DEBUG 10728 --- [main] o.h.SQL                                  : 
+    
+    alter table artikli_akcije 
+       add constraint FKexg3o7xy8jjlpw1fm47tae9jf 
+       foreign key (artikal_id) 
+       references artikal (id)
+2021-06-28 11:25:38.793 DEBUG 10728 --- [main] o.h.SQL                                  : 
+    
+    alter table artikli_akcije 
+       add constraint FKgtncbtlh29c4xpp7e00h3r1x2 
+       foreign key (akcija_id) 
+       references akcija (id)
+2021-06-28 11:25:38.846 DEBUG 10728 --- [main] o.h.SQL                                  : 
+    
+    alter table kupac 
+       add constraint FKkjh5dfhfofts6gmyy6ivxs707 
+       foreign key (korisnik_id) 
+       references korisnik (id)
+2021-06-28 11:25:38.934 DEBUG 10728 --- [main] o.h.SQL                                  : 
+    
+    alter table porudzbina 
+       add constraint FKm9b61kgdep8kwf74xjegdwgjv 
+       foreign key (kupac_korisnik_id) 
+       references kupac (korisnik_id)
+2021-06-28 11:25:39.013 DEBUG 10728 --- [main] o.h.SQL                                  : 
+    
+    alter table prodavac 
+       add constraint FKr6odhltefy4w66psvei6kgm58 
+       foreign key (korisnik_id) 
+       references korisnik (id)
+2021-06-28 11:25:39.078 DEBUG 10728 --- [main] o.h.SQL                                  : 
+    
+    alter table stavka 
+       add constraint FK4wxgf1cwjcxmxphabw1m6x8y 
+       foreign key (artikal_id) 
+       references artikal (id)
+2021-06-28 11:25:39.141 DEBUG 10728 --- [main] o.h.SQL                                  : 
+    
+    alter table stavka 
+       add constraint FKs0h9sd1q95nyokseyxjjngjfs 
+       foreign key (porudzbina_id) 
+       references porudzbina (id)
+2021-06-28 11:25:39.205  INFO 10728 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-06-28 11:25:39.219  INFO 10728 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-06-28 11:25:40.972  INFO 10728 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@24f77077, org.springframework.security.web.context.SecurityContextPersistenceFilter@7388486e, org.springframework.security.web.header.HeaderWriterFilter@4c5c0306, org.springframework.web.filter.CorsFilter@2eb73a42, org.springframework.security.web.authentication.logout.LogoutFilter@7ddcd3d, com.ftn.Taverna.security.AuthenticationTokenFilter@2059c3ff, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7c0b792e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@760d6350, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@188b9a1e, org.springframework.security.web.session.SessionManagementFilter@4518497e, org.springframework.security.web.access.ExceptionTranslationFilter@408b2ae2, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@565030b7]
+2021-06-28 11:25:41.044  INFO 10728 --- [main] o.s.s.c.ThreadPoolTaskExecutor           : Initializing ExecutorService 'applicationTaskExecutor'
+2021-06-28 11:25:41.322  INFO 10728 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port(s): 8080 (http) with context path ''
+2021-06-28 11:25:41.335  INFO 10728 --- [main] c.f.T.TavernaApplication                 : Started TavernaApplication in 7.811 seconds (JVM running for 9.696)
+2021-06-28 11:26:11.394  INFO 10728 --- [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-06-28 11:26:11.394  INFO 10728 --- [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
+2021-06-28 11:26:11.396  INFO 10728 --- [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Completed initialization in 2 ms
+2021-06-28 11:26:11.527 DEBUG 10728 --- [http-nio-8080-exec-1] o.h.SQL                                  : 
+    select
+        korisnik0_.id as id1_3_,
+        korisnik0_.adresa as adresa2_3_,
+        korisnik0_.blokiran as blokiran3_3_,
+        korisnik0_.ime as ime4_3_,
+        korisnik0_.korisnicko as korisnic5_3_,
+        korisnik0_.prezime as prezime6_3_,
+        korisnik0_.roles as roles7_3_,
+        korisnik0_.sifra as sifra8_3_ 
+    from
+        korisnik korisnik0_ 
+    where
+        korisnik0_.korisnicko=? limit ?
+2021-06-28 11:26:11.626 DEBUG 10728 --- [http-nio-8080-exec-1] o.h.SQL                                  : 
+    select
+        prodavac0_.korisnik_id as korisnik1_6_,
+        prodavac0_.imejl as imejl2_6_,
+        prodavac0_.naziv as naziv3_6_,
+        prodavac0_.posluje_od as posluje_4_6_ 
+    from
+        prodavac prodavac0_
+2021-06-28 11:26:11.641 DEBUG 10728 --- [http-nio-8080-exec-1] o.h.SQL                                  : 
+    select
+        korisnik0_.id as id1_3_0_,
+        korisnik0_.adresa as adresa2_3_0_,
+        korisnik0_.blokiran as blokiran3_3_0_,
+        korisnik0_.ime as ime4_3_0_,
+        korisnik0_.korisnicko as korisnic5_3_0_,
+        korisnik0_.prezime as prezime6_3_0_,
+        korisnik0_.roles as roles7_3_0_,
+        korisnik0_.sifra as sifra8_3_0_ 
+    from
+        korisnik korisnik0_ 
+    where
+        korisnik0_.id=?
+2021-06-28 11:26:11.649 DEBUG 10728 --- [http-nio-8080-exec-1] o.h.SQL                                  : 
+    select
+        korisnik0_.id as id1_3_0_,
+        korisnik0_.adresa as adresa2_3_0_,
+        korisnik0_.blokiran as blokiran3_3_0_,
+        korisnik0_.ime as ime4_3_0_,
+        korisnik0_.korisnicko as korisnic5_3_0_,
+        korisnik0_.prezime as prezime6_3_0_,
+        korisnik0_.roles as roles7_3_0_,
+        korisnik0_.sifra as sifra8_3_0_ 
+    from
+        korisnik korisnik0_ 
+    where
+        korisnik0_.id=?
+2021-06-28 11:26:11.653 DEBUG 10728 --- [http-nio-8080-exec-1] o.h.SQL                                  : 
+    select
+        korisnik0_.id as id1_3_0_,
+        korisnik0_.adresa as adresa2_3_0_,
+        korisnik0_.blokiran as blokiran3_3_0_,
+        korisnik0_.ime as ime4_3_0_,
+        korisnik0_.korisnicko as korisnic5_3_0_,
+        korisnik0_.prezime as prezime6_3_0_,
+        korisnik0_.roles as roles7_3_0_,
+        korisnik0_.sifra as sifra8_3_0_ 
+    from
+        korisnik korisnik0_ 
+    where
+        korisnik0_.id=?
+2021-06-28 11:26:11.688 DEBUG 10728 --- [http-nio-8080-exec-1] o.h.SQL                                  : 
+    select
+        avg(p.ocena) 
+    from
+        Porudzbina p 
+    where
+        p.id in (
+            select
+                s.porudzbina_id 
+            from
+                stavka s 
+            where
+                s.artikal_id in (
+                    select
+                        a.id 
+                    from
+                        artikal a 
+                    where
+                        a.prodavac_korisnik_id=?
+                )
+            )
+2021-06-28 11:26:11.696 DEBUG 10728 --- [http-nio-8080-exec-1] o.h.SQL                                  : 
+    select
+        avg(p.ocena) 
+    from
+        Porudzbina p 
+    where
+        p.id in (
+            select
+                s.porudzbina_id 
+            from
+                stavka s 
+            where
+                s.artikal_id in (
+                    select
+                        a.id 
+                    from
+                        artikal a 
+                    where
+                        a.prodavac_korisnik_id=?
+                )
+            )
+2021-06-28 11:26:11.700 DEBUG 10728 --- [http-nio-8080-exec-1] o.h.SQL                                  : 
+    select
+        avg(p.ocena) 
+    from
+        Porudzbina p 
+    where
+        p.id in (
+            select
+                s.porudzbina_id 
+            from
+                stavka s 
+            where
+                s.artikal_id in (
+                    select
+                        a.id 
+                    from
+                        artikal a 
+                    where
+                        a.prodavac_korisnik_id=?
+                )
+            )
+2021-06-28 11:26:13.393 DEBUG 10728 --- [http-nio-8080-exec-2] o.h.SQL                                  : 
+    select
+        korisnik0_.id as id1_3_,
+        korisnik0_.adresa as adresa2_3_,
+        korisnik0_.blokiran as blokiran3_3_,
+        korisnik0_.ime as ime4_3_,
+        korisnik0_.korisnicko as korisnic5_3_,
+        korisnik0_.prezime as prezime6_3_,
+        korisnik0_.roles as roles7_3_,
+        korisnik0_.sifra as sifra8_3_ 
+    from
+        korisnik korisnik0_ 
+    where
+        korisnik0_.korisnicko=? limit ?
+2021-06-28 11:26:13.406 DEBUG 10728 --- [http-nio-8080-exec-3] o.h.SQL                                  : 
+    select
+        korisnik0_.id as id1_3_,
+        korisnik0_.adresa as adresa2_3_,
+        korisnik0_.blokiran as blokiran3_3_,
+        korisnik0_.ime as ime4_3_,
+        korisnik0_.korisnicko as korisnic5_3_,
+        korisnik0_.prezime as prezime6_3_,
+        korisnik0_.roles as roles7_3_,
+        korisnik0_.sifra as sifra8_3_ 
+    from
+        korisnik korisnik0_ 
+    where
+        korisnik0_.korisnicko=? limit ?
+2021-06-28 11:26:13.410 DEBUG 10728 --- [http-nio-8080-exec-7] o.h.SQL                                  : 
+    select
+        korisnik0_.id as id1_3_,
+        korisnik0_.adresa as adresa2_3_,
+        korisnik0_.blokiran as blokiran3_3_,
+        korisnik0_.ime as ime4_3_,
+        korisnik0_.korisnicko as korisnic5_3_,
+        korisnik0_.prezime as prezime6_3_,
+        korisnik0_.roles as roles7_3_,
+        korisnik0_.sifra as sifra8_3_ 
+    from
+        korisnik korisnik0_ 
+    where
+        korisnik0_.korisnicko=? limit ?
+2021-06-28 11:26:13.421 DEBUG 10728 --- [http-nio-8080-exec-7] o.h.SQL                                  : 
+    select
+        avg(p.ocena) 
+    from
+        Porudzbina p 
+    where
+        p.id in (
+            select
+                s.porudzbina_id 
+            from
+                stavka s 
+            where
+                s.artikal_id in (
+                    select
+                        a.id 
+                    from
+                        artikal a 
+                    where
+                        a.prodavac_korisnik_id=?
+                )
+            )
+2021-06-28 11:26:13.425 DEBUG 10728 --- [http-nio-8080-exec-2] o.h.SQL                                  : 
+    select
+        artikal0_.id as id1_1_,
+        artikal0_.cena as cena2_1_,
+        artikal0_.naziv as naziv3_1_,
+        artikal0_.obrisan as obrisan4_1_,
+        artikal0_.opis as opis5_1_,
+        artikal0_.photo as photo6_1_,
+        artikal0_.prodavac_korisnik_id as prodavac7_1_ 
+    from
+        artikal artikal0_ 
+    left outer join
+        prodavac prodavac1_ 
+            on artikal0_.prodavac_korisnik_id=prodavac1_.korisnik_id 
+    where
+        prodavac1_.korisnik_id=?
+2021-06-28 11:26:13.433 DEBUG 10728 --- [http-nio-8080-exec-3] o.h.SQL                                  : 
+    select
+        pdz.id,
+        pdz.anoniman_komentar,
+        pdz.arhiviran_komentar,
+        pdz.dostavljeno,
+        pdz.komentar,
+        pdz.ocena,
+        pdz.satnica,
+        pdz.komentar,
+        pdz.kupac_korisnik_id 
+    FROM
+        porudzbina pdz 
+    where
+        pdz.id in (
+            select
+                s.porudzbina_id 
+            from
+                stavka s 
+            where
+                s.artikal_id in (
+                    select
+                        a.id 
+                    from
+                        artikal a 
+                    where
+                        a.prodavac_korisnik_id =?
+                )
+            )
+2021-06-28 11:26:13.436 DEBUG 10728 --- [http-nio-8080-exec-3] o.h.SQL                                  : 
+    select
+        kupac0_.korisnik_id as korisnik1_4_0_ 
+    from
+        kupac kupac0_ 
+    where
+        kupac0_.korisnik_id=?
+2021-06-28 11:26:13.439 DEBUG 10728 --- [http-nio-8080-exec-3] o.h.SQL                                  : 
+    select
+        korisnik0_.id as id1_3_0_,
+        korisnik0_.adresa as adresa2_3_0_,
+        korisnik0_.blokiran as blokiran3_3_0_,
+        korisnik0_.ime as ime4_3_0_,
+        korisnik0_.korisnicko as korisnic5_3_0_,
+        korisnik0_.prezime as prezime6_3_0_,
+        korisnik0_.roles as roles7_3_0_,
+        korisnik0_.sifra as sifra8_3_0_ 
+    from
+        korisnik korisnik0_ 
+    where
+        korisnik0_.id=?
+2021-06-28 11:26:13.440 DEBUG 10728 --- [http-nio-8080-exec-2] o.h.SQL                                  : 
+    select
+        prodavac0_.korisnik_id as korisnik1_6_0_,
+        prodavac0_.imejl as imejl2_6_0_,
+        prodavac0_.naziv as naziv3_6_0_,
+        prodavac0_.posluje_od as posluje_4_6_0_ 
+    from
+        prodavac prodavac0_ 
+    where
+        prodavac0_.korisnik_id=?
+2021-06-28 11:26:13.441 DEBUG 10728 --- [http-nio-8080-exec-2] o.h.SQL                                  : 
+    select
+        korisnik0_.id as id1_3_0_,
+        korisnik0_.adresa as adresa2_3_0_,
+        korisnik0_.blokiran as blokiran3_3_0_,
+        korisnik0_.ime as ime4_3_0_,
+        korisnik0_.korisnicko as korisnic5_3_0_,
+        korisnik0_.prezime as prezime6_3_0_,
+        korisnik0_.roles as roles7_3_0_,
+        korisnik0_.sifra as sifra8_3_0_ 
+    from
+        korisnik korisnik0_ 
+    where
+        korisnik0_.id=?
+2021-06-28 11:26:13.444 DEBUG 10728 --- [http-nio-8080-exec-3] o.h.SQL                                  : 
+    select
+        kupac0_.korisnik_id as korisnik1_4_0_ 
+    from
+        kupac kupac0_ 
+    where
+        kupac0_.korisnik_id=?
+2021-06-28 11:26:13.445 DEBUG 10728 --- [http-nio-8080-exec-3] o.h.SQL                                  : 
+    select
+        korisnik0_.id as id1_3_0_,
+        korisnik0_.adresa as adresa2_3_0_,
+        korisnik0_.blokiran as blokiran3_3_0_,
+        korisnik0_.ime as ime4_3_0_,
+        korisnik0_.korisnicko as korisnic5_3_0_,
+        korisnik0_.prezime as prezime6_3_0_,
+        korisnik0_.roles as roles7_3_0_,
+        korisnik0_.sifra as sifra8_3_0_ 
+    from
+        korisnik korisnik0_ 
+    where
+        korisnik0_.id=?
+2021-06-28 11:26:13.457 DEBUG 10728 --- [http-nio-8080-exec-2] o.h.SQL                                  : 
+    select
+        sum(a.procenat) 
+    from
+        akcija a 
+    where
+        a.id in (
+            select
+                aa.akcija_id  
+            from
+                artikli_akcije aa 
+            where
+                aa.artikal_id = ?
+        ) 
+        and  a.do_kad >= ? 
+        and a.od_kad <= ?
+2021-06-28 11:26:13.465 DEBUG 10728 --- [http-nio-8080-exec-2] o.h.SQL                                  : 
+    select
+        sum(a.procenat) 
+    from
+        akcija a 
+    where
+        a.id in (
+            select
+                aa.akcija_id  
+            from
+                artikli_akcije aa 
+            where
+                aa.artikal_id = ?
+        ) 
+        and  a.do_kad >= ? 
+        and a.od_kad <= ?
+2021-06-28 11:26:13.468 DEBUG 10728 --- [http-nio-8080-exec-2] o.h.SQL                                  : 
+    select
+        sum(a.procenat) 
+    from
+        akcija a 
+    where
+        a.id in (
+            select
+                aa.akcija_id  
+            from
+                artikli_akcije aa 
+            where
+                aa.artikal_id = ?
+        ) 
+        and  a.do_kad >= ? 
+        and a.od_kad <= ?
+2021-06-28 11:26:13.472 DEBUG 10728 --- [http-nio-8080-exec-2] o.h.SQL                                  : 
+    select
+        sum(a.procenat) 
+    from
+        akcija a 
+    where
+        a.id in (
+            select
+                aa.akcija_id  
+            from
+                artikli_akcije aa 
+            where
+                aa.artikal_id = ?
+        ) 
+        and  a.do_kad >= ? 
+        and a.od_kad <= ?
+2021-06-28 11:26:13.474 DEBUG 10728 --- [http-nio-8080-exec-2] o.h.SQL                                  : 
+    select
+        sum(a.procenat) 
+    from
+        akcija a 
+    where
+        a.id in (
+            select
+                aa.akcija_id  
+            from
+                artikli_akcije aa 
+            where
+                aa.artikal_id = ?
+        ) 
+        and  a.do_kad >= ? 
+        and a.od_kad <= ?
+2021-06-28 11:26:13.476 DEBUG 10728 --- [http-nio-8080-exec-2] o.h.SQL                                  : 
+    select
+        sum(a.procenat) 
+    from
+        akcija a 
+    where
+        a.id in (
+            select
+                aa.akcija_id  
+            from
+                artikli_akcije aa 
+            where
+                aa.artikal_id = ?
+        ) 
+        and  a.do_kad >= ? 
+        and a.od_kad <= ?
+2021-06-28 11:26:59.284  INFO 11560 --- [main] c.f.T.TavernaApplication                 : Starting TavernaApplication using Java 11.0.10 on DESKTOP-RTJH6S2 with PID 11560 (C:\OSA ANDROID 2021\OSA-2020-21\backend\Taverna\target\classes started by vladi in C:\OSA ANDROID 2021\OSA-2020-21\backend\Taverna)
+2021-06-28 11:26:59.295  INFO 11560 --- [main] c.f.T.TavernaApplication                 : No active profile set, falling back to default profiles: default
+2021-06-28 11:27:00.102  INFO 11560 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-06-28 11:27:00.211  INFO 11560 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 100 ms. Found 7 JPA repository interfaces.
+2021-06-28 11:27:00.547  INFO 11560 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@7377781e' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-28 11:27:00.552  INFO 11560 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-28 11:27:00.889  INFO 11560 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port(s): 8080 (http)
+2021-06-28 11:27:00.899  INFO 11560 --- [main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2021-06-28 11:27:00.899  INFO 11560 --- [main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/9.0.45]
+2021-06-28 11:27:01.019  INFO 11560 --- [main] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2021-06-28 11:27:01.020  INFO 11560 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1672 ms
+2021-06-28 11:27:01.097  WARN 11560 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-06-28 11:27:01.226  INFO 11560 --- [main] o.h.j.i.u.LogHelper                      : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-06-28 11:27:01.278  INFO 11560 --- [main] o.h.Version                              : HHH000412: Hibernate ORM core version 5.4.30.Final
+2021-06-28 11:27:01.426  INFO 11560 --- [main] o.h.a.c.Version                          : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-06-28 11:27:01.539  INFO 11560 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2021-06-28 11:27:01.542  WARN 11560 --- [main] c.z.h.u.DriverDataSource                 : Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2021-06-28 11:27:01.879  INFO 11560 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2021-06-28 11:27:01.894  INFO 11560 --- [main] o.h.d.Dialect                            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2021-06-28 11:27:02.718 DEBUG 11560 --- [main] o.h.SQL                                  : 
+    
+    drop table if exists akcija
+2021-06-28 11:27:02.739 DEBUG 11560 --- [main] o.h.SQL                                  : 
+    
+    drop table if exists artikal
+2021-06-28 11:27:02.747 DEBUG 11560 --- [main] o.h.SQL                                  : 
+    
+    drop table if exists artikli_akcije
+2021-06-28 11:27:02.754 DEBUG 11560 --- [main] o.h.SQL                                  : 
+    
+    drop table if exists korisnik
+2021-06-28 11:27:02.761 DEBUG 11560 --- [main] o.h.SQL                                  : 
+    
+    drop table if exists kupac
+2021-06-28 11:27:02.771 DEBUG 11560 --- [main] o.h.SQL                                  : 
+    
+    drop table if exists porudzbina
+2021-06-28 11:27:02.780 DEBUG 11560 --- [main] o.h.SQL                                  : 
+    
+    drop table if exists prodavac
+2021-06-28 11:27:02.787 DEBUG 11560 --- [main] o.h.SQL                                  : 
+    
+    drop table if exists stavka
+2021-06-28 11:27:02.797 DEBUG 11560 --- [main] o.h.SQL                                  : 
+    
+    create table akcija (
+       id integer not null auto_increment,
+        do_kad date,
+        od_kad date,
+        procenat integer,
+        tekst varchar(255),
+        prodavac_korisnik_id integer,
+        primary key (id)
+    ) engine=MyISAM
+2021-06-28 11:27:02.808 DEBUG 11560 --- [main] o.h.SQL                                  : 
+    
+    create table artikal (
+       id integer not null auto_increment,
+        cena double precision,
+        naziv varchar(255),
+        obrisan bit not null,
+        opis varchar(255),
+        photo longblob,
+        prodavac_korisnik_id integer,
+        primary key (id)
+    ) engine=MyISAM
+2021-06-28 11:27:02.818 DEBUG 11560 --- [main] o.h.SQL                                  : 
+    
+    create table artikli_akcije (
+       akcija_id integer not null,
+        artikal_id integer not null
+    ) engine=MyISAM
+2021-06-28 11:27:02.827 DEBUG 11560 --- [main] o.h.SQL                                  : 
+    
+    create table korisnik (
+       id integer not null auto_increment,
+        adresa varchar(255),
+        blokiran bit not null,
+        ime varchar(255),
+        korisnicko varchar(255),
+        prezime varchar(255),
+        roles varchar(255),
+        sifra varchar(255),
+        primary key (id)
+    ) engine=MyISAM
+2021-06-28 11:27:02.837 DEBUG 11560 --- [main] o.h.SQL                                  : 
+    
+    create table kupac (
+       korisnik_id integer not null,
+        primary key (korisnik_id)
+    ) engine=MyISAM
+2021-06-28 11:27:02.847 DEBUG 11560 --- [main] o.h.SQL                                  : 
+    
+    create table porudzbina (
+       id integer not null,
+        anoniman_komentar bit not null,
+        arhiviran_komentar bit not null,
+        dostavljeno bit not null,
+        komentar varchar(255),
+        ocena integer,
+        satnica date,
+        kupac_korisnik_id integer,
+        primary key (id)
+    ) engine=MyISAM
+2021-06-28 11:27:02.860 DEBUG 11560 --- [main] o.h.SQL                                  : 
+    
+    create table prodavac (
+       korisnik_id integer not null,
+        imejl varchar(255),
+        naziv varchar(255),
+        posluje_od date,
+        primary key (korisnik_id)
+    ) engine=MyISAM
+2021-06-28 11:27:02.870 DEBUG 11560 --- [main] o.h.SQL                                  : 
+    
+    create table stavka (
+       id integer not null auto_increment,
+        kolicina integer,
+        artikal_id integer,
+        porudzbina_id integer,
+        primary key (id)
+    ) engine=MyISAM
+2021-06-28 11:27:02.881 DEBUG 11560 --- [main] o.h.SQL                                  : 
+    
+    alter table prodavac 
+       add constraint UK_h4kcs7xr1g0fxorwwew3b73pb unique (imejl)
+2021-06-28 11:27:02.902  WARN 11560 --- [main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
+    alter table prodavac 
+       add constraint UK_h4kcs7xr1g0fxorwwew3b73pb unique (imejl)" via JDBC Statement
+
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
+    alter table prodavac 
+       add constraint UK_h4kcs7xr1g0fxorwwew3b73pb unique (imejl)" via JDBC Statement
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:67) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.applySqlString(SchemaCreatorImpl.java:439) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.applySqlStrings(SchemaCreatorImpl.java:423) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.createFromMetadata(SchemaCreatorImpl.java:348) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.performCreation(SchemaCreatorImpl.java:166) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.doCreation(SchemaCreatorImpl.java:135) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.doCreation(SchemaCreatorImpl.java:121) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:156) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:73) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:318) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:468) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1259) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:58) ~[spring-orm-5.3.6.jar:5.3.6]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365) ~[spring-orm-5.3.6.jar:5.3.6]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409) ~[spring-orm-5.3.6.jar:5.3.6]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-5.3.6.jar:5.3.6]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341) ~[spring-orm-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1845) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:602) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:524) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:233) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveNamedBean(DefaultListableBeanFactory.java:1273) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveNamedBean(DefaultListableBeanFactory.java:1234) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveBean(DefaultListableBeanFactory.java:494) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBean(DefaultListableBeanFactory.java:349) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBean(DefaultListableBeanFactory.java:342) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.orm.jpa.EntityManagerFactoryUtils.findEntityManagerFactory(EntityManagerFactoryUtils.java:121) ~[spring-orm-5.3.6.jar:5.3.6]
+	at org.springframework.orm.jpa.EntityManagerFactoryAccessor.setBeanFactory(EntityManagerFactoryAccessor.java:155) ~[spring-orm-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeAwareMethods(AbstractAutowireCapableBeanFactory.java:1808) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1773) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:602) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:524) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1380) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1300) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:887) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:541) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1334) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1177) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:564) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:524) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.addCandidateEntry(DefaultListableBeanFactory.java:1598) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:1562) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveMultipleBeans(DefaultListableBeanFactory.java:1451) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1338) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1300) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.resolveMethodArguments(AutowiredAnnotationBeanPostProcessor.java:760) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.inject(AutowiredAnnotationBeanPostProcessor.java:720) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1413) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:601) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:524) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:410) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1334) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1177) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:564) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:524) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1380) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1300) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.resolveMethodArguments(AutowiredAnnotationBeanPostProcessor.java:760) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.inject(AutowiredAnnotationBeanPostProcessor.java:720) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1413) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:601) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:524) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:410) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1334) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1177) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:564) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:524) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:213) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.getOrderedBeansOfType(ServletContextInitializerBeans.java:212) ~[spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:175) ~[spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:170) ~[spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAdaptableBeans(ServletContextInitializerBeans.java:155) ~[spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.<init>(ServletContextInitializerBeans.java:87) ~[spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.getServletContextInitializerBeans(ServletWebServerApplicationContext.java:259) ~[spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.selfInitialize(ServletWebServerApplicationContext.java:233) ~[spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.web.embedded.tomcat.TomcatStarter.onStartup(TomcatStarter.java:53) [spring-boot-2.4.5.jar:2.4.5]
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5161) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1384) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1374) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:264) [?:?]
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:140) [?:?]
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:909) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:843) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1384) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1374) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:264) [?:?]
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:140) [?:?]
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:909) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:262) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.core.StandardService.startInternal(StandardService.java:433) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:930) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.startup.Tomcat.start(Tomcat.java:486) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:123) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.<init>(TomcatWebServer.java:104) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getTomcatWebServer(TomcatServletWebServerFactory.java:450) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getWebServer(TomcatServletWebServerFactory.java:199) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:181) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:159) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:577) [spring-context-5.3.6.jar:5.3.6]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:144) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:782) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:774) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:339) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1340) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1329) [spring-boot-2.4.5.jar:2.4.5]
+	at com.ftn.Taverna.TavernaApplication.main(TavernaApplication.java:10) [classes/:?]
+Caused by: java.sql.SQLSyntaxErrorException: Specified key was too long; max key length is 1000 bytes
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120) ~[mysql-connector-java-8.0.23.jar:8.0.23]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-java-8.0.23.jar:8.0.23]
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:762) ~[mysql-connector-java-8.0.23.jar:8.0.23]
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:646) ~[mysql-connector-java-8.0.23.jar:8.0.23]
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:95) ~[HikariCP-3.4.5.jar:?]
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-3.4.5.jar:?]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	... 148 more
+
+2021-06-28 11:27:02.911 DEBUG 11560 --- [main] o.h.SQL                                  : 
+    
+    alter table akcija 
+       add constraint FKm0vv3a2tte30fe883l97yb97c 
+       foreign key (prodavac_korisnik_id) 
+       references prodavac (korisnik_id)
+2021-06-28 11:27:02.982 DEBUG 11560 --- [main] o.h.SQL                                  : 
+    
+    alter table artikal 
+       add constraint FKdc1ydqc7o7dl9ifprs47t74kc 
+       foreign key (prodavac_korisnik_id) 
+       references prodavac (korisnik_id)
+2021-06-28 11:27:03.057 DEBUG 11560 --- [main] o.h.SQL                                  : 
+    
+    alter table artikli_akcije 
+       add constraint FKexg3o7xy8jjlpw1fm47tae9jf 
+       foreign key (artikal_id) 
+       references artikal (id)
+2021-06-28 11:27:03.101 DEBUG 11560 --- [main] o.h.SQL                                  : 
+    
+    alter table artikli_akcije 
+       add constraint FKgtncbtlh29c4xpp7e00h3r1x2 
+       foreign key (akcija_id) 
+       references akcija (id)
+2021-06-28 11:27:03.137 DEBUG 11560 --- [main] o.h.SQL                                  : 
+    
+    alter table kupac 
+       add constraint FKkjh5dfhfofts6gmyy6ivxs707 
+       foreign key (korisnik_id) 
+       references korisnik (id)
+2021-06-28 11:27:03.175 DEBUG 11560 --- [main] o.h.SQL                                  : 
+    
+    alter table porudzbina 
+       add constraint FKm9b61kgdep8kwf74xjegdwgjv 
+       foreign key (kupac_korisnik_id) 
+       references kupac (korisnik_id)
+2021-06-28 11:27:03.224 DEBUG 11560 --- [main] o.h.SQL                                  : 
+    
+    alter table prodavac 
+       add constraint FKr6odhltefy4w66psvei6kgm58 
+       foreign key (korisnik_id) 
+       references korisnik (id)
+2021-06-28 11:27:03.265 DEBUG 11560 --- [main] o.h.SQL                                  : 
+    
+    alter table stavka 
+       add constraint FK4wxgf1cwjcxmxphabw1m6x8y 
+       foreign key (artikal_id) 
+       references artikal (id)
+2021-06-28 11:27:03.304 DEBUG 11560 --- [main] o.h.SQL                                  : 
+    
+    alter table stavka 
+       add constraint FKs0h9sd1q95nyokseyxjjngjfs 
+       foreign key (porudzbina_id) 
+       references porudzbina (id)
+2021-06-28 11:27:03.346  INFO 11560 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-06-28 11:27:03.358  INFO 11560 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-06-28 11:27:04.888  INFO 11560 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5d56c2d2, org.springframework.security.web.context.SecurityContextPersistenceFilter@5fe024a7, org.springframework.security.web.header.HeaderWriterFilter@5519ef7d, org.springframework.web.filter.CorsFilter@4a249610, org.springframework.security.web.authentication.logout.LogoutFilter@59263f7b, com.ftn.Taverna.security.AuthenticationTokenFilter@6d7772d3, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7bdf8c92, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@551725e4, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@ebbbe20, org.springframework.security.web.session.SessionManagementFilter@3677c508, org.springframework.security.web.access.ExceptionTranslationFilter@43255f91, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@24f77077]
+2021-06-28 11:27:04.958  INFO 11560 --- [main] o.s.s.c.ThreadPoolTaskExecutor           : Initializing ExecutorService 'applicationTaskExecutor'
+2021-06-28 11:27:05.157  INFO 11560 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port(s): 8080 (http) with context path ''
+2021-06-28 11:27:05.169  INFO 11560 --- [main] c.f.T.TavernaApplication                 : Started TavernaApplication in 6.502 seconds (JVM running for 7.972)
+2021-06-28 11:27:48.846  INFO 11560 --- [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-06-28 11:27:48.846  INFO 11560 --- [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
+2021-06-28 11:27:48.848  INFO 11560 --- [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Completed initialization in 2 ms
+2021-06-28 11:27:48.987 DEBUG 11560 --- [http-nio-8080-exec-1] o.h.SQL                                  : 
+    select
+        korisnik0_.id as id1_3_,
+        korisnik0_.adresa as adresa2_3_,
+        korisnik0_.blokiran as blokiran3_3_,
+        korisnik0_.ime as ime4_3_,
+        korisnik0_.korisnicko as korisnic5_3_,
+        korisnik0_.prezime as prezime6_3_,
+        korisnik0_.roles as roles7_3_,
+        korisnik0_.sifra as sifra8_3_ 
+    from
+        korisnik korisnik0_ 
+    where
+        korisnik0_.korisnicko=? limit ?
+2021-06-28 11:27:48.987 DEBUG 11560 --- [http-nio-8080-exec-2] o.h.SQL                                  : 
+    select
+        korisnik0_.id as id1_3_,
+        korisnik0_.adresa as adresa2_3_,
+        korisnik0_.blokiran as blokiran3_3_,
+        korisnik0_.ime as ime4_3_,
+        korisnik0_.korisnicko as korisnic5_3_,
+        korisnik0_.prezime as prezime6_3_,
+        korisnik0_.roles as roles7_3_,
+        korisnik0_.sifra as sifra8_3_ 
+    from
+        korisnik korisnik0_ 
+    where
+        korisnik0_.korisnicko=? limit ?
+2021-06-28 11:27:48.988 DEBUG 11560 --- [http-nio-8080-exec-3] o.h.SQL                                  : 
+    select
+        korisnik0_.id as id1_3_,
+        korisnik0_.adresa as adresa2_3_,
+        korisnik0_.blokiran as blokiran3_3_,
+        korisnik0_.ime as ime4_3_,
+        korisnik0_.korisnicko as korisnic5_3_,
+        korisnik0_.prezime as prezime6_3_,
+        korisnik0_.roles as roles7_3_,
+        korisnik0_.sifra as sifra8_3_ 
+    from
+        korisnik korisnik0_ 
+    where
+        korisnik0_.korisnicko=? limit ?
+2021-06-28 11:27:49.088 DEBUG 11560 --- [http-nio-8080-exec-1] o.h.SQL                                  : 
+    select
+        artikal0_.id as id1_1_,
+        artikal0_.cena as cena2_1_,
+        artikal0_.naziv as naziv3_1_,
+        artikal0_.obrisan as obrisan4_1_,
+        artikal0_.opis as opis5_1_,
+        artikal0_.photo as photo6_1_,
+        artikal0_.prodavac_korisnik_id as prodavac7_1_ 
+    from
+        artikal artikal0_ 
+    left outer join
+        prodavac prodavac1_ 
+            on artikal0_.prodavac_korisnik_id=prodavac1_.korisnik_id 
+    where
+        prodavac1_.korisnik_id=?
+2021-06-28 11:27:49.114 DEBUG 11560 --- [http-nio-8080-exec-1] o.h.SQL                                  : 
+    select
+        prodavac0_.korisnik_id as korisnik1_6_0_,
+        prodavac0_.imejl as imejl2_6_0_,
+        prodavac0_.naziv as naziv3_6_0_,
+        prodavac0_.posluje_od as posluje_4_6_0_ 
+    from
+        prodavac prodavac0_ 
+    where
+        prodavac0_.korisnik_id=?
+2021-06-28 11:27:49.114 DEBUG 11560 --- [http-nio-8080-exec-2] o.h.SQL                                  : 
+    select
+        avg(p.ocena) 
+    from
+        Porudzbina p 
+    where
+        p.id in (
+            select
+                s.porudzbina_id 
+            from
+                stavka s 
+            where
+                s.artikal_id in (
+                    select
+                        a.id 
+                    from
+                        artikal a 
+                    where
+                        a.prodavac_korisnik_id=?
+                )
+            )
+2021-06-28 11:27:49.118 DEBUG 11560 --- [http-nio-8080-exec-3] o.h.SQL                                  : 
+    select
+        pdz.id,
+        pdz.anoniman_komentar,
+        pdz.arhiviran_komentar,
+        pdz.dostavljeno,
+        pdz.komentar,
+        pdz.ocena,
+        pdz.satnica,
+        pdz.komentar,
+        pdz.kupac_korisnik_id 
+    FROM
+        porudzbina pdz 
+    where
+        pdz.id in (
+            select
+                s.porudzbina_id 
+            from
+                stavka s 
+            where
+                s.artikal_id in (
+                    select
+                        a.id 
+                    from
+                        artikal a 
+                    where
+                        a.prodavac_korisnik_id =?
+                )
+            )
+2021-06-28 11:27:49.122 DEBUG 11560 --- [http-nio-8080-exec-1] o.h.SQL                                  : 
+    select
+        korisnik0_.id as id1_3_0_,
+        korisnik0_.adresa as adresa2_3_0_,
+        korisnik0_.blokiran as blokiran3_3_0_,
+        korisnik0_.ime as ime4_3_0_,
+        korisnik0_.korisnicko as korisnic5_3_0_,
+        korisnik0_.prezime as prezime6_3_0_,
+        korisnik0_.roles as roles7_3_0_,
+        korisnik0_.sifra as sifra8_3_0_ 
+    from
+        korisnik korisnik0_ 
+    where
+        korisnik0_.id=?
+2021-06-28 11:27:49.123 DEBUG 11560 --- [http-nio-8080-exec-3] o.h.SQL                                  : 
+    select
+        kupac0_.korisnik_id as korisnik1_4_0_ 
+    from
+        kupac kupac0_ 
+    where
+        kupac0_.korisnik_id=?
+2021-06-28 11:27:49.127 DEBUG 11560 --- [http-nio-8080-exec-3] o.h.SQL                                  : 
+    select
+        korisnik0_.id as id1_3_0_,
+        korisnik0_.adresa as adresa2_3_0_,
+        korisnik0_.blokiran as blokiran3_3_0_,
+        korisnik0_.ime as ime4_3_0_,
+        korisnik0_.korisnicko as korisnic5_3_0_,
+        korisnik0_.prezime as prezime6_3_0_,
+        korisnik0_.roles as roles7_3_0_,
+        korisnik0_.sifra as sifra8_3_0_ 
+    from
+        korisnik korisnik0_ 
+    where
+        korisnik0_.id=?
+2021-06-28 11:27:49.134 DEBUG 11560 --- [http-nio-8080-exec-3] o.h.SQL                                  : 
+    select
+        kupac0_.korisnik_id as korisnik1_4_0_ 
+    from
+        kupac kupac0_ 
+    where
+        kupac0_.korisnik_id=?
+2021-06-28 11:27:49.136 DEBUG 11560 --- [http-nio-8080-exec-3] o.h.SQL                                  : 
+    select
+        korisnik0_.id as id1_3_0_,
+        korisnik0_.adresa as adresa2_3_0_,
+        korisnik0_.blokiran as blokiran3_3_0_,
+        korisnik0_.ime as ime4_3_0_,
+        korisnik0_.korisnicko as korisnic5_3_0_,
+        korisnik0_.prezime as prezime6_3_0_,
+        korisnik0_.roles as roles7_3_0_,
+        korisnik0_.sifra as sifra8_3_0_ 
+    from
+        korisnik korisnik0_ 
+    where
+        korisnik0_.id=?
+2021-06-28 11:27:49.141 DEBUG 11560 --- [http-nio-8080-exec-1] o.h.SQL                                  : 
+    select
+        sum(a.procenat) 
+    from
+        akcija a 
+    where
+        a.id in (
+            select
+                aa.akcija_id  
+            from
+                artikli_akcije aa 
+            where
+                aa.artikal_id = ?
+        ) 
+        and  a.do_kad >= ? 
+        and a.od_kad <= ?
+2021-06-28 11:27:49.149 DEBUG 11560 --- [http-nio-8080-exec-1] o.h.SQL                                  : 
+    select
+        sum(a.procenat) 
+    from
+        akcija a 
+    where
+        a.id in (
+            select
+                aa.akcija_id  
+            from
+                artikli_akcije aa 
+            where
+                aa.artikal_id = ?
+        ) 
+        and  a.do_kad >= ? 
+        and a.od_kad <= ?
+2021-06-28 11:27:49.153 DEBUG 11560 --- [http-nio-8080-exec-1] o.h.SQL                                  : 
+    select
+        sum(a.procenat) 
+    from
+        akcija a 
+    where
+        a.id in (
+            select
+                aa.akcija_id  
+            from
+                artikli_akcije aa 
+            where
+                aa.artikal_id = ?
+        ) 
+        and  a.do_kad >= ? 
+        and a.od_kad <= ?
+2021-06-28 11:27:49.157 DEBUG 11560 --- [http-nio-8080-exec-1] o.h.SQL                                  : 
+    select
+        sum(a.procenat) 
+    from
+        akcija a 
+    where
+        a.id in (
+            select
+                aa.akcija_id  
+            from
+                artikli_akcije aa 
+            where
+                aa.artikal_id = ?
+        ) 
+        and  a.do_kad >= ? 
+        and a.od_kad <= ?
+2021-06-28 11:27:49.161 DEBUG 11560 --- [http-nio-8080-exec-1] o.h.SQL                                  : 
+    select
+        sum(a.procenat) 
+    from
+        akcija a 
+    where
+        a.id in (
+            select
+                aa.akcija_id  
+            from
+                artikli_akcije aa 
+            where
+                aa.artikal_id = ?
+        ) 
+        and  a.do_kad >= ? 
+        and a.od_kad <= ?
+2021-06-28 11:27:49.164 DEBUG 11560 --- [http-nio-8080-exec-1] o.h.SQL                                  : 
+    select
+        sum(a.procenat) 
+    from
+        akcija a 
+    where
+        a.id in (
+            select
+                aa.akcija_id  
+            from
+                artikli_akcije aa 
+            where
+                aa.artikal_id = ?
+        ) 
+        and  a.do_kad >= ? 
+        and a.od_kad <= ?
+2021-06-28 11:27:51.768 DEBUG 11560 --- [http-nio-8080-exec-4] o.h.SQL                                  : 
+    select
+        korisnik0_.id as id1_3_,
+        korisnik0_.adresa as adresa2_3_,
+        korisnik0_.blokiran as blokiran3_3_,
+        korisnik0_.ime as ime4_3_,
+        korisnik0_.korisnicko as korisnic5_3_,
+        korisnik0_.prezime as prezime6_3_,
+        korisnik0_.roles as roles7_3_,
+        korisnik0_.sifra as sifra8_3_ 
+    from
+        korisnik korisnik0_ 
+    where
+        korisnik0_.korisnicko=? limit ?
+2021-06-28 11:27:51.800 DEBUG 11560 --- [http-nio-8080-exec-4] o.h.SQL                                  : 
+    select
+        prodavac0_.korisnik_id as korisnik1_6_,
+        prodavac0_.imejl as imejl2_6_,
+        prodavac0_.naziv as naziv3_6_,
+        prodavac0_.posluje_od as posluje_4_6_ 
+    from
+        prodavac prodavac0_
+2021-06-28 11:27:51.803 DEBUG 11560 --- [http-nio-8080-exec-4] o.h.SQL                                  : 
+    select
+        korisnik0_.id as id1_3_0_,
+        korisnik0_.adresa as adresa2_3_0_,
+        korisnik0_.blokiran as blokiran3_3_0_,
+        korisnik0_.ime as ime4_3_0_,
+        korisnik0_.korisnicko as korisnic5_3_0_,
+        korisnik0_.prezime as prezime6_3_0_,
+        korisnik0_.roles as roles7_3_0_,
+        korisnik0_.sifra as sifra8_3_0_ 
+    from
+        korisnik korisnik0_ 
+    where
+        korisnik0_.id=?
+2021-06-28 11:27:51.805 DEBUG 11560 --- [http-nio-8080-exec-4] o.h.SQL                                  : 
+    select
+        korisnik0_.id as id1_3_0_,
+        korisnik0_.adresa as adresa2_3_0_,
+        korisnik0_.blokiran as blokiran3_3_0_,
+        korisnik0_.ime as ime4_3_0_,
+        korisnik0_.korisnicko as korisnic5_3_0_,
+        korisnik0_.prezime as prezime6_3_0_,
+        korisnik0_.roles as roles7_3_0_,
+        korisnik0_.sifra as sifra8_3_0_ 
+    from
+        korisnik korisnik0_ 
+    where
+        korisnik0_.id=?
+2021-06-28 11:27:51.807 DEBUG 11560 --- [http-nio-8080-exec-4] o.h.SQL                                  : 
+    select
+        korisnik0_.id as id1_3_0_,
+        korisnik0_.adresa as adresa2_3_0_,
+        korisnik0_.blokiran as blokiran3_3_0_,
+        korisnik0_.ime as ime4_3_0_,
+        korisnik0_.korisnicko as korisnic5_3_0_,
+        korisnik0_.prezime as prezime6_3_0_,
+        korisnik0_.roles as roles7_3_0_,
+        korisnik0_.sifra as sifra8_3_0_ 
+    from
+        korisnik korisnik0_ 
+    where
+        korisnik0_.id=?
+2021-06-28 11:27:51.813 DEBUG 11560 --- [http-nio-8080-exec-4] o.h.SQL                                  : 
+    select
+        avg(p.ocena) 
+    from
+        Porudzbina p 
+    where
+        p.id in (
+            select
+                s.porudzbina_id 
+            from
+                stavka s 
+            where
+                s.artikal_id in (
+                    select
+                        a.id 
+                    from
+                        artikal a 
+                    where
+                        a.prodavac_korisnik_id=?
+                )
+            )
+2021-06-28 11:27:51.816 DEBUG 11560 --- [http-nio-8080-exec-4] o.h.SQL                                  : 
+    select
+        avg(p.ocena) 
+    from
+        Porudzbina p 
+    where
+        p.id in (
+            select
+                s.porudzbina_id 
+            from
+                stavka s 
+            where
+                s.artikal_id in (
+                    select
+                        a.id 
+                    from
+                        artikal a 
+                    where
+                        a.prodavac_korisnik_id=?
+                )
+            )
+2021-06-28 11:27:51.819 DEBUG 11560 --- [http-nio-8080-exec-4] o.h.SQL                                  : 
+    select
+        avg(p.ocena) 
+    from
+        Porudzbina p 
+    where
+        p.id in (
+            select
+                s.porudzbina_id 
+            from
+                stavka s 
+            where
+                s.artikal_id in (
+                    select
+                        a.id 
+                    from
+                        artikal a 
+                    where
+                        a.prodavac_korisnik_id=?
+                )
+            )
+2021-06-28 11:27:52.795 DEBUG 11560 --- [http-nio-8080-exec-5] o.h.SQL                                  : 
+    select
+        korisnik0_.id as id1_3_,
+        korisnik0_.adresa as adresa2_3_,
+        korisnik0_.blokiran as blokiran3_3_,
+        korisnik0_.ime as ime4_3_,
+        korisnik0_.korisnicko as korisnic5_3_,
+        korisnik0_.prezime as prezime6_3_,
+        korisnik0_.roles as roles7_3_,
+        korisnik0_.sifra as sifra8_3_ 
+    from
+        korisnik korisnik0_ 
+    where
+        korisnik0_.korisnicko=? limit ?
+2021-06-28 11:27:52.795 DEBUG 11560 --- [http-nio-8080-exec-6] o.h.SQL                                  : 
+    select
+        korisnik0_.id as id1_3_,
+        korisnik0_.adresa as adresa2_3_,
+        korisnik0_.blokiran as blokiran3_3_,
+        korisnik0_.ime as ime4_3_,
+        korisnik0_.korisnicko as korisnic5_3_,
+        korisnik0_.prezime as prezime6_3_,
+        korisnik0_.roles as roles7_3_,
+        korisnik0_.sifra as sifra8_3_ 
+    from
+        korisnik korisnik0_ 
+    where
+        korisnik0_.korisnicko=? limit ?
+2021-06-28 11:27:52.801 DEBUG 11560 --- [http-nio-8080-exec-7] o.h.SQL                                  : 
+    select
+        korisnik0_.id as id1_3_,
+        korisnik0_.adresa as adresa2_3_,
+        korisnik0_.blokiran as blokiran3_3_,
+        korisnik0_.ime as ime4_3_,
+        korisnik0_.korisnicko as korisnic5_3_,
+        korisnik0_.prezime as prezime6_3_,
+        korisnik0_.roles as roles7_3_,
+        korisnik0_.sifra as sifra8_3_ 
+    from
+        korisnik korisnik0_ 
+    where
+        korisnik0_.korisnicko=? limit ?
+2021-06-28 11:27:52.803 DEBUG 11560 --- [http-nio-8080-exec-5] o.h.SQL                                  : 
+    select
+        artikal0_.id as id1_1_,
+        artikal0_.cena as cena2_1_,
+        artikal0_.naziv as naziv3_1_,
+        artikal0_.obrisan as obrisan4_1_,
+        artikal0_.opis as opis5_1_,
+        artikal0_.photo as photo6_1_,
+        artikal0_.prodavac_korisnik_id as prodavac7_1_ 
+    from
+        artikal artikal0_ 
+    left outer join
+        prodavac prodavac1_ 
+            on artikal0_.prodavac_korisnik_id=prodavac1_.korisnik_id 
+    where
+        prodavac1_.korisnik_id=?
+2021-06-28 11:27:52.803 DEBUG 11560 --- [http-nio-8080-exec-6] o.h.SQL                                  : 
+    select
+        pdz.id,
+        pdz.anoniman_komentar,
+        pdz.arhiviran_komentar,
+        pdz.dostavljeno,
+        pdz.komentar,
+        pdz.ocena,
+        pdz.satnica,
+        pdz.komentar,
+        pdz.kupac_korisnik_id 
+    FROM
+        porudzbina pdz 
+    where
+        pdz.id in (
+            select
+                s.porudzbina_id 
+            from
+                stavka s 
+            where
+                s.artikal_id in (
+                    select
+                        a.id 
+                    from
+                        artikal a 
+                    where
+                        a.prodavac_korisnik_id =?
+                )
+            )
+2021-06-28 11:27:52.807 DEBUG 11560 --- [http-nio-8080-exec-5] o.h.SQL                                  : 
+    select
+        prodavac0_.korisnik_id as korisnik1_6_0_,
+        prodavac0_.imejl as imejl2_6_0_,
+        prodavac0_.naziv as naziv3_6_0_,
+        prodavac0_.posluje_od as posluje_4_6_0_ 
+    from
+        prodavac prodavac0_ 
+    where
+        prodavac0_.korisnik_id=?
+2021-06-28 11:27:52.809 DEBUG 11560 --- [http-nio-8080-exec-5] o.h.SQL                                  : 
+    select
+        korisnik0_.id as id1_3_0_,
+        korisnik0_.adresa as adresa2_3_0_,
+        korisnik0_.blokiran as blokiran3_3_0_,
+        korisnik0_.ime as ime4_3_0_,
+        korisnik0_.korisnicko as korisnic5_3_0_,
+        korisnik0_.prezime as prezime6_3_0_,
+        korisnik0_.roles as roles7_3_0_,
+        korisnik0_.sifra as sifra8_3_0_ 
+    from
+        korisnik korisnik0_ 
+    where
+        korisnik0_.id=?
+2021-06-28 11:27:52.811 DEBUG 11560 --- [http-nio-8080-exec-7] o.h.SQL                                  : 
+    select
+        avg(p.ocena) 
+    from
+        Porudzbina p 
+    where
+        p.id in (
+            select
+                s.porudzbina_id 
+            from
+                stavka s 
+            where
+                s.artikal_id in (
+                    select
+                        a.id 
+                    from
+                        artikal a 
+                    where
+                        a.prodavac_korisnik_id=?
+                )
+            )
+2021-06-28 11:27:52.812 DEBUG 11560 --- [http-nio-8080-exec-5] o.h.SQL                                  : 
+    select
+        sum(a.procenat) 
+    from
+        akcija a 
+    where
+        a.id in (
+            select
+                aa.akcija_id  
+            from
+                artikli_akcije aa 
+            where
+                aa.artikal_id = ?
+        ) 
+        and  a.do_kad >= ? 
+        and a.od_kad <= ?
+2021-06-28 11:27:52.817 DEBUG 11560 --- [http-nio-8080-exec-5] o.h.SQL                                  : 
+    select
+        sum(a.procenat) 
+    from
+        akcija a 
+    where
+        a.id in (
+            select
+                aa.akcija_id  
+            from
+                artikli_akcije aa 
+            where
+                aa.artikal_id = ?
+        ) 
+        and  a.do_kad >= ? 
+        and a.od_kad <= ?
+2021-06-28 11:27:52.820 DEBUG 11560 --- [http-nio-8080-exec-5] o.h.SQL                                  : 
+    select
+        sum(a.procenat) 
+    from
+        akcija a 
+    where
+        a.id in (
+            select
+                aa.akcija_id  
+            from
+                artikli_akcije aa 
+            where
+                aa.artikal_id = ?
+        ) 
+        and  a.do_kad >= ? 
+        and a.od_kad <= ?
+2021-06-28 11:28:06.164 DEBUG 11560 --- [http-nio-8080-exec-8] o.h.SQL                                  : 
+    select
+        korisnik0_.id as id1_3_,
+        korisnik0_.adresa as adresa2_3_,
+        korisnik0_.blokiran as blokiran3_3_,
+        korisnik0_.ime as ime4_3_,
+        korisnik0_.korisnicko as korisnic5_3_,
+        korisnik0_.prezime as prezime6_3_,
+        korisnik0_.roles as roles7_3_,
+        korisnik0_.sifra as sifra8_3_ 
+    from
+        korisnik korisnik0_ 
+    where
+        korisnik0_.korisnicko=? limit ?
+2021-06-28 11:28:06.209 DEBUG 11560 --- [http-nio-8080-exec-8] o.h.SQL                                  : 
+    select
+        kupac0_.korisnik_id as korisnik1_4_ 
+    from
+        kupac kupac0_ 
+    left outer join
+        korisnik korisnik1_ 
+            on kupac0_.korisnik_id=korisnik1_.id 
+    where
+        korisnik1_.korisnicko=?
+2021-06-28 11:28:06.211 DEBUG 11560 --- [http-nio-8080-exec-8] o.h.SQL                                  : 
+    select
+        korisnik0_.id as id1_3_0_,
+        korisnik0_.adresa as adresa2_3_0_,
+        korisnik0_.blokiran as blokiran3_3_0_,
+        korisnik0_.ime as ime4_3_0_,
+        korisnik0_.korisnicko as korisnic5_3_0_,
+        korisnik0_.prezime as prezime6_3_0_,
+        korisnik0_.roles as roles7_3_0_,
+        korisnik0_.sifra as sifra8_3_0_ 
+    from
+        korisnik korisnik0_ 
+    where
+        korisnik0_.id=?
+2021-06-28 11:28:06.241 DEBUG 11560 --- [http-nio-8080-exec-8] o.h.SQL                                  : 
+    select
+        porudzbina0_.id as id1_5_1_,
+        porudzbina0_.anoniman_komentar as anoniman2_5_1_,
+        porudzbina0_.arhiviran_komentar as arhivira3_5_1_,
+        porudzbina0_.dostavljeno as dostavlj4_5_1_,
+        porudzbina0_.komentar as komentar5_5_1_,
+        porudzbina0_.kupac_korisnik_id as kupac_ko8_5_1_,
+        porudzbina0_.ocena as ocena6_5_1_,
+        porudzbina0_.satnica as satnica7_5_1_,
+        stavke1_.porudzbina_id as porudzbi4_7_3_,
+        stavke1_.id as id1_7_3_,
+        stavke1_.id as id1_7_0_,
+        stavke1_.artikal_id as artikal_3_7_0_,
+        stavke1_.kolicina as kolicina2_7_0_,
+        stavke1_.porudzbina_id as porudzbi4_7_0_ 
+    from
+        porudzbina porudzbina0_ 
+    left outer join
+        stavka stavke1_ 
+            on porudzbina0_.id=stavke1_.porudzbina_id 
+    where
+        porudzbina0_.id=?
+2021-06-28 11:28:06.267 DEBUG 11560 --- [http-nio-8080-exec-8] o.h.SQL                                  : 
+    insert 
+    into
+        porudzbina
+        (anoniman_komentar, arhiviran_komentar, dostavljeno, komentar, kupac_korisnik_id, ocena, satnica, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2021-06-28 11:28:06.280 DEBUG 11560 --- [http-nio-8080-exec-8] o.h.SQL                                  : 
+    select
+        artikal0_.id as id1_1_0_,
+        artikal0_.cena as cena2_1_0_,
+        artikal0_.naziv as naziv3_1_0_,
+        artikal0_.obrisan as obrisan4_1_0_,
+        artikal0_.opis as opis5_1_0_,
+        artikal0_.photo as photo6_1_0_,
+        artikal0_.prodavac_korisnik_id as prodavac7_1_0_,
+        prodavac1_.korisnik_id as korisnik1_6_1_,
+        prodavac1_.imejl as imejl2_6_1_,
+        prodavac1_.naziv as naziv3_6_1_,
+        prodavac1_.posluje_od as posluje_4_6_1_,
+        korisnik2_.id as id1_3_2_,
+        korisnik2_.adresa as adresa2_3_2_,
+        korisnik2_.blokiran as blokiran3_3_2_,
+        korisnik2_.ime as ime4_3_2_,
+        korisnik2_.korisnicko as korisnic5_3_2_,
+        korisnik2_.prezime as prezime6_3_2_,
+        korisnik2_.roles as roles7_3_2_,
+        korisnik2_.sifra as sifra8_3_2_ 
+    from
+        artikal artikal0_ 
+    left outer join
+        prodavac prodavac1_ 
+            on artikal0_.prodavac_korisnik_id=prodavac1_.korisnik_id 
+    left outer join
+        korisnik korisnik2_ 
+            on prodavac1_.korisnik_id=korisnik2_.id 
+    where
+        artikal0_.id=?
+2021-06-28 11:28:06.290 DEBUG 11560 --- [http-nio-8080-exec-8] o.h.SQL                                  : 
+    select
+        porudzbina_.id,
+        porudzbina_.anoniman_komentar as anoniman2_5_,
+        porudzbina_.arhiviran_komentar as arhivira3_5_,
+        porudzbina_.dostavljeno as dostavlj4_5_,
+        porudzbina_.komentar as komentar5_5_,
+        porudzbina_.kupac_korisnik_id as kupac_ko8_5_,
+        porudzbina_.ocena as ocena6_5_,
+        porudzbina_.satnica as satnica7_5_ 
+    from
+        porudzbina porudzbina_ 
+    where
+        porudzbina_.id=?
+2021-06-28 11:28:06.293 DEBUG 11560 --- [http-nio-8080-exec-8] o.h.SQL                                  : 
+    insert 
+    into
+        stavka
+        (artikal_id, kolicina, porudzbina_id) 
+    values
+        (?, ?, ?)
+2021-06-28 11:28:07.970 DEBUG 11560 --- [http-nio-8080-exec-9] o.h.SQL                                  : 
+    select
+        korisnik0_.id as id1_3_,
+        korisnik0_.adresa as adresa2_3_,
+        korisnik0_.blokiran as blokiran3_3_,
+        korisnik0_.ime as ime4_3_,
+        korisnik0_.korisnicko as korisnic5_3_,
+        korisnik0_.prezime as prezime6_3_,
+        korisnik0_.roles as roles7_3_,
+        korisnik0_.sifra as sifra8_3_ 
+    from
+        korisnik korisnik0_ 
+    where
+        korisnik0_.korisnicko=? limit ?
+2021-06-28 11:28:07.977 DEBUG 11560 --- [http-nio-8080-exec-9] o.h.SQL                                  : 
+    select
+        prodavac0_.korisnik_id as korisnik1_6_,
+        prodavac0_.imejl as imejl2_6_,
+        prodavac0_.naziv as naziv3_6_,
+        prodavac0_.posluje_od as posluje_4_6_ 
+    from
+        prodavac prodavac0_
+2021-06-28 11:28:07.980 DEBUG 11560 --- [http-nio-8080-exec-9] o.h.SQL                                  : 
+    select
+        korisnik0_.id as id1_3_0_,
+        korisnik0_.adresa as adresa2_3_0_,
+        korisnik0_.blokiran as blokiran3_3_0_,
+        korisnik0_.ime as ime4_3_0_,
+        korisnik0_.korisnicko as korisnic5_3_0_,
+        korisnik0_.prezime as prezime6_3_0_,
+        korisnik0_.roles as roles7_3_0_,
+        korisnik0_.sifra as sifra8_3_0_ 
+    from
+        korisnik korisnik0_ 
+    where
+        korisnik0_.id=?
+2021-06-28 11:28:07.982 DEBUG 11560 --- [http-nio-8080-exec-9] o.h.SQL                                  : 
+    select
+        korisnik0_.id as id1_3_0_,
+        korisnik0_.adresa as adresa2_3_0_,
+        korisnik0_.blokiran as blokiran3_3_0_,
+        korisnik0_.ime as ime4_3_0_,
+        korisnik0_.korisnicko as korisnic5_3_0_,
+        korisnik0_.prezime as prezime6_3_0_,
+        korisnik0_.roles as roles7_3_0_,
+        korisnik0_.sifra as sifra8_3_0_ 
+    from
+        korisnik korisnik0_ 
+    where
+        korisnik0_.id=?
+2021-06-28 11:28:07.983 DEBUG 11560 --- [http-nio-8080-exec-9] o.h.SQL                                  : 
+    select
+        korisnik0_.id as id1_3_0_,
+        korisnik0_.adresa as adresa2_3_0_,
+        korisnik0_.blokiran as blokiran3_3_0_,
+        korisnik0_.ime as ime4_3_0_,
+        korisnik0_.korisnicko as korisnic5_3_0_,
+        korisnik0_.prezime as prezime6_3_0_,
+        korisnik0_.roles as roles7_3_0_,
+        korisnik0_.sifra as sifra8_3_0_ 
+    from
+        korisnik korisnik0_ 
+    where
+        korisnik0_.id=?
+2021-06-28 11:28:07.985 DEBUG 11560 --- [http-nio-8080-exec-9] o.h.SQL                                  : 
+    select
+        avg(p.ocena) 
+    from
+        Porudzbina p 
+    where
+        p.id in (
+            select
+                s.porudzbina_id 
+            from
+                stavka s 
+            where
+                s.artikal_id in (
+                    select
+                        a.id 
+                    from
+                        artikal a 
+                    where
+                        a.prodavac_korisnik_id=?
+                )
+            )
+2021-06-28 11:28:07.987 DEBUG 11560 --- [http-nio-8080-exec-9] o.h.SQL                                  : 
+    select
+        avg(p.ocena) 
+    from
+        Porudzbina p 
+    where
+        p.id in (
+            select
+                s.porudzbina_id 
+            from
+                stavka s 
+            where
+                s.artikal_id in (
+                    select
+                        a.id 
+                    from
+                        artikal a 
+                    where
+                        a.prodavac_korisnik_id=?
+                )
+            )
+2021-06-28 11:28:07.989 DEBUG 11560 --- [http-nio-8080-exec-9] o.h.SQL                                  : 
+    select
+        avg(p.ocena) 
+    from
+        Porudzbina p 
+    where
+        p.id in (
+            select
+                s.porudzbina_id 
+            from
+                stavka s 
+            where
+                s.artikal_id in (
+                    select
+                        a.id 
+                    from
+                        artikal a 
+                    where
+                        a.prodavac_korisnik_id=?
+                )
+            )
+2021-06-28 11:29:32.958  INFO 2876 --- [main] c.f.T.TavernaApplication                 : Starting TavernaApplication using Java 11.0.10 on DESKTOP-RTJH6S2 with PID 2876 (C:\OSA ANDROID 2021\OSA-2020-21\backend\Taverna\target\classes started by vladi in C:\OSA ANDROID 2021\OSA-2020-21\backend\Taverna)
+2021-06-28 11:29:32.976  INFO 2876 --- [main] c.f.T.TavernaApplication                 : No active profile set, falling back to default profiles: default
+2021-06-28 11:29:33.803  INFO 2876 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-06-28 11:29:33.910  INFO 2876 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 98 ms. Found 7 JPA repository interfaces.
+2021-06-28 11:29:34.250  INFO 2876 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@234cff57' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-28 11:29:34.255  INFO 2876 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-06-28 11:29:34.535  INFO 2876 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port(s): 8080 (http)
+2021-06-28 11:29:34.545  INFO 2876 --- [main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2021-06-28 11:29:34.546  INFO 2876 --- [main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/9.0.45]
+2021-06-28 11:29:34.668  INFO 2876 --- [main] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2021-06-28 11:29:34.668  INFO 2876 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1638 ms
+2021-06-28 11:29:34.748  WARN 2876 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-06-28 11:29:34.876  INFO 2876 --- [main] o.h.j.i.u.LogHelper                      : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-06-28 11:29:34.930  INFO 2876 --- [main] o.h.Version                              : HHH000412: Hibernate ORM core version 5.4.30.Final
+2021-06-28 11:29:35.085  INFO 2876 --- [main] o.h.a.c.Version                          : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-06-28 11:29:35.207  INFO 2876 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2021-06-28 11:29:35.211  WARN 2876 --- [main] c.z.h.u.DriverDataSource                 : Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2021-06-28 11:29:35.547  INFO 2876 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2021-06-28 11:29:35.562  INFO 2876 --- [main] o.h.d.Dialect                            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2021-06-28 11:29:36.348 DEBUG 2876 --- [main] o.h.SQL                                  : 
+    
+    drop table if exists akcija
+2021-06-28 11:29:36.400 DEBUG 2876 --- [main] o.h.SQL                                  : 
+    
+    drop table if exists artikal
+2021-06-28 11:29:36.409 DEBUG 2876 --- [main] o.h.SQL                                  : 
+    
+    drop table if exists artikli_akcije
+2021-06-28 11:29:36.415 DEBUG 2876 --- [main] o.h.SQL                                  : 
+    
+    drop table if exists korisnik
+2021-06-28 11:29:36.423 DEBUG 2876 --- [main] o.h.SQL                                  : 
+    
+    drop table if exists kupac
+2021-06-28 11:29:36.430 DEBUG 2876 --- [main] o.h.SQL                                  : 
+    
+    drop table if exists porudzbina
+2021-06-28 11:29:36.443 DEBUG 2876 --- [main] o.h.SQL                                  : 
+    
+    drop table if exists prodavac
+2021-06-28 11:29:36.450 DEBUG 2876 --- [main] o.h.SQL                                  : 
+    
+    drop table if exists stavka
+2021-06-28 11:29:36.467 DEBUG 2876 --- [main] o.h.SQL                                  : 
+    
+    create table akcija (
+       id integer not null auto_increment,
+        do_kad date,
+        od_kad date,
+        procenat integer,
+        tekst varchar(255),
+        prodavac_korisnik_id integer,
+        primary key (id)
+    ) engine=MyISAM
+2021-06-28 11:29:36.484 DEBUG 2876 --- [main] o.h.SQL                                  : 
+    
+    create table artikal (
+       id integer not null auto_increment,
+        cena double precision,
+        naziv varchar(255),
+        obrisan bit not null,
+        opis varchar(255),
+        photo longblob,
+        prodavac_korisnik_id integer,
+        primary key (id)
+    ) engine=MyISAM
+2021-06-28 11:29:36.495 DEBUG 2876 --- [main] o.h.SQL                                  : 
+    
+    create table artikli_akcije (
+       akcija_id integer not null,
+        artikal_id integer not null
+    ) engine=MyISAM
+2021-06-28 11:29:36.505 DEBUG 2876 --- [main] o.h.SQL                                  : 
+    
+    create table korisnik (
+       id integer not null auto_increment,
+        adresa varchar(255),
+        blokiran bit not null,
+        ime varchar(255),
+        korisnicko varchar(255),
+        prezime varchar(255),
+        roles varchar(255),
+        sifra varchar(255),
+        primary key (id)
+    ) engine=MyISAM
+2021-06-28 11:29:36.516 DEBUG 2876 --- [main] o.h.SQL                                  : 
+    
+    create table kupac (
+       korisnik_id integer not null,
+        primary key (korisnik_id)
+    ) engine=MyISAM
+2021-06-28 11:29:36.532 DEBUG 2876 --- [main] o.h.SQL                                  : 
+    
+    create table porudzbina (
+       id integer not null,
+        anoniman_komentar bit not null,
+        arhiviran_komentar bit not null,
+        dostavljeno bit not null,
+        komentar varchar(255),
+        ocena integer,
+        satnica date,
+        kupac_korisnik_id integer,
+        primary key (id)
+    ) engine=MyISAM
+2021-06-28 11:29:36.544 DEBUG 2876 --- [main] o.h.SQL                                  : 
+    
+    create table prodavac (
+       korisnik_id integer not null,
+        imejl varchar(255),
+        naziv varchar(255),
+        posluje_od date,
+        primary key (korisnik_id)
+    ) engine=MyISAM
+2021-06-28 11:29:36.556 DEBUG 2876 --- [main] o.h.SQL                                  : 
+    
+    create table stavka (
+       id integer not null auto_increment,
+        kolicina integer,
+        artikal_id integer,
+        porudzbina_id integer,
+        primary key (id)
+    ) engine=MyISAM
+2021-06-28 11:29:36.567 DEBUG 2876 --- [main] o.h.SQL                                  : 
+    
+    alter table prodavac 
+       add constraint UK_h4kcs7xr1g0fxorwwew3b73pb unique (imejl)
+2021-06-28 11:29:36.584  WARN 2876 --- [main] o.h.t.s.i.ExceptionHandlerLoggedImpl     : GenerationTarget encountered exception accepting command : Error executing DDL "
+    alter table prodavac 
+       add constraint UK_h4kcs7xr1g0fxorwwew3b73pb unique (imejl)" via JDBC Statement
+
+org.hibernate.tool.schema.spi.CommandAcceptanceException: Error executing DDL "
+    alter table prodavac 
+       add constraint UK_h4kcs7xr1g0fxorwwew3b73pb unique (imejl)" via JDBC Statement
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:67) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.applySqlString(SchemaCreatorImpl.java:439) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.applySqlStrings(SchemaCreatorImpl.java:423) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.createFromMetadata(SchemaCreatorImpl.java:348) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.performCreation(SchemaCreatorImpl.java:166) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.doCreation(SchemaCreatorImpl.java:135) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	at org.hibernate.tool.schema.internal.SchemaCreatorImpl.doCreation(SchemaCreatorImpl.java:121) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:156) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:73) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:318) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:468) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1259) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:58) ~[spring-orm-5.3.6.jar:5.3.6]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365) ~[spring-orm-5.3.6.jar:5.3.6]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409) ~[spring-orm-5.3.6.jar:5.3.6]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-5.3.6.jar:5.3.6]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:341) ~[spring-orm-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1845) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1782) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:602) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:524) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:233) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveNamedBean(DefaultListableBeanFactory.java:1273) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveNamedBean(DefaultListableBeanFactory.java:1234) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveBean(DefaultListableBeanFactory.java:494) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBean(DefaultListableBeanFactory.java:349) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBean(DefaultListableBeanFactory.java:342) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.orm.jpa.EntityManagerFactoryUtils.findEntityManagerFactory(EntityManagerFactoryUtils.java:121) ~[spring-orm-5.3.6.jar:5.3.6]
+	at org.springframework.orm.jpa.EntityManagerFactoryAccessor.setBeanFactory(EntityManagerFactoryAccessor.java:155) ~[spring-orm-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeAwareMethods(AbstractAutowireCapableBeanFactory.java:1808) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1773) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:602) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:524) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1380) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1300) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:887) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:541) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1334) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1177) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:564) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:524) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.addCandidateEntry(DefaultListableBeanFactory.java:1598) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:1562) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveMultipleBeans(DefaultListableBeanFactory.java:1451) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1338) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1300) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.resolveMethodArguments(AutowiredAnnotationBeanPostProcessor.java:760) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.inject(AutowiredAnnotationBeanPostProcessor.java:720) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1413) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:601) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:524) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:410) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1334) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1177) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:564) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:524) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1380) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1300) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.resolveMethodArguments(AutowiredAnnotationBeanPostProcessor.java:760) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredMethodElement.inject(AutowiredAnnotationBeanPostProcessor.java:720) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:119) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:399) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1413) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:601) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:524) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:410) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1334) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1177) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:564) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:524) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:213) ~[spring-beans-5.3.6.jar:5.3.6]
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.getOrderedBeansOfType(ServletContextInitializerBeans.java:212) ~[spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:175) ~[spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:170) ~[spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAdaptableBeans(ServletContextInitializerBeans.java:155) ~[spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.<init>(ServletContextInitializerBeans.java:87) ~[spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.getServletContextInitializerBeans(ServletWebServerApplicationContext.java:259) ~[spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.selfInitialize(ServletWebServerApplicationContext.java:233) ~[spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.web.embedded.tomcat.TomcatStarter.onStartup(TomcatStarter.java:53) [spring-boot-2.4.5.jar:2.4.5]
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5161) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1384) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1374) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:264) [?:?]
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:140) [?:?]
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:909) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:843) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1384) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1374) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at java.util.concurrent.FutureTask.run(FutureTask.java:264) [?:?]
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:75) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:140) [?:?]
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:909) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:262) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.core.StandardService.startInternal(StandardService.java:433) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:930) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:183) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.apache.catalina.startup.Tomcat.start(Tomcat.java:486) [tomcat-embed-core-9.0.45.jar:9.0.45]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:123) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.web.embedded.tomcat.TomcatWebServer.<init>(TomcatWebServer.java:104) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getTomcatWebServer(TomcatServletWebServerFactory.java:450) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory.getWebServer(TomcatServletWebServerFactory.java:199) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:181) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:159) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:577) [spring-context-5.3.6.jar:5.3.6]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:144) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:782) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:774) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:339) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1340) [spring-boot-2.4.5.jar:2.4.5]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1329) [spring-boot-2.4.5.jar:2.4.5]
+	at com.ftn.Taverna.TavernaApplication.main(TavernaApplication.java:10) [classes/:?]
+Caused by: java.sql.SQLSyntaxErrorException: Specified key was too long; max key length is 1000 bytes
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120) ~[mysql-connector-java-8.0.23.jar:8.0.23]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-java-8.0.23.jar:8.0.23]
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:762) ~[mysql-connector-java-8.0.23.jar:8.0.23]
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:646) ~[mysql-connector-java-8.0.23.jar:8.0.23]
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:95) ~[HikariCP-3.4.5.jar:?]
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java) ~[HikariCP-3.4.5.jar:?]
+	at org.hibernate.tool.schema.internal.exec.GenerationTargetToDatabase.accept(GenerationTargetToDatabase.java:54) ~[hibernate-core-5.4.30.Final.jar:5.4.30.Final]
+	... 148 more
+
+2021-06-28 11:29:36.592 DEBUG 2876 --- [main] o.h.SQL                                  : 
+    
+    alter table akcija 
+       add constraint FKm0vv3a2tte30fe883l97yb97c 
+       foreign key (prodavac_korisnik_id) 
+       references prodavac (korisnik_id)
+2021-06-28 11:29:36.634 DEBUG 2876 --- [main] o.h.SQL                                  : 
+    
+    alter table artikal 
+       add constraint FKdc1ydqc7o7dl9ifprs47t74kc 
+       foreign key (prodavac_korisnik_id) 
+       references prodavac (korisnik_id)
+2021-06-28 11:29:36.676 DEBUG 2876 --- [main] o.h.SQL                                  : 
+    
+    alter table artikli_akcije 
+       add constraint FKexg3o7xy8jjlpw1fm47tae9jf 
+       foreign key (artikal_id) 
+       references artikal (id)
+2021-06-28 11:29:36.712 DEBUG 2876 --- [main] o.h.SQL                                  : 
+    
+    alter table artikli_akcije 
+       add constraint FKgtncbtlh29c4xpp7e00h3r1x2 
+       foreign key (akcija_id) 
+       references akcija (id)
+2021-06-28 11:29:36.746 DEBUG 2876 --- [main] o.h.SQL                                  : 
+    
+    alter table kupac 
+       add constraint FKkjh5dfhfofts6gmyy6ivxs707 
+       foreign key (korisnik_id) 
+       references korisnik (id)
+2021-06-28 11:29:36.775 DEBUG 2876 --- [main] o.h.SQL                                  : 
+    
+    alter table porudzbina 
+       add constraint FKm9b61kgdep8kwf74xjegdwgjv 
+       foreign key (kupac_korisnik_id) 
+       references kupac (korisnik_id)
+2021-06-28 11:29:36.833 DEBUG 2876 --- [main] o.h.SQL                                  : 
+    
+    alter table prodavac 
+       add constraint FKr6odhltefy4w66psvei6kgm58 
+       foreign key (korisnik_id) 
+       references korisnik (id)
+2021-06-28 11:29:36.880 DEBUG 2876 --- [main] o.h.SQL                                  : 
+    
+    alter table stavka 
+       add constraint FK4wxgf1cwjcxmxphabw1m6x8y 
+       foreign key (artikal_id) 
+       references artikal (id)
+2021-06-28 11:29:36.946 DEBUG 2876 --- [main] o.h.SQL                                  : 
+    
+    alter table stavka 
+       add constraint FKs0h9sd1q95nyokseyxjjngjfs 
+       foreign key (porudzbina_id) 
+       references porudzbina (id)
+2021-06-28 11:29:37.023  INFO 2876 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-06-28 11:29:37.037  INFO 2876 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-06-28 11:29:38.409  INFO 2876 --- [main] o.s.s.w.DefaultSecurityFilterChain       : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@565030b7, org.springframework.security.web.context.SecurityContextPersistenceFilter@7fba492e, org.springframework.security.web.header.HeaderWriterFilter@14d6ede3, org.springframework.web.filter.CorsFilter@752fecbf, org.springframework.security.web.authentication.logout.LogoutFilter@2f7d8a7c, com.ftn.Taverna.security.AuthenticationTokenFilter@46507dda, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@17635531, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3e0e3048, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2eb31735, org.springframework.security.web.session.SessionManagementFilter@35198da3, org.springframework.security.web.access.ExceptionTranslationFilter@7bdf8c92, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@55731ccd]
+2021-06-28 11:29:38.464  INFO 2876 --- [main] o.s.s.c.ThreadPoolTaskExecutor           : Initializing ExecutorService 'applicationTaskExecutor'
+2021-06-28 11:29:38.640  INFO 2876 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port(s): 8080 (http) with context path ''
+2021-06-28 11:29:38.651  INFO 2876 --- [main] c.f.T.TavernaApplication                 : Started TavernaApplication in 6.373 seconds (JVM running for 7.916)
+2021-06-28 11:29:49.429  INFO 2876 --- [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-06-28 11:29:49.429  INFO 2876 --- [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
+2021-06-28 11:29:49.431  INFO 2876 --- [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Completed initialization in 2 ms
+2021-06-28 11:29:49.615 DEBUG 2876 --- [http-nio-8080-exec-1] o.h.SQL                                  : 
+    select
+        korisnik0_.id as id1_3_,
+        korisnik0_.adresa as adresa2_3_,
+        korisnik0_.blokiran as blokiran3_3_,
+        korisnik0_.ime as ime4_3_,
+        korisnik0_.korisnicko as korisnic5_3_,
+        korisnik0_.prezime as prezime6_3_,
+        korisnik0_.roles as roles7_3_,
+        korisnik0_.sifra as sifra8_3_ 
+    from
+        korisnik korisnik0_ 
+    where
+        korisnik0_.korisnicko=? limit ?
+2021-06-28 11:29:49.726 DEBUG 2876 --- [http-nio-8080-exec-1] o.h.SQL                                  : 
+    select
+        prodavac0_.korisnik_id as korisnik1_6_,
+        prodavac0_.imejl as imejl2_6_,
+        prodavac0_.naziv as naziv3_6_,
+        prodavac0_.posluje_od as posluje_4_6_ 
+    from
+        prodavac prodavac0_
+2021-06-28 11:29:49.742 DEBUG 2876 --- [http-nio-8080-exec-1] o.h.SQL                                  : 
+    select
+        korisnik0_.id as id1_3_0_,
+        korisnik0_.adresa as adresa2_3_0_,
+        korisnik0_.blokiran as blokiran3_3_0_,
+        korisnik0_.ime as ime4_3_0_,
+        korisnik0_.korisnicko as korisnic5_3_0_,
+        korisnik0_.prezime as prezime6_3_0_,
+        korisnik0_.roles as roles7_3_0_,
+        korisnik0_.sifra as sifra8_3_0_ 
+    from
+        korisnik korisnik0_ 
+    where
+        korisnik0_.id=?
+2021-06-28 11:29:49.750 DEBUG 2876 --- [http-nio-8080-exec-1] o.h.SQL                                  : 
+    select
+        korisnik0_.id as id1_3_0_,
+        korisnik0_.adresa as adresa2_3_0_,
+        korisnik0_.blokiran as blokiran3_3_0_,
+        korisnik0_.ime as ime4_3_0_,
+        korisnik0_.korisnicko as korisnic5_3_0_,
+        korisnik0_.prezime as prezime6_3_0_,
+        korisnik0_.roles as roles7_3_0_,
+        korisnik0_.sifra as sifra8_3_0_ 
+    from
+        korisnik korisnik0_ 
+    where
+        korisnik0_.id=?
+2021-06-28 11:29:49.753 DEBUG 2876 --- [http-nio-8080-exec-1] o.h.SQL                                  : 
+    select
+        korisnik0_.id as id1_3_0_,
+        korisnik0_.adresa as adresa2_3_0_,
+        korisnik0_.blokiran as blokiran3_3_0_,
+        korisnik0_.ime as ime4_3_0_,
+        korisnik0_.korisnicko as korisnic5_3_0_,
+        korisnik0_.prezime as prezime6_3_0_,
+        korisnik0_.roles as roles7_3_0_,
+        korisnik0_.sifra as sifra8_3_0_ 
+    from
+        korisnik korisnik0_ 
+    where
+        korisnik0_.id=?
+2021-06-28 11:29:49.783 DEBUG 2876 --- [http-nio-8080-exec-1] o.h.SQL                                  : 
+    select
+        avg(p.ocena) 
+    from
+        Porudzbina p 
+    where
+        p.id in (
+            select
+                s.porudzbina_id 
+            from
+                stavka s 
+            where
+                s.artikal_id in (
+                    select
+                        a.id 
+                    from
+                        artikal a 
+                    where
+                        a.prodavac_korisnik_id=?
+                )
+            )
+2021-06-28 11:29:49.790 DEBUG 2876 --- [http-nio-8080-exec-1] o.h.SQL                                  : 
+    select
+        avg(p.ocena) 
+    from
+        Porudzbina p 
+    where
+        p.id in (
+            select
+                s.porudzbina_id 
+            from
+                stavka s 
+            where
+                s.artikal_id in (
+                    select
+                        a.id 
+                    from
+                        artikal a 
+                    where
+                        a.prodavac_korisnik_id=?
+                )
+            )
+2021-06-28 11:29:49.793 DEBUG 2876 --- [http-nio-8080-exec-1] o.h.SQL                                  : 
+    select
+        avg(p.ocena) 
+    from
+        Porudzbina p 
+    where
+        p.id in (
+            select
+                s.porudzbina_id 
+            from
+                stavka s 
+            where
+                s.artikal_id in (
+                    select
+                        a.id 
+                    from
+                        artikal a 
+                    where
+                        a.prodavac_korisnik_id=?
+                )
+            )

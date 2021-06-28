@@ -37,11 +37,11 @@ insert into porudzbina(id,dostavljeno,satnica,kupac_korisnik_id,anoniman_komenta
 
 
 
-insert into akcija(do_kad,od_kad,procenat,tekst,prodavac_korisnik_id) values ('2021-08-20','2021-09-25',30,'Akcija',3);
+insert into akcija(do_kad,od_kad,procenat,tekst,prodavac_korisnik_id) values ('2021-08-20','2021-06-22',30,'Akcija',3);
 insert into artikli_akcije(akcija_id,artikal_id) values (1,1);
 insert into artikli_akcije(akcija_id,artikal_id) values (1,2);
 
 
-insert into akcija(do_kad,od_kad,procenat,tekst,prodavac_korisnik_id) values ('2021-07-20','2021-10-25',30,'Akcija 2',3);
+insert into akcija(do_kad,od_kad,procenat,tekst,prodavac_korisnik_id) values ('2021-10-20','2021-06-25',30,'Akcija 2',3);
 insert into artikli_akcije(akcija_id,artikal_id) values (2,1);
 insert into artikli_akcije(akcija_id,artikal_id) values (2,2);

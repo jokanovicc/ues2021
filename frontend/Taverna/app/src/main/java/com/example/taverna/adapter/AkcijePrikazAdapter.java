@@ -34,6 +34,7 @@ public class AkcijePrikazAdapter extends RecyclerView.Adapter<AkcijePrikazAdapte
         TextView popust;
         TextView doKad;
         TextView odKad;
+        TextView opis;
 
 
         ViewHolder(View itemView) {
@@ -42,6 +43,7 @@ public class AkcijePrikazAdapter extends RecyclerView.Adapter<AkcijePrikazAdapte
             popust = itemView.findViewById(R.id.prikazPopust);
             doKad = itemView.findViewById(R.id.prikazDoKad);
             odKad = itemView.findViewById(R.id.prikazOdKad);
+            opis = itemView.findViewById(R.id.opisPopust);
 
 
         }
@@ -62,6 +64,7 @@ public class AkcijePrikazAdapter extends RecyclerView.Adapter<AkcijePrikazAdapte
         holder.popust.setText("Попуст: "+akcijaPrikaz.getProcenat());
         holder.doKad.setText("До: " + akcijaPrikaz.getDoKad());
         holder.odKad.setText("Од: " + akcijaPrikaz.getOdKad());
+        holder.opis.setText(akcijaPrikaz.getTekst());
 
     }
 

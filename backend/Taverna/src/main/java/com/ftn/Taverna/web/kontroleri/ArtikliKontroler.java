@@ -180,7 +180,6 @@ public class ArtikliKontroler {
         akcija.setProcenat(akcijaDTO.getPopust());
         akcija.setTekst(akcijaDTO.getOpis());
         akcija.setProdavac(prodavac);
-
         for(Integer i: akcijaDTO.getArtikli()){
             Artikal artikal = artikliServis.findOne(i);
             akcija.getArtikli().add(artikal);

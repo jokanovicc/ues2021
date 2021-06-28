@@ -27,6 +27,14 @@
 
 
             <TextView
+                android:id="@+id/opisPopust"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mnogo dobro"
+                android:textSize="15dp"/>
+
+
+            <TextView
                 android:id="@+id/prikazPopust"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

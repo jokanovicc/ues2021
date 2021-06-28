@@ -225,40 +225,52 @@ public class DodavanjeAkcije extends AppCompatActivity implements AdapterView.On
                 opis.setError("Morate uneti opis");
             } else {
 
-                if (procenat.length() == 0 || Integer.parseInt(procenat) > 99) {
-                    popust.requestFocus();
-                    popust.setError("Morate uneti popust");
-
+                if (datum == null) {
+                    Toast.makeText(DodavanjeAkcije.this, "Morate uneti pocetni datum", Toast.LENGTH_LONG).show();
                 } else {
-                    akcijaDodaj.setProcenat(Integer.parseInt(procenat));
-                    akcijaDodaj.setOdKad(datum);
-                    akcijaDodaj.setDoKad(datum2);
-                    akcijaDodaj.setOpis(opisAkcije);
-                    akcijaDodaj.setArtikli(DodavanjeAkcijeAdapter.artikli);
 
-                    artikliApiService = RetrofitClient.artikliApiService;
-                    Call<Void> call = artikliApiService.dodajAkciju(akcijaDodaj);
-                    call.enqueue(new Callback<Void>() {
-                        @Override
-                        public void onResponse(Call<Void> call, Response<Void> response) {
-                            System.out.println("Okej");
-                            Intent intent2 = new Intent(DodavanjeAkcije.this, Akcije.class);
-                            startActivity(intent2);
+                    if (datum2 == null) {
+                        Toast.makeText(DodavanjeAkcije.this, "Morate uneti zavrsni datum", Toast.LENGTH_LONG).show();
+
+                    } else {
+
+
+                        if (procenat.length() == 0 || Integer.parseInt(procenat) > 99) {
+                            popust.requestFocus();
+                            popust.setError("Morate uneti popust");
+
+                        } else {
+                            akcijaDodaj.setProcenat(Integer.parseInt(procenat));
+                            akcijaDodaj.setOdKad(datum);
+                            akcijaDodaj.setDoKad(datum2);
+                            akcijaDodaj.setOpis(opisAkcije);
+                            akcijaDodaj.setArtikli(DodavanjeAkcijeAdapter.artikli);
+
+                            artikliApiService = RetrofitClient.artikliApiService;
+                            Call<Void> call = artikliApiService.dodajAkciju(akcijaDodaj);
+                            call.enqueue(new Callback<Void>() {
+                                @Override
+                                public void onResponse(Call<Void> call, Response<Void> response) {
+                                    DodavanjeAkcijeAdapter.artikli.clear();
+                                    System.out.println("Okej");
+                                    Intent intent2 = new Intent(DodavanjeAkcije.this, Akcije.class);
+                                    startActivity(intent2);
+                                    finish();
+                                }
+
+                                @Override
+                                public void onFailure(Call<Void> call, Throwable t) {
+                                    System.out.println("nije okej");
+
+                                }
+                            });
                         }
-
-                        @Override
-                        public void onFailure(Call<Void> call, Throwable t) {
-                            System.out.println("nije okej");
-
-                        }
-                    });
+                    }
                 }
             }
+
+
         }
-
-
-
-
 
 
     }
