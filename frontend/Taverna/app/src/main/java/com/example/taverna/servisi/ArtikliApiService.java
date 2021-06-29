@@ -30,6 +30,9 @@ public interface ArtikliApiService {
     @GET("artikli/{id}")
     Call<Artikal> getArtikalById(@Path("id") int id);
 
+    @GET("artikli/prodavac-artikli")
+    Call<List<Artikal>> getArtikalByProdavac();
+
     @POST("artikli")
     Call<Artikal> saveArtikal(@Body Artikal artikal);
 

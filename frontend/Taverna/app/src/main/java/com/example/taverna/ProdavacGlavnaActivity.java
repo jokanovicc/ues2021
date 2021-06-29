@@ -73,7 +73,7 @@ public class ProdavacGlavnaActivity extends AppCompatActivity {
 
         artikliApiService = RetrofitClient.artikliApiService;
 
-        Call<List<Artikal>> call = artikliApiService.getArtikliProdavaca(sharedPreferences.getInt(String.valueOf(MainActivity.ID),1));
+        Call<List<Artikal>> call = artikliApiService.getArtikalByProdavac();
         call.enqueue(new Callback<List<Artikal>>() {
 
 

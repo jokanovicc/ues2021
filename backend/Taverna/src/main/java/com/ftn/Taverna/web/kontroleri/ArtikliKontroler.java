@@ -110,6 +110,27 @@ public class ArtikliKontroler {
     }
 
 
+    @GetMapping(value = "/prodavac-artikli")
+    @PreAuthorize("hasAnyRole('PRODAVAC')")
+    public ResponseEntity<Collection<ArtikalDTO>> getArtikalByProdavac(Authentication authentication){
+        UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
+        String username = userPrincipal.getUsername();
+        System.out.println("Ovo jeee" + username);
+        Prodavac prodavac = prodavacServis.findByUsername(username);
+        List<Artikal> artikli = artikliServis.findByProdavac(prodavac.getId());
+        List<ArtikalDTO> artikalDTOS = new ArrayList<>();
+        for (Artikal artikal:artikli) {
+            if(!artikal.isObrisan())
+                artikalDTOS.add(new ArtikalDTO(artikal));
+
+        }
+
+        return new ResponseEntity<>(artikalDTOS, HttpStatus.OK);
+
+
+    }
+
+
     @PostMapping
     @PreAuthorize("hasAnyRole('PRODAVAC')")
     public ResponseEntity<ArtikalDTO> snimiArtikal(@RequestBody ArtikalDTOPost artikalDTO, Authentication authentication){
@@ -184,7 +205,6 @@ public class ArtikliKontroler {
             Artikal artikal = artikliServis.findOne(i);
             akcija.getArtikli().add(artikal);
         }
-
         akcijaServis.saveAkcija(akcija);
         return new ResponseEntity<Void>(HttpStatus.OK);
 

@@ -18,4 +18,6 @@ public interface KorisnikRepository extends JpaRepository<Korisnik, Integer> {
 
 
     Optional<Korisnik> findFirstByKorisnicko(String username);
+
+
 }
