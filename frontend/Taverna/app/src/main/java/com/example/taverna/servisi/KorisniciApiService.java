@@ -46,7 +46,7 @@ public interface KorisniciApiService {
     @GET("/porudzbine/prosecna-ocena/{id}")
     Call<Double> getProsecnaOcena(@Path("id") int id);
 
-    @PUT("/users/izmena-sifre")
+    @POST("/users/izmena-sifre")
     Call<Boolean> izmeniSifru(@Body IzmenaSifreDTO izmenaSifreDTO);
 
     @GET("/korisnici/prodavac-info")

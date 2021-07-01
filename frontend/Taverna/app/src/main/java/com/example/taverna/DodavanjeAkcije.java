@@ -118,7 +118,7 @@ public class DodavanjeAkcije extends AppCompatActivity implements AdapterView.On
                                 }
 
                                 datum = year + "-" + mesec + "-" + dan;
-                                mTv.setText(year+"-"+monthOfYear+"-"+dayOfMonth);
+                                mTv.setText(year+"-"+(monthOfYear+1)+"-"+dayOfMonth);
                                 Toast.makeText(DodavanjeAkcije.this, dayOfMonth + "-" + (monthOfYear + 1) + "-" + year, Toast.LENGTH_LONG).show();
                             }
                         }, mYear, mMonth, mDay);
@@ -188,7 +188,7 @@ public class DodavanjeAkcije extends AppCompatActivity implements AdapterView.On
                                 }
 
                                 datum2 = year + "-" + mesec + "-" + dan;
-                                mTv2.setText(year+"-"+monthOfYear+"-"+dayOfMonth);
+                                mTv2.setText(year+"-"+(monthOfYear+1)+"-"+dayOfMonth);
 
 
                                 Toast.makeText(DodavanjeAkcije.this, dayOfMonth + "-" + (monthOfYear + 1) + "-" + year, Toast.LENGTH_LONG).show();
@@ -233,37 +233,42 @@ public class DodavanjeAkcije extends AppCompatActivity implements AdapterView.On
                         Toast.makeText(DodavanjeAkcije.this, "Morate uneti zavrsni datum", Toast.LENGTH_LONG).show();
 
                     } else {
-
-
-                        if (procenat.length() == 0 || Integer.parseInt(procenat) > 99) {
-                            popust.requestFocus();
-                            popust.setError("Morate uneti popust");
+                        if (datum.equals(datum2)) {
+                            Toast.makeText(DodavanjeAkcije.this, "Uneli ste iste datume", Toast.LENGTH_LONG).show();
 
                         } else {
-                            akcijaDodaj.setProcenat(Integer.parseInt(procenat));
-                            akcijaDodaj.setOdKad(datum);
-                            akcijaDodaj.setDoKad(datum2);
-                            akcijaDodaj.setOpis(opisAkcije);
-                            akcijaDodaj.setArtikli(DodavanjeAkcijeAdapter.artikli);
 
-                            artikliApiService = RetrofitClient.artikliApiService;
-                            Call<Void> call = artikliApiService.dodajAkciju(akcijaDodaj);
-                            call.enqueue(new Callback<Void>() {
-                                @Override
-                                public void onResponse(Call<Void> call, Response<Void> response) {
-                                    DodavanjeAkcijeAdapter.artikli.clear();
-                                    System.out.println("Okej");
-                                    Intent intent2 = new Intent(DodavanjeAkcije.this, Akcije.class);
-                                    startActivity(intent2);
-                                    finish();
-                                }
 
-                                @Override
-                                public void onFailure(Call<Void> call, Throwable t) {
-                                    System.out.println("nije okej");
+                            if (procenat.length() == 0 || Integer.parseInt(procenat) > 99) {
+                                popust.requestFocus();
+                                popust.setError("Morate uneti popust");
 
-                                }
-                            });
+                            } else {
+                                akcijaDodaj.setProcenat(Integer.parseInt(procenat));
+                                akcijaDodaj.setOdKad(datum);
+                                akcijaDodaj.setDoKad(datum2);
+                                akcijaDodaj.setOpis(opisAkcije);
+                                akcijaDodaj.setArtikli(DodavanjeAkcijeAdapter.artikli);
+
+                                artikliApiService = RetrofitClient.artikliApiService;
+                                Call<Void> call = artikliApiService.dodajAkciju(akcijaDodaj);
+                                call.enqueue(new Callback<Void>() {
+                                    @Override
+                                    public void onResponse(Call<Void> call, Response<Void> response) {
+                                        DodavanjeAkcijeAdapter.artikli.clear();
+                                        System.out.println("Okej");
+                                        Intent intent2 = new Intent(DodavanjeAkcije.this, Akcije.class);
+                                        startActivity(intent2);
+                                        finish();
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<Void> call, Throwable t) {
+                                        System.out.println("nije okej");
+
+                                    }
+                                });
+                            }
                         }
                     }
                 }

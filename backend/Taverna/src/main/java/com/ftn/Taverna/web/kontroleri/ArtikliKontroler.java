@@ -176,16 +176,22 @@ public class ArtikliKontroler {
 
     @PostMapping(value = "/{id}")
     @PreAuthorize("hasAnyRole('PRODAVAC')")
-    public ResponseEntity<Void> obrisiArtikal(@PathVariable("id") Integer id){
+    public ResponseEntity<Void> obrisiArtikal(@PathVariable("id") Integer id,Authentication authentication){
         Artikal artikal = artikliServis.findOne(id);
-        if(artikal!=null){
-            artikal.setObrisan(true);
-            artikliServis.saveArtikal(artikal);
-            return new ResponseEntity<Void>(HttpStatus.OK);
+        UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
+        Prodavac prodavac = prodavacServis.findByUsername(userPrincipal.getUsername());
+        List<Artikal> artikli = artikliServis.findByProdavac(prodavac.getId());
+        if(!artikli.contains(artikal)){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }else {
+            if (artikal != null) {
+                artikal.setObrisan(true);
+                artikliServis.saveArtikal(artikal);
+                return new ResponseEntity<Void>(HttpStatus.OK);
+            } else {
+                return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 
-        }else{
-            return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
-
+            }
         }
     }
 

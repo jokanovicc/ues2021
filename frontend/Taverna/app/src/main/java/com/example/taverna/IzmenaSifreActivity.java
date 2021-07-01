@@ -59,6 +59,7 @@ public class IzmenaSifreActivity extends AppCompatActivity {
 
         String staraSifraIzmena = staraSifraEdit.getText().toString();
         String novaSifraIzmena = novaSifraEdit.getText().toString();
+        System.out.println(staraSifraIzmena);
 
         if(staraSifraIzmena.length()==0){
             staraSifraEdit.requestFocus();
