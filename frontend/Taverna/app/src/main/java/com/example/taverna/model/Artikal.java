@@ -26,18 +26,18 @@ public class Artikal {
 
     @SerializedName("akcijskaCena")
     @Expose
-    private Integer akcijskaCena;
+    private Double akcijskaCena;
 
     @SerializedName("photo")
     @Expose
     private Bitmap photo;
 
 
-    public Integer getAkcijskaCena() {
+    public Double getAkcijskaCena() {
         return akcijskaCena;
     }
 
-    public void setAkcijskaCena(Integer akcijskaCena) {
+    public void setAkcijskaCena(Double akcijskaCena) {
         this.akcijskaCena = akcijskaCena;
     }
 

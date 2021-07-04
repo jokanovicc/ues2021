@@ -5,11 +5,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 @Data
 @NoArgsConstructor
 public class KorisnikDTO {
 
+    @NotEmpty
     private Integer id;
     @NotBlank
     private String ime;
@@ -19,9 +21,11 @@ public class KorisnikDTO {
     private String korisnicko;
     @NotBlank
     private boolean blokiran;
+    @NotBlank
     private String adresa;
-
+    @NotBlank
     private String token;
+    @NotBlank
     private String role;
 
     public KorisnikDTO(Korisnik korisnik){

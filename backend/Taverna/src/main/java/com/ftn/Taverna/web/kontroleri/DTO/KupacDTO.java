@@ -5,18 +5,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
 public class KupacDTO implements Serializable {
 
+    @NotEmpty
     private Integer id;
     @NotBlank
     private String adresa;
     @NotBlank
     private String ime;
+    @NotBlank
     private String prezime;
+    @NotBlank
     private String korisnicko;
     private boolean blokiran;
 

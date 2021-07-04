@@ -16,6 +16,7 @@ public class Korisnik {
     private Integer id;
     private String ime;
     private String prezime;
+    @Column(unique = true,length = 20)
     private String korisnicko;
     private String sifra;
     private String adresa;

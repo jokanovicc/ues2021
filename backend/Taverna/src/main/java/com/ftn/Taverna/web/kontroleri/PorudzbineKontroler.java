@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
@@ -40,13 +41,6 @@ public class PorudzbineKontroler {
 
     @Autowired
     ArtikliServis artikliServis;
-
-    @Autowired
-    PorudzbinaRepository porudzbinaRepository;
-
-    @Autowired
-    ArtikalRepository artikalRepository;
-
     @Autowired
     StavkaRepository stavkaRepository;
     @Autowired
@@ -67,7 +61,7 @@ public class PorudzbineKontroler {
                 if(p.getKomentar()==null)
                 porudzbinaDTOS.add(new PorudzbinaDTO(p));
                 for (PorudzbinaDTO porudzbinaDTO : porudzbinaDTOS) {
-                    List<String> stringove = porudzbinaRepository.getNaziviArtikala(porudzbinaDTO.getId());
+                    List<String> stringove = porudzbinaServis.getNaziviArtikala(porudzbinaDTO.getId());
                     String jela = String.join(" | ", stringove);
                     porudzbinaDTO.setArtikli(jela);
                 }
@@ -83,7 +77,7 @@ public class PorudzbineKontroler {
 
     @GetMapping("prosecna-ocena/{id}")
     public ResponseEntity<Double> getOcenaProdavca(@PathVariable("id") Integer id){
-        Double ocena = porudzbinaRepository.getProsecnaOcenaProdavca(id);
+        Double ocena = porudzbinaServis.getProsecnaOcenaProdavca(id);
         if(ocena==null){
             ocena = 0.0;
         }
@@ -95,7 +89,7 @@ public class PorudzbineKontroler {
 
     @PostMapping(value = "/porucivanje")
     @PreAuthorize("hasAnyRole('KUPAC')")
-    public ResponseEntity<PorudzbinaDTO2> napraviPorudzbinu(@RequestBody PorucivanjeDTO porucivanjeDTO,Authentication authentication){
+    public ResponseEntity<PorudzbinaDTO2> napraviPorudzbinu(@RequestBody @Validated PorucivanjeDTO porucivanjeDTO, Authentication authentication){
         UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
         String username = userPrincipal.getUsername();
         Kupac kupac = kupacServis.findByUsername(username);
@@ -104,7 +98,7 @@ public class PorudzbineKontroler {
         Porudzbina porudzbina = new Porudzbina();
         Random r = new Random();
         int low = 10;
-        int high = 1000;
+        int high = 3000;
         int result = r.nextInt(high-low) + low;
         porudzbina.setId(result);
         porudzbina.setSatnica(Date.valueOf(LocalDate.now()));
@@ -112,9 +106,8 @@ public class PorudzbineKontroler {
         porudzbina.setDostavljeno(false);
         porudzbina.setAnonimanKomentar(false);
         porudzbina.setAnonimanKomentar(false);
-        porudzbinaRepository.save(porudzbina);
+        porudzbinaServis.save(porudzbina);
         for (StavkaDTO stavkaDTO:porucivanjeDTO.getListaStavki()) {
-
 
                 Stavka stavka = new Stavka();
                 stavka.setKolicina(stavkaDTO.getKolicina());
@@ -125,7 +118,7 @@ public class PorudzbineKontroler {
 
         }
         porudzbina.setStavke(stavkas);
-        porudzbinaRepository.save(porudzbina);
+        porudzbinaServis.save(porudzbina);
 
         return new ResponseEntity<>(new PorudzbinaDTO2(porudzbina),HttpStatus.OK);
 
@@ -149,13 +142,13 @@ public class PorudzbineKontroler {
 
     @PostMapping("komentar")
     @PreAuthorize("hasAnyRole('KUPAC')")
-    public ResponseEntity<KomentarDTO> dodavanjeKomentara(@RequestBody KomentarPOSTDTO komentarDTO){
+    public ResponseEntity<KomentarDTO> dodavanjeKomentara(@RequestBody @Validated KomentarPOSTDTO komentarDTO){
         Porudzbina porudzbina = porudzbinaServis.findOne(komentarDTO.getPorudzbina());
         porudzbina.setKomentar(komentarDTO.getKomentar());
         porudzbina.setAnonimanKomentar(komentarDTO.isAnoniman());
         porudzbina.setArhiviranKomentar(false);
         porudzbina.setOcena(komentarDTO.getOcena());
-        porudzbinaRepository.save(porudzbina);
+        porudzbinaServis.save(porudzbina);
 
         //ovde
         return new ResponseEntity<>(new KomentarDTO(porudzbina),HttpStatus.OK);

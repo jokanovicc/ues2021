@@ -27,7 +27,7 @@ public class Prodavac {
 
     private Date poslujeOd;
     private String naziv;
-    @Column(unique = true)
+    @Column(unique = true,length = 20)
     private String imejl;
 
 

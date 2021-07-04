@@ -57,10 +57,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter  {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception{
-        //Naglasavamo browser-u da ne cache-ira podatke koje dobije u header-ima
-        //detaljnije: https://www.baeldung.com/spring-security-cache-control-headers
         httpSecurity.headers().cacheControl().disable();
-        //Neophodno da ne bi proveravali autentifikaciju kod Preflight zahteva
         httpSecurity.cors();
         httpSecurity.csrf().disable()
                 .sessionManagement()
@@ -68,12 +65,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter  {
                 .and()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/users/login").permitAll()
-                .antMatchers(HttpMethod.POST, "/korisnici/lista-prodavaca").permitAll()
-                .antMatchers(HttpMethod.POST, "/korisnici/lista-kupaca").permitAll()
-                .antMatchers(HttpMethod.GET, "/artikli/prodavac/{id}").permitAll()
-                .antMatchers(HttpMethod.POST, "/artikli/akcije").permitAll()
-
-
+                .antMatchers(HttpMethod.POST, "/korisnici/register-prodavac").permitAll()
+                .antMatchers(HttpMethod.POST, "/korisnici/register-kupac").permitAll()
                 .anyRequest().authenticated();
 
         httpSecurity.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);

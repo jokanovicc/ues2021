@@ -22,8 +22,6 @@ public class ArtikalDTOPost implements Serializable {
     @NotBlank
     private Double cena;
 
-    private List<Integer> artikli = new ArrayList<>();
-
     private byte[] photo;
 
 

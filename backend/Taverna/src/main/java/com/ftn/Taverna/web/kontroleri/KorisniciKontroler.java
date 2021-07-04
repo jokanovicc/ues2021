@@ -17,6 +17,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
@@ -41,10 +42,6 @@ public class KorisniciKontroler {
     private PorudzbinaServis porudzbinaServis;
     @Autowired
     private KorisnikServis korisnikServis;
-    @Autowired
-    KorisnikRepository korisnikRepository;
-    @Autowired
-    PorudzbinaRepository porudzbinaRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -56,7 +53,7 @@ public class KorisniciKontroler {
     @GetMapping(value = "/svi-korisnici")
     @PreAuthorize("hasAnyRole('ADMIN')")
     public ResponseEntity<Collection<KorisnikDTO>> getKorisnici() {
-        List<Korisnik> korisnici = korisnikRepository.findAll();
+        List<Korisnik> korisnici = korisnikServis.findAll();
         List<KorisnikDTO> korisnikDTOS = new ArrayList<>();
         for (Korisnik k : korisnici) {
             if (!k.getRoles().equals(Roles.ADMIN)) {
@@ -111,7 +108,6 @@ public class KorisniciKontroler {
     public ResponseEntity<KorisnikDTO> getMyInfo(Authentication authentication) {
         UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
         String username = userPrincipal.getUsername();
-        System.out.println("Ovo jeee" + username);
         Korisnik korisnik = korisnikServis.findByUsername(username);
         return new ResponseEntity<>(new KorisnikDTO(korisnik), HttpStatus.OK);
 
@@ -120,11 +116,10 @@ public class KorisniciKontroler {
 
 
     @PutMapping(value = "/izmena-info")
-    public ResponseEntity<KorisnikDTO> izmeniKorisnika(@RequestBody KorisnikDTO korisnikDTO, Authentication authentication) {
+    public ResponseEntity<KorisnikDTO> izmeniKorisnika(@RequestBody @Validated KorisnikDTO korisnikDTO, Authentication authentication) {
 
         UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
         String username = userPrincipal.getUsername();
-        System.out.println("Ovo jeee" + username);
         Korisnik korisnik = korisnikServis.findByUsername(username);
         korisnik.setIme(korisnikDTO.getIme());
         korisnik.setPrezime(korisnikDTO.getPrezime());
@@ -137,13 +132,13 @@ public class KorisniciKontroler {
     }
 
 
-    @PostMapping(value = "/lista-kupaca", consumes = "application/json")
+    @PostMapping(value = "/register-kupac", consumes = "application/json")
     public ResponseEntity<Boolean> snimiKupca(@RequestBody KupacDTOPost kupacDTO) {
 
         Korisnik noviKorisnik = new Korisnik();
         Kupac noviKupac = new Kupac();
 
-        List<String> korisnicka = korisnikRepository.findAllKorisnicko();
+        List<String> korisnicka = korisnikServis.getKorisnicka();
         if (korisnicka.contains(kupacDTO.getKorisnicko())) {
             return new ResponseEntity<Boolean>(false, HttpStatus.OK);
 
@@ -176,7 +171,7 @@ public class KorisniciKontroler {
             }
         }
         for (ProdavacDTO p1 : prodavacDTO) {
-            Double ocena = porudzbinaRepository.getProsecnaOcenaProdavca(p1.getId());
+            Double ocena = porudzbinaServis.getProsecnaOcenaProdavca(p1.getId());
             if (ocena == null) {
                 ocena = 0.0;
             }
@@ -186,15 +181,15 @@ public class KorisniciKontroler {
     }
 
 
-    @PostMapping(value = "/lista-prodavaca", consumes = "application/json")
+    @PostMapping(value = "/register-prodavac", consumes = "application/json")
     public ResponseEntity<Boolean> snimiProdavca(@RequestBody ProdavacDTOPost prodavacDTO) {
 
         Korisnik noviKorisnik = new Korisnik();
         Prodavac noviProdavac = new Prodavac();
 
 
-        List<String> korisnicka = korisnikRepository.findAllKorisnicko();
-        List<String> imejlovi = korisnikRepository.findAllImejl();
+        List<String> korisnicka = korisnikServis.getKorisnicka();
+        List<String> imejlovi = korisnikServis.getMejlovi();
         if (korisnicka.contains(prodavacDTO.getKorisnicko()) || imejlovi.contains(prodavacDTO.getImejl())) {
             return new ResponseEntity<Boolean>(false, HttpStatus.OK);
         } else {

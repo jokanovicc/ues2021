@@ -17,6 +17,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.parameters.P;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
@@ -40,19 +41,6 @@ public class ArtikliKontroler {
     private AkcijaServis akcijaServis;
 
 
-
-    //CRUD OPERACIJE ARTIKLA
-    @GetMapping
-    public ResponseEntity<Collection<ArtikalDTO>> findAllArtikli() {
-        List<Artikal> artikli = artikliServis.findAll();
-        List<ArtikalDTO> artikliDTO = new ArrayList<>();
-        for(Artikal a: artikli){
-            artikliDTO.add(new ArtikalDTO(a));
-        }
-        return new ResponseEntity<>(artikliDTO, HttpStatus.OK);
-
-
-    }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<ArtikalDTO> getArtikalById(@PathVariable("id") Integer id,Authentication authentication){
@@ -89,7 +77,6 @@ public class ArtikliKontroler {
 
 
 
-
     @GetMapping(value = "/prodavac/{id}")
     public ResponseEntity<Collection<ArtikalDTO>> gerArtikliProdavca(@PathVariable("id") Integer id){
         System.out.println("Ovde sam");
@@ -115,7 +102,6 @@ public class ArtikliKontroler {
     public ResponseEntity<Collection<ArtikalDTO>> getArtikalByProdavac(Authentication authentication){
         UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
         String username = userPrincipal.getUsername();
-        System.out.println("Ovo jeee" + username);
         Prodavac prodavac = prodavacServis.findByUsername(username);
         List<Artikal> artikli = artikliServis.findByProdavac(prodavac.getId());
         List<ArtikalDTO> artikalDTOS = new ArrayList<>();
@@ -133,11 +119,10 @@ public class ArtikliKontroler {
 
     @PostMapping
     @PreAuthorize("hasAnyRole('PRODAVAC')")
-    public ResponseEntity<ArtikalDTO> snimiArtikal(@RequestBody ArtikalDTOPost artikalDTO, Authentication authentication){
+    public ResponseEntity<ArtikalDTO> snimiArtikal(@RequestBody @Validated ArtikalDTOPost artikalDTO, Authentication authentication){
         Artikal artikal = new Artikal();
         UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
         String username = userPrincipal.getUsername();
-        System.out.println("Ovo jeee" + username);
         Prodavac prodavac = prodavacServis.findByUsername(username);
         artikal.setNaziv(artikalDTO.getNaziv());
         artikal.setCena(artikalDTO.getCena());
@@ -158,7 +143,7 @@ public class ArtikliKontroler {
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAnyRole('PRODAVAC')")
-    public ResponseEntity<ArtikalDTO> izmeniArtikal(@RequestBody ArtikalDTOPost artikalDTO,@PathVariable("id") Integer id,Authentication authentication){
+    public ResponseEntity<ArtikalDTO> izmeniArtikal(@RequestBody @Validated ArtikalDTOPost artikalDTO,@PathVariable("id") Integer id,Authentication authentication){
         Artikal artikal = artikliServis.findOne(id);
         UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
         Prodavac prodavac = prodavacServis.findByUsername(userPrincipal.getUsername());
@@ -197,11 +182,10 @@ public class ArtikliKontroler {
 
     @PostMapping(value = "/akcije")
     @PreAuthorize("hasAnyRole('PRODAVAC')")
-    public ResponseEntity<Void> napraviAkciju(@RequestBody AkcijaDTO akcijaDTO,Authentication authentication){
+    public ResponseEntity<Void> napraviAkciju(@RequestBody @Validated AkcijaDTO akcijaDTO,Authentication authentication){
         UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
         Prodavac prodavac = prodavacServis.findByUsername(userPrincipal.getUsername());
         Akcija akcija = new Akcija();
-        System.out.println("to je " +akcijaDTO.getDoKad());
         akcija.setDoKad(akcijaDTO.getDoKad());
         akcija.setOdKad(akcijaDTO.getOdKad());
         akcija.setProcenat(akcijaDTO.getPopust());
@@ -214,6 +198,27 @@ public class ArtikliKontroler {
         akcijaServis.saveAkcija(akcija);
         return new ResponseEntity<Void>(HttpStatus.OK);
 
+
+    }
+
+    @DeleteMapping(value = "/akcije/{id}")
+    @PreAuthorize("hasAnyRole('PRODAVAC')")
+    public ResponseEntity<Void> obrisiAkciju(@PathVariable("id") Integer id,Authentication authentication){
+        UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
+        Akcija akcija = akcijaServis.findById(id);
+        Prodavac prodavac = prodavacServis.findByUsername(userPrincipal.getUsername());
+        List<Akcija> akcije = akcijaServis.getByProdavac(prodavac.getId());
+        if(!akcije.contains(akcija)){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }else {
+            if (akcija != null) {
+                akcijaServis.deleteAkcija(akcija);
+                return new ResponseEntity<Void>(HttpStatus.OK);
+            } else {
+                return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+
+            }
+        }
 
     }
 

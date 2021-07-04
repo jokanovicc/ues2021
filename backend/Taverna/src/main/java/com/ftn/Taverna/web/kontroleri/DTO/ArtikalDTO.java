@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Positive;
 import java.io.Serializable;
 
 
@@ -13,15 +14,16 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class ArtikalDTO implements Serializable {
 
+    @NotEmpty
     private Integer id;
-
     @NotEmpty
     private Integer prodavacId;
     @NotBlank
     private String naziv;
     @NotBlank
     private String opis;
-    @NotBlank
+    @Positive
+    @NotEmpty
     private Double cena;
     private Double akcijskaCena;
 
@@ -34,7 +36,6 @@ public class ArtikalDTO implements Serializable {
         this.opis = artikal.getOpis();
         this.cena = artikal.getCena();
         this.photo = artikal.getPhoto();
-
 
     }
 

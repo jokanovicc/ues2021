@@ -26,6 +26,7 @@ import com.example.taverna.model.Komentar;
 import com.example.taverna.servisi.ArtikliApiService;
 import com.example.taverna.servisi.RetrofitClient;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -237,44 +238,48 @@ public class DodavanjeAkcije extends AppCompatActivity implements AdapterView.On
                             Toast.makeText(DodavanjeAkcije.this, "Uneli ste iste datume", Toast.LENGTH_LONG).show();
 
                         } else {
-
-
-                            if (procenat.length() == 0 || Integer.parseInt(procenat) > 99) {
-                                popust.requestFocus();
-                                popust.setError("Morate uneti popust");
+                            if (Date.valueOf(datum).after(Date.valueOf(datum2))) {
+                                Toast.makeText(DodavanjeAkcije.this, "Datum početka je ispred datuma trajanja", Toast.LENGTH_LONG).show();
 
                             } else {
-                                akcijaDodaj.setProcenat(Integer.parseInt(procenat));
-                                akcijaDodaj.setOdKad(datum);
-                                akcijaDodaj.setDoKad(datum2);
-                                akcijaDodaj.setOpis(opisAkcije);
-                                akcijaDodaj.setArtikli(DodavanjeAkcijeAdapter.artikli);
 
-                                artikliApiService = RetrofitClient.artikliApiService;
-                                Call<Void> call = artikliApiService.dodajAkciju(akcijaDodaj);
-                                call.enqueue(new Callback<Void>() {
-                                    @Override
-                                    public void onResponse(Call<Void> call, Response<Void> response) {
-                                        DodavanjeAkcijeAdapter.artikli.clear();
-                                        System.out.println("Okej");
-                                        Intent intent2 = new Intent(DodavanjeAkcije.this, Akcije.class);
-                                        startActivity(intent2);
-                                        finish();
-                                    }
+                                if (procenat.length() == 0 || Integer.parseInt(procenat) > 99) {
+                                    popust.requestFocus();
+                                    popust.setError("Morate uneti popust");
 
-                                    @Override
-                                    public void onFailure(Call<Void> call, Throwable t) {
-                                        System.out.println("nije okej");
+                                } else {
+                                    akcijaDodaj.setProcenat(Integer.parseInt(procenat));
+                                    akcijaDodaj.setOdKad(datum);
+                                    akcijaDodaj.setDoKad(datum2);
+                                    akcijaDodaj.setOpis(opisAkcije);
+                                    akcijaDodaj.setArtikli(DodavanjeAkcijeAdapter.artikli);
 
-                                    }
-                                });
+                                    artikliApiService = RetrofitClient.artikliApiService;
+                                    Call<Void> call = artikliApiService.dodajAkciju(akcijaDodaj);
+                                    call.enqueue(new Callback<Void>() {
+                                        @Override
+                                        public void onResponse(Call<Void> call, Response<Void> response) {
+                                            DodavanjeAkcijeAdapter.artikli.clear();
+                                            System.out.println("Okej");
+                                            Intent intent2 = new Intent(DodavanjeAkcije.this, Akcije.class);
+                                            startActivity(intent2);
+                                            finish();
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<Void> call, Throwable t) {
+                                            System.out.println("nije okej");
+
+                                        }
+                                    });
+                                }
                             }
                         }
                     }
                 }
+
+
             }
-
-
         }
 
 

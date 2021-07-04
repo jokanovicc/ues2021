@@ -114,12 +114,16 @@
                 android:text="Додај"
                 android:textSize="15sp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvArtikliAkcija"
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="10dp" />
+                android:layout_height="wrap_content">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvArtikliAkcija"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="10dp" />
+            </ScrollView>
 
 
 

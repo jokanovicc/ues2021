@@ -54,4 +54,7 @@ public interface ArtikliApiService {
     @POST("artikli/akcije")
     Call<Void> dodajAkciju(@Body AkcijaDodaj akcijaDodaj);
 
+    @DELETE("artikli/akcije/{id}")
+    Call<Void> deleteAkcije(@Path("id") Integer id);
+
 }

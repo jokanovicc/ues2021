@@ -1,6 +1,7 @@
 package com.example.taverna.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,15 +10,24 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.taverna.GlavnaStranaActivity;
+import com.example.taverna.ProdavacGlavnaActivity;
 import com.example.taverna.R;
 import com.example.taverna.model.AkcijaPrikaz;
+import com.example.taverna.servisi.ArtikliApiService;
+import com.example.taverna.servisi.RetrofitClient;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class AkcijePrikazAdapter extends RecyclerView.Adapter<AkcijePrikazAdapter.ViewHolder> {
     private List<AkcijaPrikaz> mData;
     private Context context;
     private Button button;
+    private ArtikliApiService artikliApiService;
 
     public static final String MyPres = "MyPre1";
     public static final String Username = "usernameKey";
@@ -35,6 +45,7 @@ public class AkcijePrikazAdapter extends RecyclerView.Adapter<AkcijePrikazAdapte
         TextView doKad;
         TextView odKad;
         TextView opis;
+        Button obrisi;
 
 
         ViewHolder(View itemView) {
@@ -44,6 +55,7 @@ public class AkcijePrikazAdapter extends RecyclerView.Adapter<AkcijePrikazAdapte
             doKad = itemView.findViewById(R.id.prikazDoKad);
             odKad = itemView.findViewById(R.id.prikazOdKad);
             opis = itemView.findViewById(R.id.opisPopust);
+            obrisi = (Button)itemView.findViewById(R.id.obrisiAkcijuButton);
 
 
         }
@@ -66,10 +78,40 @@ public class AkcijePrikazAdapter extends RecyclerView.Adapter<AkcijePrikazAdapte
         holder.odKad.setText("Од: " + akcijaPrikaz.getOdKad());
         holder.opis.setText(akcijaPrikaz.getTekst());
 
+        holder.obrisi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                obrisiAkciju(akcijaPrikaz.getId());
+                Intent intent = new Intent(context, GlavnaStranaActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+
+            }
+        });
+
+
     }
 
     @Override
     public int getItemCount() {
         return mData.size();
+    }
+
+
+    public void obrisiAkciju(Integer id){
+        artikliApiService = RetrofitClient.artikliApiService;
+        Call<Void> call = artikliApiService.deleteAkcije(id);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                System.out.println("Obrisan");
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                System.out.println("nije obrisan");
+
+            }
+        });
     }
 }

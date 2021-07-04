@@ -16,7 +16,7 @@ public class TokenUtils {
     @Value("biloKojiString")
     private String secret;
 
-    @Value("36000000000000") //3600 sec = 1h
+    @Value("3600") //3600 sec = 1h
     private Long expiration;
 
     public String getUsernameFromToken(String token) {

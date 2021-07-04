@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
@@ -26,6 +27,7 @@ public class PorudzbinaDTO implements Serializable {
     @NotEmpty
     private boolean dostavljeno;
 
+    @NotBlank
     private String artikli;
 
     

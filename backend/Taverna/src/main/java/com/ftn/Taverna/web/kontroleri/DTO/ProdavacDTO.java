@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.sql.Date;
@@ -24,9 +25,13 @@ public class ProdavacDTO implements Serializable {
     private String naziv;
     @NotBlank
     private String ime;
+    @NotBlank
     private String prezime;
+    @NotBlank
     private String korisnicko;
+    @NotBlank
     private boolean blokiran;
+    @NotEmpty
     private Double ocena;
 
 

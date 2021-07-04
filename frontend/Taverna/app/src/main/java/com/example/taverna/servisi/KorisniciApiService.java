@@ -21,10 +21,10 @@ public interface KorisniciApiService {
     @GET("korisnici/lista-prodavaca")
     Call<List<Prodavac>> getProdavci();
 
-    @POST("korisnici/lista-kupaca")
+    @POST("/korisnici/register-kupac")
     Call<Boolean> registerKupca(@Body Kupac kupac);
 
-    @POST("korisnici/lista-prodavaca")
+    @POST("/korisnici/register-prodavac")
     Call<Boolean> registerProdavac(@Body Prodavac prodavac);
 
     @POST("users/login")

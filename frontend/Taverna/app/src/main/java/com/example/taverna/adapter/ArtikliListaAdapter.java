@@ -114,8 +114,9 @@ public class ArtikliListaAdapter extends RecyclerView.Adapter<ArtikliListaAdapte
         double cenaArtikla;
 
         if(artikal.getAkcijskaCena()!=0.0){
-            holder.akcijskaCena.setText("Акцијска цена: "+artikal.getAkcijskaCena().toString() + " RSD");
-            cenaArtikla = artikal.getAkcijskaCena();
+            int cenaAkcija = artikal.getAkcijskaCena().intValue();
+            holder.akcijskaCena.setText("Акцијска цена: "+cenaAkcija + " RSD");
+            cenaArtikla = artikal.getAkcijskaCena().intValue();
         }else{
             cenaArtikla = artikal.getCena();
             holder.linearLayout.setAlpha(0);

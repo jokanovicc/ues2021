@@ -1,7 +1,7 @@
 package com.ftn.Taverna.web.kontroleri;
 import com.ftn.Taverna.web.kontroleri.DTO.IzmenaSifreDTO;
 import com.ftn.Taverna.web.kontroleri.DTO.KorisnikDTO;
-import com.ftn.Taverna.web.kontroleri.DTO.Login;
+import com.ftn.Taverna.web.kontroleri.DTO.LoginDTO;
 import com.ftn.Taverna.model.Korisnik;
 import com.ftn.Taverna.security.TokenUtils;
 import com.ftn.Taverna.servisi.KorisnikServis;
@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -44,7 +45,7 @@ public class LoginController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<KorisnikDTO> login(@RequestBody Login userDto) {
+    public ResponseEntity<KorisnikDTO> login(@RequestBody @Validated LoginDTO userDto) {
 
         Korisnik korisnik = korisnikServis.findByUsername(userDto.getKorisnicko());
         if (korisnik!=null && korisnik.isBlokiran()) {
@@ -53,7 +54,9 @@ public class LoginController {
         }
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(userDto.getKorisnicko(), userDto.getSifra());
+        //vraca da li su kredencijali ispravni
         Authentication authentication = authenticationManager.authenticate(authenticationToken);
+        //deljena memorija za security, da se zna ko je autentifikovan
         SecurityContextHolder.getContext().setAuthentication(authentication);
         System.out.println("sam ovde_ ");
         try {
@@ -70,7 +73,7 @@ public class LoginController {
 
 
     @PostMapping ("izmena-sifre")
-    private ResponseEntity<Boolean> izmeniSifru(@RequestBody IzmenaSifreDTO izmenaSifreDTO, Authentication authentication) {
+    private ResponseEntity<Boolean> izmeniSifru(@RequestBody @Validated IzmenaSifreDTO izmenaSifreDTO, Authentication authentication) {
         System.out.println(izmenaSifreDTO.getStaraSifra());
         UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
         String korisnicko = userPrincipal.getUsername();

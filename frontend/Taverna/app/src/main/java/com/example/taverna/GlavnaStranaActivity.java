@@ -170,6 +170,7 @@ public class GlavnaStranaActivity extends AppCompatActivity {
 
                     Intent i6 = new Intent(GlavnaStranaActivity.this, MainActivity.class);
                     startActivity(i6);
+                    finish();
                 }
 
                 DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);

@@ -25,6 +25,19 @@ public class AkcijaServis {
         return akcijaRepository.getAkcijeProdavca(id);
     }
 
+    public Akcija findById(Integer id){
+        return akcijaRepository.findById(id).orElse(null);
+    }
+
+    public void deleteAkcija(Akcija akcija){
+        akcijaRepository.delete(akcija);
+    }
+
+    public List<Akcija> getByProdavac(Integer id){
+        return akcijaRepository.getAkcijaByProdavac_Korisnik_Id(id);
+    }
+
+
     public List<String> artikliNaAkcijiPrikaz(Integer id){
         return akcijaRepository.artikliAkcijaPrikaz(id);
     }

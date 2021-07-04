@@ -23,7 +23,7 @@ public class Akcija {
     @ManyToOne
     private Prodavac prodavac;
 
-    @ManyToMany(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {CascadeType.DETACH},fetch = FetchType.LAZY)
     @JoinTable(name="artikli_akcije", joinColumns = {@JoinColumn(name = "akcija_id")},
     inverseJoinColumns = {@JoinColumn(name = "artikal_id")})
     private List<Artikal> artikli = new ArrayList<>();

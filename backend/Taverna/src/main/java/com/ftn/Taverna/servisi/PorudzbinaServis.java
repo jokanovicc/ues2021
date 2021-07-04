@@ -34,5 +34,13 @@ public class PorudzbinaServis {
         return porudzbinaRepository.getKomentari(id);
     }
 
+    public List<String> getNaziviArtikala(Integer id){
+        return porudzbinaRepository.getNaziviArtikala(id);
+    }
+
+    public Double getProsecnaOcenaProdavca(Integer id){
+        return porudzbinaRepository.getProsecnaOcenaProdavca(id);
+    }
+
 
 }
