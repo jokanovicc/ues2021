@@ -16,7 +16,7 @@ insert into artikal(cena,naziv,opis,prodavac_korisnik_id,obrisan) values (500,'�
 insert into artikal(cena,naziv,opis,prodavac_korisnik_id,obrisan) values (750,'Карађорђева шницла','Mauris vulputate risus risus. Phasellus at erat sollicitudin, sollicitudin sapien convallis, suscipit quam. Curabitur mollis a felis in scelerisque. Suspendisse potenti.',3,false);
 insert into artikal(cena,naziv,opis,prodavac_korisnik_id,obrisan) values (500,'Пуњене паприке','Suspendisse quis hendrerit odio. Integer eu euismod velit. Fusce nec mi vitae justo varius pellentesque. Maecenas et leo nunc. Suspendisse sagittis nisi a libero rutrum, quis semper nulla dictum. Fusce volutpat aliquet vehicula.',4,false);
 insert into artikal(cena,naziv,opis,prodavac_korisnik_id,obrisan) values (280,'Бечка шницла','Sed vitae vulputate orci. Sed a facilisis sapien. Nulla facilisi. Phasellus ut pellentesque ante. Nulla facilisi. Cras eget lacinia felis, in fermentum nulla.м',4,false);
-insert into artikal(cena,naziv,opis,prodavac_korisnik_id,obrisan) values (500,'Мусака','Sed vitae vulputate orci. Sed a facilisis sapien. Nulla facilisi. Phasellus ut pellentesque ante. Nulla facilisi.',3,false);
+insert into artikal(cena,naziv,opis,prodavac_korisnik_id,obrisan) values (500,'Musaka','Sed vitae vulputate orci. Sed a facilisis sapien. Nulla facilisi. Phasellus ut pellentesque ante. Nulla facilisi.',3,false);
 
 
 
