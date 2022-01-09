@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.taverna">
+    package="com.example.taverna" >
     <!--
     Na pocetku aplikacije specificiramo koje sve permisije (prava pristupa) nasa
     aplikacija zahteva. Svaku permisiju korisnik mora da dopusti. Ovaj oblik permisija
@@ -13,7 +13,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -23,8 +23,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Taverna"
-        android:usesCleartextTraffic="true">
-        <activity android:name=".IzmenaSifreActivity"></activity>
+        android:usesCleartextTraffic="true" >
+        <activity
+            android:name=".aktivnosti.SearchByNazivActivity"
+            android:exported="false"
+            android:label="@string/title_activity_search_by_naziv"
+            android:theme="@style/Theme.Taverna.NoActionBar" />
+        <activity android:name=".IzmenaSifreActivity" />
         <activity android:name=".EditProfilActivity" />
         <activity android:name=".ProdavacGlavnaActivity" />
         <activity android:name=".prodavacProzori.ProdavacGlavnaActivity" />
@@ -39,6 +44,9 @@
         <activity android:name=".Akcije" />
         <activity android:name=".DodavanjeProizvoda" />
         <activity android:name=".KomentariActivity" />
+        <activity android:name=".SearchByNazivActivity" />
+        <activity android:name=".elastic.SearchByKomentarActivity" />
+
         <activity
             android:name=".ArtikalActivity"
             android:theme="@style/Theme.Taverna.NoActionBar" />
@@ -53,7 +61,7 @@
         <activity
             android:name=".SplashScreenActivity"
             android:label="@string/app_name"
-            android:theme="@android:style/Theme.Black.NoTitleBar">
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

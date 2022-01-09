@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/activity_akcije.xml" value="0.28306159420289856" />
+        <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/activity_dodavanje_akcije.xml" value="0.20833333333333334" />
+        <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/activity_main.xml" value="0.3442028985507246" />
+        <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/activity_search_komentar.xml" value="0.338768115942029" />
+        <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/activity_search_naziv.xml" value="0.20833333333333334" />
+        <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/akcije_row.xml" value="0.3442028985507246" />
+        <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/artikli_akcije_dodavanje_row.xml" value="0.3442028985507246" />
+        <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/artikli_row.xml" value="0.3442028985507246" />
+        <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/elastic_komentar_row.xml" value="0.338768115942029" />
+        <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/elastic_naziv_row.xml" value="0.3442028985507246" />
+        <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/komentar_upr_row.xml" value="0.3442028985507246" />
+        <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/prodavci_row.xml" value="0.3442028985507246" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_13" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

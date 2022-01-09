@@ -17,7 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
 
-    public static final String SERVICE_API_PATH = "http://192.168.1.7:8080/";
+    public static final String SERVICE_API_PATH = "http://192.168.1.10:8080/";
     public static String token;
 
     public static String getToken() {
@@ -55,6 +55,7 @@ public class RetrofitClient {
     public static ArtikliApiService artikliApiService = retrofit.create(ArtikliApiService.class);
     public static KorisniciApiService korisniciApiService = retrofit.create(KorisniciApiService.class);
     public static PorudzbineApiService porudzbineApiService = retrofit.create(PorudzbineApiService.class);
+    public static ElasticSearchAPIService elasticSearchAPIService = retrofit.create(ElasticSearchAPIService.class);
 
 
 

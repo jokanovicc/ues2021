@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.taverna.elastic.SearchByKomentarActivity;
 import com.example.taverna.model.Korisnik;
 import com.example.taverna.model.Login;
 import com.example.taverna.servisi.KorisniciApiService;
@@ -34,6 +35,10 @@ public class MainActivity extends AppCompatActivity {
     private Button registerButton;
     private Button registerProdavacButton;
     private Button prodavacButton;
+    private Button searchButton;
+    private Button searchButton2;
+
+
     private KorisniciApiService korisniciApiService;
 
     private SharedPreferences sharedPreferences;
@@ -60,9 +65,12 @@ public class MainActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.activity_main_loginButton);
         registerButton = findViewById(R.id.activity_main_registerButton);
         registerProdavacButton = findViewById(R.id.registerProdavac2);
+        searchButton2 = findViewById(R.id.searchButtonStartKomentar);
+
 
         sharedPreferences = getSharedPreferences(MyPres, Context.MODE_PRIVATE);
 
+        searchButton = findViewById(R.id.searchButtonStart);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +84,22 @@ public class MainActivity extends AppCompatActivity {
                 }
 
 
+            }
+        });
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent33 = new Intent(MainActivity.this, SearchByNazivActivity.class);
+                startActivity(intent33);
+            }
+        });
+
+        searchButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent333 = new Intent(MainActivity.this, SearchByKomentarActivity.class);
+                startActivity(intent333);
             }
         });
 

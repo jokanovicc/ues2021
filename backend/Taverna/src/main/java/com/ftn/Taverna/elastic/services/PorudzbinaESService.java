@@ -61,6 +61,30 @@ public class PorudzbinaESService {
 
 
     }
+
+    public List<PorudzbinaESDto> findByOcenaTekst(Double from, Double to, String text, Boolean or){
+        String range = from + "-" + to;
+        QueryBuilder priceQuery= SearchQueryGenerator.createRangeQuery(new SimpleQueryES("ocena",range));
+        QueryBuilder komentarQuery = SearchQueryGenerator.createWordQuery(new SimpleQueryES("komentar",text));
+
+        if(or){
+            BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery()
+                    .should(priceQuery)
+                    .should(komentarQuery);
+        }
+
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery()
+                .must(priceQuery)
+                .must(komentarQuery);
+
+        return PorudzbinaMapper.mapDtos(searchByBoolQuery(boolQueryBuilder));
+
+
+    }
+
+
+
+
     private SearchHits<PorudzbinaES> searchByBoolQuery(BoolQueryBuilder boolQueryBuilder) {
         NativeSearchQuery searchQuery = new NativeSearchQueryBuilder()
                 .withQuery(boolQueryBuilder)

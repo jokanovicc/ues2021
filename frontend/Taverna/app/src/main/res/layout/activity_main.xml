@@ -10,7 +10,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="540dp"
+        android:layout_height="wrap_content"
         android:layout_margin="50dp"
         card_view:cardCornerRadius="10dp"
         card_view:cardElevation="8dp"
@@ -19,7 +19,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="550dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="30dp">
 
@@ -85,6 +85,21 @@
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
                 android:text="Као продавац"
+                android:textSize="15sp" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:id="@+id/searchButtonStart"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:text="search"
+                android:textSize="15sp" />
+            <Button
+                android:layout_width="wrap_content"
+                android:id="@+id/searchButtonStartKomentar"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:text="search-tekst komentara"
                 android:textSize="15sp" />
 
         </LinearLayout>

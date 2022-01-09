@@ -70,4 +70,27 @@ public class ArtikalESService {
         return elasticsearchRestTemplate.search(searchQuery, ArtikalES.class,  IndexCoordinates.of("artikli"));
     }
 
+
+
+    public List<ArtikalESDto> searchByNazivPrice(String naziv, Double from, Double to, Boolean orOperator){
+        String range = from + "-" + to;
+        QueryBuilder priceQuery= SearchQueryGenerator.createRangeQuery(new SimpleQueryES("cena",range));
+        QueryBuilder nazivQuery = SearchQueryGenerator.createWordQuery(new SimpleQueryES("naziv",naziv));
+
+        if(orOperator) {
+            BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery()
+                    .should(priceQuery)
+                    .should(nazivQuery);
+        }
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery()
+                .must(priceQuery)
+                .must(nazivQuery);
+
+        return ArtikalMapper.mapDtos(searchByBoolQuery(boolQueryBuilder));
+
+
+
+    }
+
+
 }

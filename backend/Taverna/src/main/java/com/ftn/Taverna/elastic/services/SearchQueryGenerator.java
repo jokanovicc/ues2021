@@ -13,7 +13,7 @@ public class SearchQueryGenerator {
             return QueryBuilderCustom.buildQuery(SearchType.PHRASE, simpleQueryES.getField(), simpleQueryES.getValue());
 
         }else{
-            return QueryBuilderCustom.buildQuery(SearchType.MATCH,simpleQueryES.getField(),simpleQueryES.getValue());
+            return QueryBuilderCustom.buildQuery(SearchType.FUZZY,simpleQueryES.getField(),simpleQueryES.getValue());
         }
     }
 
@@ -21,4 +21,9 @@ public class SearchQueryGenerator {
         return QueryBuilderCustom.buildQuery(SearchType.RANGE, simpleQueryES.getField(), simpleQueryES.getValue());
 
     }
+    public static QueryBuilder createWordQuery(SimpleQueryES simpleQueryES){
+        return QueryBuilderCustom.buildQuery(SearchType.MATCH, simpleQueryES.getField(), simpleQueryES.getValue());
+
+    }
+
 }
