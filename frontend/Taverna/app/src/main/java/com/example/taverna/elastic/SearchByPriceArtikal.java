@@ -1,5 +1,4 @@
-package com.example.taverna;
-
+package com.example.taverna.elastic;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -15,10 +14,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.taverna.R;
 import com.example.taverna.adapter.ElasticSearchAdapter;
-import com.example.taverna.elastic.SearchMenuActivity;
 import com.example.taverna.elastic.dto.ArtikalESDTO;
 import com.example.taverna.elastic.dto.TextRequestDTO;
+import com.example.taverna.elastic.dto.ToFromRequestDTO;
 import com.example.taverna.servisi.ElasticSearchAPIService;
 import com.example.taverna.servisi.RetrofitClient;
 
@@ -29,27 +29,28 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SearchByNazivActivity extends AppCompatActivity {
+public class SearchByPriceArtikal extends AppCompatActivity {
 
     Button mBtn;
-
     private RecyclerView recyclerView;
     private ElasticSearchAPIService elasticSearchAPIService;
-    private EditText naziv;
+    private EditText from;
+    private EditText to;
     private List<ArtikalESDTO> artikalESDTOS;
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_naziv);
+        setContentView(R.layout.activity_search_artikal_price);
 
 
-        mBtn = findViewById(R.id.searchNazivButton);
-        naziv = findViewById(R.id.inputNazivSearch);
+        mBtn = findViewById(R.id.searchPriceButton);
+        from = findViewById(R.id.inputPriceFrom);
+        to = findViewById(R.id.inputPriceTo);
 
 
-        recyclerView = findViewById(R.id.rvNazivSearch);
+        recyclerView = findViewById(R.id.rvPriceSearch);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         artikalESDTOS = new ArrayList<>();
@@ -68,12 +69,16 @@ public class SearchByNazivActivity extends AppCompatActivity {
     }
 
     private void posaljiFormu(){
-        String nazivField = naziv.getText().toString();
-        TextRequestDTO textRequestDTO = new TextRequestDTO();
-        textRequestDTO.setText(nazivField);
+        Integer fromPrice = Integer.parseInt(from.getText().toString());
+        Integer toPrice = Integer.parseInt(to.getText().toString());
+
+        ToFromRequestDTO toFromRequestDTO = new ToFromRequestDTO();
+        toFromRequestDTO.setFrom(fromPrice);
+        toFromRequestDTO.setTo(toPrice);
+
 
         elasticSearchAPIService = RetrofitClient.elasticSearchAPIService;
-        Call<List<ArtikalESDTO>> call = elasticSearchAPIService.searchByNaziv(textRequestDTO);
+        Call<List<ArtikalESDTO>> call = elasticSearchAPIService.searchByPrice(toFromRequestDTO);
         call.enqueue(new Callback<List<ArtikalESDTO>>() {
 
 
@@ -82,18 +87,19 @@ public class SearchByNazivActivity extends AppCompatActivity {
                 System.out.println(response.body());
 
                 if(response.body().size()!=0){
-                    Toast.makeText(SearchByNazivActivity.this, "Нађено резултата " + response.body().size(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SearchByPriceArtikal.this, "Нађено резултата " + response.body().size(), Toast.LENGTH_SHORT).show();
                     recyclerView.setAdapter(new ElasticSearchAdapter(response.body(), getApplicationContext()));
-                    naziv.setAlpha(0);
-                    mBtn.setAlpha(0);
+                    from.setFocusable(false);
+                    to.setFocusable(false);
+                    mBtn.setFocusable(false);
                 }else{
-                    Toast.makeText(SearchByNazivActivity.this, "Нађено резултата " + response.body().size(), Toast.LENGTH_SHORT).show();
-                    AlertDialog.Builder builder = new AlertDialog.Builder(SearchByNazivActivity.this);
+                    Toast.makeText(SearchByPriceArtikal.this, "Нађено резултата " + response.body().size(), Toast.LENGTH_SHORT).show();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(SearchByPriceArtikal.this);
                     builder.setCancelable(true);
                     builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            Intent intent = new Intent(SearchByNazivActivity.this, SearchMenuActivity.class);
+                            Intent intent = new Intent(SearchByPriceArtikal.this, SearchMenuActivity.class);
                             startActivity(intent);
                         }
                     });

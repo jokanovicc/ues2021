@@ -30,35 +30,35 @@ public class SearchController {
         return porudzbinaESService.getByTekst(porudzbinaKomentarRequest.getText());
     }
 
-    @GetMapping("/price")
+    @PostMapping("/price")
     public List<ArtikalESDto> searchByPrice(@RequestBody ToFromRequestDTO toFromRequestDTO){
         return artikalESService.findByPrice(toFromRequestDTO.getFrom(), toFromRequestDTO.getTo());
     }
 
-    @GetMapping("/rating")
+    @PostMapping("/rating")
     public List<PorudzbinaESDto> searchByRating(@RequestBody ToFromRequestDTO toFromRequestDTO){
         return porudzbinaESService.findByOcena(toFromRequestDTO.getFrom(), toFromRequestDTO.getTo());
     }
 
 
-    @GetMapping("/naziv-cena")
+    @PostMapping("/naziv-cena")
     public List<ArtikalESDto> findByNazivCena(@RequestBody AndOrRequest artikalNazivCenaRequest){
-        if(artikalNazivCenaRequest.isOrUpit() == true){
+        if(artikalNazivCenaRequest.isOr() == true){
             //Upit je sa Or
-            return artikalESService.searchByNazivPrice(artikalNazivCenaRequest.getNaziv(),artikalNazivCenaRequest.getFrom(),artikalNazivCenaRequest.getTo(),true);
+            return artikalESService.searchByNazivPriceOr(artikalNazivCenaRequest.getNaziv(),artikalNazivCenaRequest.getFrom(),artikalNazivCenaRequest.getTo());
         }else//Upit je sa And
-            return artikalESService.searchByNazivPrice(artikalNazivCenaRequest.getNaziv(),artikalNazivCenaRequest.getFrom(),artikalNazivCenaRequest.getTo(),false);
+            return artikalESService.searchByNazivPriceAnd(artikalNazivCenaRequest.getNaziv(),artikalNazivCenaRequest.getFrom(),artikalNazivCenaRequest.getTo());
 
 
     }
 
-    @GetMapping("/komentar-ocena")
+    @PostMapping("/komentar-ocena")
     public List<PorudzbinaESDto> findByTekstRating(@RequestBody AndOrRequest artikalNazivCenaRequest){
-        if(artikalNazivCenaRequest.isOrUpit() == true){
+        if(artikalNazivCenaRequest.isOr() == true){
             //Upit je sa Or
-            return porudzbinaESService.findByOcenaTekst(artikalNazivCenaRequest.getFrom(),artikalNazivCenaRequest.getTo(),artikalNazivCenaRequest.getNaziv(),true);
+            return porudzbinaESService.searchByOcenaTekstOr(artikalNazivCenaRequest.getNaziv(),artikalNazivCenaRequest.getFrom(),artikalNazivCenaRequest.getTo());
         }else//Upit je sa And
-            return porudzbinaESService.findByOcenaTekst(artikalNazivCenaRequest.getFrom(),artikalNazivCenaRequest.getTo(),artikalNazivCenaRequest.getNaziv(),false);
+            return porudzbinaESService.searchByOcenaTekstAnd(artikalNazivCenaRequest.getNaziv(),artikalNazivCenaRequest.getFrom(),artikalNazivCenaRequest.getTo());
 
 
     }

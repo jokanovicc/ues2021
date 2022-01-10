@@ -69,10 +69,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter  {
                 .antMatchers(HttpMethod.POST, "/korisnici/register-kupac").permitAll()
                 .antMatchers(HttpMethod.POST, "/elastic/naziv").permitAll()
                 .antMatchers(HttpMethod.POST, "/elastic/tekst-komentara").permitAll()
-                .antMatchers(HttpMethod.GET, "/elastic/price").permitAll()
-                .antMatchers(HttpMethod.GET, "/elastic/rating").permitAll()
-                .antMatchers(HttpMethod.GET, "/elastic/naziv-cena").permitAll()
-                .antMatchers(HttpMethod.GET, "/elastic/komentar-ocena").permitAll()
+                .antMatchers(HttpMethod.POST, "/elastic/price").permitAll()
+                .antMatchers(HttpMethod.POST, "/elastic/rating").permitAll()
+                .antMatchers(HttpMethod.POST, "/elastic/naziv-cena").permitAll()
+                .antMatchers(HttpMethod.POST, "/elastic/komentar-ocena").permitAll()
 
                 .anyRequest().authenticated();
 

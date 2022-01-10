@@ -1,5 +1,6 @@
 package com.ftn.Taverna.elastic.services;
 
+import com.ftn.Taverna.elastic.controllers.dtoS.ArtikalESDto;
 import com.ftn.Taverna.elastic.controllers.dtoS.PorudzbinaESDto;
 import com.ftn.Taverna.elastic.controllers.dtoS.SimpleQueryES;
 import com.ftn.Taverna.elastic.mappers.ArtikalMapper;
@@ -62,22 +63,28 @@ public class PorudzbinaESService {
 
     }
 
-    public List<PorudzbinaESDto> findByOcenaTekst(Double from, Double to, String text, Boolean or){
+    public List<PorudzbinaESDto> searchByOcenaTekstAnd(String naziv, Double from, Double to){
         String range = from + "-" + to;
-        QueryBuilder priceQuery= SearchQueryGenerator.createRangeQuery(new SimpleQueryES("ocena",range));
-        QueryBuilder komentarQuery = SearchQueryGenerator.createWordQuery(new SimpleQueryES("komentar",text));
-
-        if(or){
-            BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery()
-                    .should(priceQuery)
-                    .should(komentarQuery);
-        }
-
+        QueryBuilder ratingQuery= SearchQueryGenerator.createRangeQuery(new SimpleQueryES("ocena",range));
+        QueryBuilder textQuery = SearchQueryGenerator.createWordQuery(new SimpleQueryES("komentar",naziv));
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery()
-                .must(priceQuery)
-                .must(komentarQuery);
-
+                .must(ratingQuery)
+                .must(textQuery);
         return PorudzbinaMapper.mapDtos(searchByBoolQuery(boolQueryBuilder));
+
+
+
+    }
+
+    public List<PorudzbinaESDto> searchByOcenaTekstOr(String naziv, Double from, Double to){
+        String range = from + "-" + to;
+        QueryBuilder ratingQuery= SearchQueryGenerator.createRangeQuery(new SimpleQueryES("ocena",range));
+        QueryBuilder komentarQuery = SearchQueryGenerator.createWordQuery(new SimpleQueryES("komentar",naziv));
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery()
+                .should(ratingQuery)
+                .should(komentarQuery);
+        return PorudzbinaMapper.mapDtos(searchByBoolQuery(boolQueryBuilder));
+
 
 
     }

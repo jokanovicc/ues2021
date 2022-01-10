@@ -1,8 +1,10 @@
 package com.ftn.Taverna.elastic.services;
 
 import com.ftn.Taverna.elastic.controllers.dtoS.ArtikalESDto;
+import com.ftn.Taverna.elastic.controllers.dtoS.PorudzbinaESDto;
 import com.ftn.Taverna.elastic.controllers.dtoS.SimpleQueryES;
 import com.ftn.Taverna.elastic.mappers.ArtikalMapper;
+import com.ftn.Taverna.elastic.mappers.PorudzbinaMapper;
 import com.ftn.Taverna.elastic.model.ArtikalES;
 import com.ftn.Taverna.elastic.repository.ArtikalEsRepository;
 import org.elasticsearch.index.query.BoolQueryBuilder;
@@ -72,20 +74,26 @@ public class ArtikalESService {
 
 
 
-    public List<ArtikalESDto> searchByNazivPrice(String naziv, Double from, Double to, Boolean orOperator){
+    public List<ArtikalESDto> searchByNazivPriceAnd(String naziv, Double from, Double to){
+            String range = from + "-" + to;
+            QueryBuilder priceQuery= SearchQueryGenerator.createRangeQuery(new SimpleQueryES("cena",range));
+            QueryBuilder komentarQuery = SearchQueryGenerator.createMatchQueryBuilder(new SimpleQueryES("naziv",naziv));
+            BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery()
+                        .must(priceQuery)
+                        .must(komentarQuery);
+            return ArtikalMapper.mapDtos(searchByBoolQuery(boolQueryBuilder));
+
+
+
+    }
+
+    public List<ArtikalESDto> searchByNazivPriceOr(String naziv, Double from, Double to){
         String range = from + "-" + to;
         QueryBuilder priceQuery= SearchQueryGenerator.createRangeQuery(new SimpleQueryES("cena",range));
-        QueryBuilder nazivQuery = SearchQueryGenerator.createWordQuery(new SimpleQueryES("naziv",naziv));
-
-        if(orOperator) {
-            BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery()
-                    .should(priceQuery)
-                    .should(nazivQuery);
-        }
+        QueryBuilder komentarQuery = SearchQueryGenerator.createWordQuery(new SimpleQueryES("naziv",naziv));
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery()
-                .must(priceQuery)
-                .must(nazivQuery);
-
+                .should(priceQuery)
+                .should(komentarQuery);
         return ArtikalMapper.mapDtos(searchByBoolQuery(boolQueryBuilder));
 
 

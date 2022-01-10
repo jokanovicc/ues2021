@@ -14,4 +14,5 @@ public interface ArtikalRepository extends JpaRepository<Artikal, Integer> {
     @Query(value = "select sum(a.procenat) from akcija a where a.id in (select aa.akcija_id  from artikli_akcije aa where aa.artikal_id = ?1) and  a.do_kad >= ?2 and a.od_kad <= ?2",nativeQuery = true)
     Double getProcenatAkcije(Integer id,Date datum);
 
+
 }

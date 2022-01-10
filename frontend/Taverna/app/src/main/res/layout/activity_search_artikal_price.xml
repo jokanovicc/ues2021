@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".elastic.SearchByKomentarActivity"
+    tools:context=".elastic.SearchByRatingPorudzbina"
     android:orientation="vertical">
 
 
@@ -20,7 +20,7 @@
             android:background="@color/cardview_light_background"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="// Претрага по тексту коментара"
+            android:text="// Претрага по цени артикла"
             android:textColor="@color/black"/>
 
 
@@ -42,23 +42,53 @@
                     android:layout_marginLeft="1dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tekst:"
-                    android:textSize="20sp" />
+                    android:text="Цена од:"
+                    android:textSize="15sp" />
 
 
 
                 <EditText
-                    android:id="@+id/inputKomentarSearch"
-                    android:layout_width="match_parent"
+                    android:id="@+id/inputPriceFrom"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:inputType="textMultiLine"
-                    android:layout_marginBottom="20dp"/>
+                    android:inputType="number" />
+
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_marginLeft="1dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Цена до:"
+                    android:textSize="15sp" />
+
+
+
+                <EditText
+                    android:id="@+id/inputPriceTo"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:layout_marginBottom="10dp"/>
+
+
+
 
             </LinearLayout>
 
 
+
             <Button
-                android:id="@+id/searchKomentarButton"
+                android:id="@+id/searchPriceButton"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text="Pretraga"
@@ -68,7 +98,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvKomentarSearch"
+                    android:id="@+id/rvPriceSearch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="1dp"
@@ -86,4 +116,3 @@
 
 
 </LinearLayout>
-

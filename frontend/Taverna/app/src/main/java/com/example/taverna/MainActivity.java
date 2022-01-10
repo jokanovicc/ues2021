@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.taverna.elastic.SearchByKomentarActivity;
+import com.example.taverna.elastic.SearchMenuActivity;
 import com.example.taverna.model.Korisnik;
 import com.example.taverna.model.Login;
 import com.example.taverna.servisi.KorisniciApiService;
@@ -90,18 +91,11 @@ public class MainActivity extends AppCompatActivity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent33 = new Intent(MainActivity.this, SearchByNazivActivity.class);
+                Intent intent33 = new Intent(MainActivity.this, SearchMenuActivity.class);
                 startActivity(intent33);
             }
         });
 
-        searchButton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent333 = new Intent(MainActivity.this, SearchByKomentarActivity.class);
-                startActivity(intent333);
-            }
-        });
 
         registerProdavacButton.setOnClickListener(new View.OnClickListener() {
             @Override

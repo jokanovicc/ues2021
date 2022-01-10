@@ -46,6 +46,15 @@
         <activity android:name=".KomentariActivity" />
         <activity android:name=".SearchByNazivActivity" />
         <activity android:name=".elastic.SearchByKomentarActivity" />
+        <activity android:name=".elastic.SearchMenuActivity" />
+        <activity android:name=".elastic.SearchByPriceArtikal" />
+        <activity android:name=".elastic.SearchByRatingPorudzbina" />
+        <activity android:name=".elastic.SearchByNazivPrice" />
+        <activity android:name=".elastic.SearchByRatingText" />
+
+
+
+
 
         <activity
             android:name=".ArtikalActivity"
