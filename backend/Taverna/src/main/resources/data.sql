@@ -1,9 +1,9 @@
 
-INSERT INTO KORISNIK(blokiran,ime,korisnicko,prezime,roles,sifra,adresa) VALUES (0,'Petar','petarp','Petrovic','KUPAC','$2y$12$NBbapzmuJ51yZfY7YDcjc.EVGgiSa8QQROlbhn8jSrSp57BqNXvmq','Багљаш, Зрењанин');
-INSERT INTO KORISNIK(blokiran,ime,korisnicko,prezime,roles,sifra,adresa) VALUES (0,'Jovan','jovanj','Jovanovic','KUPAC','$2y$12$4/Un/5KB8khlSkeBQ3M8WulnbpleV2dqmRBRMyfhWHSdEj89zjnqe','Zarka Zrenjanina 42a Zrenjanin');
-INSERT INTO KORISNIK(blokiran,ime,korisnicko,prezime,roles,sifra,adresa) VALUES (0,'Milan','milan','Milanic','PRODAVAC','$2y$12$p.LEypYqiJw2TOnB3fHQH.LlbYxykTaMD/9cfxjPJ50//eUo8z5am','Сечањ, Вожда Карађорђа');
-INSERT INTO KORISNIK(blokiran,ime,korisnicko,prezime,roles,sifra,adresa) VALUES (0,'Janko','janko','Jovanovic','PRODAVAC','$2y$12$Gzr4ylnTWwZ2enY.AbVTbO78wS6bf8OIdC5VA7qTSCcw.vjXvaHwO','Mileticeva 21 Zrenjanin');
-INSERT INTO KORISNIK(blokiran,ime,korisnicko,prezime,roles,sifra,adresa) VALUES (0,'Ado','adminat','Adminic','ADMIN','$2y$12$gTVzo.W/QhBe6Hn4mXeVwuuXdHSjvQsoU5fQGOZ8w9gZ1xLHeBiLK','Beograd');
+INSERT INTO KORISNIK(blokiran,ime,korisnicko,prezime,roles,sifra,adresa) VALUES (0,'Petar','petarp','Petrovic','KUPAC','$2a$12$Em4G.dRNsIogor3VDYndHeFBlB4Uq9.h2zQ8dfNconpX51IF9WrO6','Багљаш, Зрењанин');
+INSERT INTO KORISNIK(blokiran,ime,korisnicko,prezime,roles,sifra,adresa) VALUES (0,'Jovan','jovanj','Jovanovic','KUPAC','$2a$12$HrSJNzw8HRjnfgX85P7tAOvX/b7I6ODYOsQ43PlIarC/yzFPJFW96','Zarka Zrenjanina 42a Zrenjanin');
+INSERT INTO KORISNIK(blokiran,ime,korisnicko,prezime,roles,sifra,adresa) VALUES (0,'Milan','milan','Milanic','PRODAVAC','$2a$12$nsxMLQUY1B7LBE0GqnmakeMizkPXsfMgWgEhYVMV1/.ljLTQzf/0.','Сечањ, Вожда Карађорђа');
+INSERT INTO KORISNIK(blokiran,ime,korisnicko,prezime,roles,sifra,adresa) VALUES (0,'Janko','janko','Jovanovic','PRODAVAC','$2a$12$eTILd/4J/8abnNM/0ymJfegYGeoUi8n1zzfcUOtX4ioWGSq42WsyW','Mileticeva 21 Zrenjanin');
+INSERT INTO KORISNIK(blokiran,ime,korisnicko,prezime,roles,sifra,adresa) VALUES (0,'Ado','adminat','Adminic','ADMIN','$2a$12$X0IUrn8k3RGS6FAi.zyf8O0T2OqNM5o15.OIfrRnoGrswfp2ow0KG','Beograd');
 
 INSERT INTO KUPAC(korisnik_id) VALUES (1);
 INSERT INTO KUPAC(korisnik_id) VALUES (2);

@@ -73,6 +73,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter  {
                 .antMatchers(HttpMethod.POST, "/elastic/rating").permitAll()
                 .antMatchers(HttpMethod.POST, "/elastic/naziv-cena").permitAll()
                 .antMatchers(HttpMethod.POST, "/elastic/komentar-ocena").permitAll()
+                .antMatchers(HttpMethod.POST, "/elastic/rating-artikla").permitAll()
+                .antMatchers(HttpMethod.POST, "/elastic/komentari-artikla").permitAll()
+                .antMatchers(HttpMethod.POST, "/elastic/ukupna-cena").permitAll()
 
                 .anyRequest().authenticated();
 

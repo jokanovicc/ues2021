@@ -33,6 +33,8 @@ public class PorudzbinaES {
     @Field(type = FieldType.Integer)
     private Integer ocena;
 
+    @Field(type = FieldType.Double)
+    private Double cena;
 
 
     public PorudzbinaES(Porudzbina porudzbina){

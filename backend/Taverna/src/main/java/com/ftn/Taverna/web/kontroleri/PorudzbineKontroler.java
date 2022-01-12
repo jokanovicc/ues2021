@@ -1,6 +1,8 @@
 package com.ftn.Taverna.web.kontroleri;
 
 
+import com.ftn.Taverna.elastic.model.PorudzbinaES;
+import com.ftn.Taverna.elastic.services.PorudzbinaESService;
 import com.ftn.Taverna.repository.ArtikalRepository;
 import com.ftn.Taverna.repository.PorudzbinaRepository;
 import com.ftn.Taverna.repository.StavkaRepository;
@@ -45,6 +47,8 @@ public class PorudzbineKontroler {
     StavkaRepository stavkaRepository;
     @Autowired
     KorisnikServis korisnikServis;
+    @Autowired
+    PorudzbinaESService porudzbinaESService;
 
 
 
@@ -119,6 +123,9 @@ public class PorudzbineKontroler {
         }
         porudzbina.setStavke(stavkas);
         porudzbinaServis.save(porudzbina);
+
+
+        PorudzbinaES porudzbinaES = new PorudzbinaES();
 
         return new ResponseEntity<>(new PorudzbinaDTO2(porudzbina),HttpStatus.OK);
 

@@ -13,4 +13,6 @@ public interface PorudzbinaEsRepository extends ElasticsearchRepository<Porudzbi
     List<PorudzbinaES> findAllByKomentar(String tekst);
 
 
+
+
 }

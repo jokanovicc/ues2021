@@ -4,10 +4,14 @@ import com.ftn.Taverna.elastic.model.ArtikalES;
 import com.ftn.Taverna.elastic.model.PorudzbinaES;
 import com.ftn.Taverna.elastic.repository.ArtikalEsRepository;
 import com.ftn.Taverna.elastic.repository.PorudzbinaEsRepository;
+import com.ftn.Taverna.elastic.services.ArtikalESService;
+import com.ftn.Taverna.elastic.services.PorudzbinaESService;
 import com.ftn.Taverna.model.Artikal;
 import com.ftn.Taverna.model.Porudzbina;
+import com.ftn.Taverna.model.Stavka;
 import com.ftn.Taverna.repository.ArtikalRepository;
 import com.ftn.Taverna.repository.PorudzbinaRepository;
+import com.ftn.Taverna.repository.StavkaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.stereotype.Component;
@@ -40,6 +44,12 @@ public class Loader {
     PorudzbinaRepository porudzbinaRepository;
 
 
+    @Autowired
+    ArtikalESService artikalESService;
+
+    @Autowired
+    PorudzbinaESService porudzbinaESService;
+
     @PostConstruct
     @Transactional
     public void loadAll(){
@@ -51,6 +61,10 @@ public class Loader {
         for(Artikal artikal: artikalRepository.findAll()){
             artikli.add(new ArtikalES(artikal));
         }
+        for(ArtikalES artikalES: artikli){
+            artikalES.setRating(artikalESService.getRating(artikalES));
+            artikalES.setKomentara(artikalESService.getBrojKomentara(artikalES));
+        }
         artikalEsRepository.saveAll(artikli);
 
 
@@ -58,10 +72,15 @@ public class Loader {
         for(Porudzbina porudzbina: porudzbinaRepository.findAll()){
             porudzbinaES.add(new PorudzbinaES(porudzbina));
         }
+        for(PorudzbinaES p: porudzbinaES){
+            p.setCena(porudzbinaESService.getUkupnaCenaPorudzbine(p));
+        }
 
         porudzbinaEsRepository.saveAll(porudzbinaES);
 
+
         System.out.println("Loading Completed");
+
 
 
     }

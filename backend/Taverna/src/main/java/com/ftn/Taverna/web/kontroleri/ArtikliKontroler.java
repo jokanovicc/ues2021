@@ -1,5 +1,8 @@
 package com.ftn.Taverna.web.kontroleri;
 
+import com.ftn.Taverna.elastic.mappers.ArtikalMapper;
+import com.ftn.Taverna.elastic.model.ArtikalES;
+import com.ftn.Taverna.elastic.services.ArtikalESService;
 import com.ftn.Taverna.model.Akcija;
 import com.ftn.Taverna.model.Artikal;
 import com.ftn.Taverna.web.kontroleri.DTO.AkcijaDTO;
@@ -39,6 +42,9 @@ public class ArtikliKontroler {
     private ProdavacServis prodavacServis;
     @Autowired
     private AkcijaServis akcijaServis;
+
+    @Autowired
+    private ArtikalESService artikalESService;
 
 
 
@@ -134,6 +140,7 @@ public class ArtikliKontroler {
         }
         artikal.setProdavac(prodavac);
         artikal = artikliServis.saveArtikal(artikal);
+        artikalESService.index(new ArtikalES(artikal));
         return new ResponseEntity<ArtikalDTO>(new ArtikalDTO(artikal), HttpStatus.CREATED);
 
 
@@ -148,6 +155,7 @@ public class ArtikliKontroler {
         UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
         Prodavac prodavac = prodavacServis.findByUsername(userPrincipal.getUsername());
         List<Artikal> artikli = artikliServis.findByProdavac(prodavac.getId());
+        ArtikalES artikalES = artikalESService.findByJpaID(id);
         if(!artikli.contains(artikal)){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }else {
@@ -155,6 +163,10 @@ public class ArtikliKontroler {
             artikal.setCena(artikalDTO.getCena());
             artikal.setOpis(artikalDTO.getOpis());
             artikliServis.saveArtikal(artikal);
+            artikalES.setNaziv(artikal.getNaziv());
+            artikalES.setCena(artikal.getCena());
+            artikalES.setOpis(artikal.getOpis());
+            artikalESService.index(artikalES);
             return new ResponseEntity<>(new ArtikalDTO(artikal), HttpStatus.CREATED);
         }
     }

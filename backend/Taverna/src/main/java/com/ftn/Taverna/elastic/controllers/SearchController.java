@@ -1,6 +1,8 @@
 package com.ftn.Taverna.elastic.controllers;
 
 import com.ftn.Taverna.elastic.controllers.dtoS.*;
+import com.ftn.Taverna.elastic.model.ArtikalES;
+import com.ftn.Taverna.elastic.repository.ArtikalEsRepository;
 import com.ftn.Taverna.elastic.services.ArtikalESService;
 import com.ftn.Taverna.elastic.services.PorudzbinaESService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +21,12 @@ public class SearchController {
     @Autowired
     private PorudzbinaESService porudzbinaESService;
 
+    @Autowired
+    ArtikalEsRepository artikalEsRepository;
+
 
     @PostMapping("/naziv")
-    public List<ArtikalESDto> searchByNaziv(@RequestBody TextRequestDTO textRequestDTO){
+    public List<ArtikalES> searchByNaziv(@RequestBody TextRequestDTO textRequestDTO){
         return artikalESService.findByNaziv(textRequestDTO.getText());
     }
 
@@ -62,6 +67,23 @@ public class SearchController {
 
 
     }
+
+
+    @PostMapping("/rating-artikla")
+    public List<ArtikalESDto> searchByRatingArtikla(@RequestBody ToFromRequestDTO toFromRequestDTO){
+        return artikalESService.findByOcena(toFromRequestDTO.getFrom(),toFromRequestDTO.getTo());
+    }
+
+    @PostMapping("/komentari-artikla")
+    public List<ArtikalESDto> searchByKomentariArtikla(@RequestBody ToFromRequestDTO toFromRequestDTO){
+        return artikalESService.findByKomentara(toFromRequestDTO.getFrom(),toFromRequestDTO.getTo());
+    }
+
+    @PostMapping("/ukupna-cena")
+    public List<PorudzbinaESDto> searchByUkupnaCena(@RequestBody ToFromRequestDTO toFromRequestDTO){
+        return porudzbinaESService.findByCena(toFromRequestDTO.getFrom(), toFromRequestDTO.getTo());
+    }
+
 
 
 

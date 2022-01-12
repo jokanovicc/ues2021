@@ -1,12 +1,12 @@
 package com.ftn.Taverna.elastic.services;
 
 import com.ftn.Taverna.elastic.controllers.dtoS.ArtikalESDto;
-import com.ftn.Taverna.elastic.controllers.dtoS.PorudzbinaESDto;
 import com.ftn.Taverna.elastic.controllers.dtoS.SimpleQueryES;
 import com.ftn.Taverna.elastic.mappers.ArtikalMapper;
-import com.ftn.Taverna.elastic.mappers.PorudzbinaMapper;
 import com.ftn.Taverna.elastic.model.ArtikalES;
 import com.ftn.Taverna.elastic.repository.ArtikalEsRepository;
+import com.ftn.Taverna.model.Artikal;
+import com.ftn.Taverna.repository.ArtikalRepository;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -30,14 +30,23 @@ public class ArtikalESService {
     @Autowired
     private ArtikalEsRepository artikalEsRepository;
 
+    @Autowired
+    private ArtikalRepository artikalRepository;
+
 
     public ArtikalESService(ElasticsearchRestTemplate elasticsearchRestTemplate) {
         this.elasticsearchRestTemplate = elasticsearchRestTemplate;
     }
 
+    public void index(ArtikalES a){artikalEsRepository.save(a);
+    }
+    public ArtikalES findByJpaID(Integer jpaId){
+        return artikalEsRepository.getByJpaId(jpaId);
+    }
 
-    public List<ArtikalESDto> findByNaziv(String naziv) {
-        return mapsArtikalToArtikalDTO(artikalEsRepository.findAllByNaziv(naziv));
+
+    public List<ArtikalES> findByNaziv(String naziv) {
+        return artikalEsRepository.findAllByNaziv(naziv);
     }
 
 
@@ -48,6 +57,19 @@ public class ArtikalESService {
         }
         return artikalESDtos;
     }
+
+    public Double getRating(ArtikalES artikalES) {
+        if(artikalRepository.getRatingArtikla(artikalES.getJpaId()) != null){
+            return artikalRepository.getRatingArtikla(artikalES.getJpaId());
+        }else return 0.0;
+
+    }
+
+    public Integer getBrojKomentara(ArtikalES artikalES){
+        return artikalRepository.getBrojKomentaraArtikla(artikalES.getJpaId());
+    }
+
+
 
 
 
@@ -64,6 +86,48 @@ public class ArtikalESService {
 
     }
 
+    public List<ArtikalESDto> findByOcena(Double from, Double to){
+        String range = from + "-" + to;
+        QueryBuilder priceQuery= SearchQueryGenerator.createRangeQuery(new SimpleQueryES("rating",range));
+
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery()
+                .must(priceQuery);
+
+        return ArtikalMapper.mapDtos(searchByBoolQuery(boolQueryBuilder));
+
+
+
+    }
+
+    public List<ArtikalESDto> findByKomentara(Double from, Double to){
+        String range = from + "-" + to;
+        QueryBuilder priceQuery= SearchQueryGenerator.createRangeQuery(new SimpleQueryES("komentara",range));
+
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery()
+                .must(priceQuery);
+
+        return ArtikalMapper.mapDtos(searchByBoolQuery(boolQueryBuilder));
+
+
+
+    }
+
+    public List<ArtikalESDto> findByRatingQuery(Double from, Double to){
+        String range = from + "-" + to;
+        QueryBuilder priceQuery= SearchQueryGenerator.createRangeQuery(new SimpleQueryES("cena",range));
+
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery()
+                .must(priceQuery);
+
+        return ArtikalMapper.mapDtos(searchByBoolQuery(boolQueryBuilder));
+
+
+
+    }
+
+
+
+
     private SearchHits<ArtikalES> searchByBoolQuery(BoolQueryBuilder boolQueryBuilder) {
         NativeSearchQuery searchQuery = new NativeSearchQueryBuilder()
                 .withQuery(boolQueryBuilder)
@@ -74,10 +138,15 @@ public class ArtikalESService {
 
 
 
+
+
+
+
+
     public List<ArtikalESDto> searchByNazivPriceAnd(String naziv, Double from, Double to){
             String range = from + "-" + to;
             QueryBuilder priceQuery= SearchQueryGenerator.createRangeQuery(new SimpleQueryES("cena",range));
-            QueryBuilder komentarQuery = SearchQueryGenerator.createMatchQueryBuilder(new SimpleQueryES("naziv",naziv));
+            QueryBuilder komentarQuery = SearchQueryGenerator.createWordQuery(new SimpleQueryES("naziv",naziv));
             BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery()
                         .must(priceQuery)
                         .must(komentarQuery);

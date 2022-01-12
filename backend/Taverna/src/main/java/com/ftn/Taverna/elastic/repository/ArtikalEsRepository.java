@@ -11,4 +11,6 @@ public interface ArtikalEsRepository extends ElasticsearchRepository<ArtikalES,S
 
     List<ArtikalES> findAllByJpaId(Integer id);
     List<ArtikalES> findAllByNaziv(String naziv);
+
+    ArtikalES getByJpaId(Integer id);
 }

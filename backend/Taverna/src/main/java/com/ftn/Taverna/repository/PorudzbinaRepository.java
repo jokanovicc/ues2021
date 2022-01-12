@@ -26,4 +26,12 @@ public interface PorudzbinaRepository extends JpaRepository<Porudzbina, Integer>
     @Query(value="select pdz.id,pdz.anoniman_komentar,pdz.arhiviran_komentar,pdz.dostavljeno,pdz.komentar,pdz.ocena,pdz.satnica,pdz.komentar,pdz.kupac_korisnik_id FROM porudzbina pdz where pdz.id in (select s.porudzbina_id from stavka s where s.artikal_id in (select a.id from artikal a where a.prodavac_korisnik_id =?1))", nativeQuery = true)
     List<Porudzbina> getKomentari(Integer id);
 
+
+
+    @Query(value = "SELECT s.kolicina*a.cena FROM porudzbina p " +
+            "INNER JOIN stavka s on s.porudzbina_id = p.id " +
+            "INNER JOIN artikal a on s.artikal_id = a.id " +
+            "WHERE p.id=?1 GROUP BY p.id", nativeQuery = true)
+    Double getUkupnaCenaPorudzbine(Integer id);
+
 }

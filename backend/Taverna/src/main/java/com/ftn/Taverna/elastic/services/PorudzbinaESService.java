@@ -8,6 +8,7 @@ import com.ftn.Taverna.elastic.mappers.PorudzbinaMapper;
 import com.ftn.Taverna.elastic.model.ArtikalES;
 import com.ftn.Taverna.elastic.model.PorudzbinaES;
 import com.ftn.Taverna.elastic.repository.PorudzbinaEsRepository;
+import com.ftn.Taverna.repository.PorudzbinaRepository;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -29,6 +30,9 @@ public class PorudzbinaESService {
     private PorudzbinaEsRepository porudzbinaEsRepository;
 
     private final ElasticsearchRestTemplate elasticsearchRestTemplate;
+
+    @Autowired
+    private PorudzbinaRepository porudzbinaRepository;
 
 
     public PorudzbinaESService(ElasticsearchRestTemplate elasticsearchRestTemplate) {
@@ -63,6 +67,19 @@ public class PorudzbinaESService {
 
     }
 
+    public List<PorudzbinaESDto> findByCena(Double from, Double to){
+        String range = from + "-" + to;
+        QueryBuilder priceQuery= SearchQueryGenerator.createRangeQuery(new SimpleQueryES("cena",range));
+
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery()
+                .must(priceQuery);
+
+        return PorudzbinaMapper.mapDtos(searchByBoolQuery(boolQueryBuilder));
+
+
+
+    }
+
     public List<PorudzbinaESDto> searchByOcenaTekstAnd(String naziv, Double from, Double to){
         String range = from + "-" + to;
         QueryBuilder ratingQuery= SearchQueryGenerator.createRangeQuery(new SimpleQueryES("ocena",range));
@@ -87,6 +104,10 @@ public class PorudzbinaESService {
 
 
 
+    }
+
+    public Double getUkupnaCenaPorudzbine(PorudzbinaES p){
+        return porudzbinaRepository.getUkupnaCenaPorudzbine(p.getJpaId());
     }
 
 

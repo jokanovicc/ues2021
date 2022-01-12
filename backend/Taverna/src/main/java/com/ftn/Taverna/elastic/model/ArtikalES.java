@@ -1,5 +1,6 @@
 package com.ftn.Taverna.elastic.model;
 
+import com.ftn.Taverna.elastic.services.ArtikalESService;
 import com.ftn.Taverna.model.Artikal;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,6 +31,10 @@ public class ArtikalES {
 
     private Integer jpaId;
 
+    private Double rating;
+
+    private Integer komentara;
+
 
 
     //mapper
@@ -39,8 +44,6 @@ public class ArtikalES {
         this.cena = artikal.getCena();
         this.opis = artikal.getOpis();
     }
-
-
 
 
 }
