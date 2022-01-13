@@ -35,5 +35,14 @@ public interface ElasticSearchAPIService {
     @POST("elastic/komentar-ocena")
     Call<List<PorudzbinaESDTO>> searchByRatingText(@Body AndOrRequest andOrRequest);
 
+    @POST("elastic/rating-artikla")
+    Call<List<ArtikalESDTO>> searchByRatingArtikla(@Body ToFromRequestDTO toFromRequestDTO);
+
+    @POST("elastic/komentari-artikla")
+    Call<List<ArtikalESDTO>> searchByArtikalBrojKomentara(@Body ToFromRequestDTO toFromRequestDTO);
+
+    @POST("elastic/ukupna-cena")
+    Call<List<PorudzbinaESDTO>> searchByCenaPorudzbine(@Body ToFromRequestDTO toFromRequestDTO);
+
 
 }

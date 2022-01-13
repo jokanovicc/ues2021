@@ -24,11 +24,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Taverna"
         android:usesCleartextTraffic="true" >
-        <activity
-            android:name=".aktivnosti.SearchByNazivActivity"
-            android:exported="false"
-            android:label="@string/title_activity_search_by_naziv"
-            android:theme="@style/Theme.Taverna.NoActionBar" />
         <activity android:name=".IzmenaSifreActivity" />
         <activity android:name=".EditProfilActivity" />
         <activity android:name=".ProdavacGlavnaActivity" />
@@ -51,7 +46,10 @@
         <activity android:name=".elastic.SearchByRatingPorudzbina" />
         <activity android:name=".elastic.SearchByNazivPrice" />
         <activity android:name=".elastic.SearchByRatingText" />
+        <activity android:name=".elastic.SearchArtikalByOcena" />
+        <activity android:name=".elastic.SearchByPorudzbinaCena" />
 
+        <activity android:name=".elastic.SearchByBrojKomentaraArtikla" />
 
 
 

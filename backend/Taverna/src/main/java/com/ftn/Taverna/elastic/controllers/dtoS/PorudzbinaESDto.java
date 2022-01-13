@@ -13,5 +13,7 @@ public class PorudzbinaESDto {
     private boolean anonimanKomentar;
     private Integer ocena;
     private Date satnica;
+    private Double cena;
+    private String kupac;
 
 }

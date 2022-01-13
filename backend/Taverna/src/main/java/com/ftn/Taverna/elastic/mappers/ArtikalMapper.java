@@ -20,6 +20,8 @@ public class ArtikalMapper {
                 .naziv(artikalES.getNaziv())
                 .cena(artikalES.getCena())
                 .opis(artikalES.getOpis())
+                .komentara(artikalES.getKomentara())
+                .rating(artikalES.getRating())
                 .build();
     }
 

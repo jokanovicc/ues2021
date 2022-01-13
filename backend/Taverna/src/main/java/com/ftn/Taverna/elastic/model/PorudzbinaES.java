@@ -36,6 +36,9 @@ public class PorudzbinaES {
     @Field(type = FieldType.Double)
     private Double cena;
 
+    @Field(type = FieldType.Keyword)
+    private String kupac;
+
 
     public PorudzbinaES(Porudzbina porudzbina){
         this.jpaId = porudzbina.getId();
@@ -43,6 +46,7 @@ public class PorudzbinaES {
         this.satnica = porudzbina.getSatnica();
         this.anonimanKomentar = porudzbina.isAnonimanKomentar();
         this.ocena = porudzbina.getOcena();
+        this.kupac = porudzbina.getKupac().getKorisnik().getKorisnicko();
     }
 
 

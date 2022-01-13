@@ -28,7 +28,7 @@ public interface PorudzbinaRepository extends JpaRepository<Porudzbina, Integer>
 
 
 
-    @Query(value = "SELECT s.kolicina*a.cena FROM porudzbina p " +
+    @Query(value = "SELECT SUM(s.kolicina*a.cena) FROM porudzbina p " +
             "INNER JOIN stavka s on s.porudzbina_id = p.id " +
             "INNER JOIN artikal a on s.artikal_id = a.id " +
             "WHERE p.id=?1 GROUP BY p.id", nativeQuery = true)

@@ -22,6 +22,9 @@ public class SearchMenuActivity extends AppCompatActivity {
     MaterialCardView linearLayoutPriceArtikal;
     MaterialCardView linearLayoutRating;
     MaterialCardView linearLayourNazivCena;
+    MaterialCardView linearLayourArtikalRating;
+    MaterialCardView linearLayourArtikalKomentara;
+    MaterialCardView linearLayourUkupnaCena;
 
     MaterialCardView linearLayourTextRating;
 
@@ -37,6 +40,9 @@ public class SearchMenuActivity extends AppCompatActivity {
         linearLayoutRating = findViewById(R.id.linearPorudzbinaRating);
         linearLayourNazivCena = findViewById(R.id.linearArtikalNazivPrice);
         linearLayourTextRating = findViewById(R.id.linearPorudzbinaRatingText);
+        linearLayourArtikalRating = findViewById(R.id.linearArtikalRating);
+        linearLayourArtikalKomentara = findViewById(R.id.linearArtikalKomentara);
+        linearLayourUkupnaCena = findViewById(R.id.linearCenaPorudzbine);
 
         linearLayoutNaziv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +91,29 @@ public class SearchMenuActivity extends AppCompatActivity {
             }
         });
 
+        linearLayourArtikalRating.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SearchMenuActivity.this, SearchArtikalByOcena.class);
+                startActivity(intent);
+            }
+        });
 
+        linearLayourArtikalKomentara.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SearchMenuActivity.this, SearchByBrojKomentaraArtikla.class);
+                startActivity(intent);
+            }
+        });
+
+        linearLayourUkupnaCena.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SearchMenuActivity.this, SearchByPorudzbinaCena.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

@@ -8,18 +8,6 @@
     android:layout_marginBottom="5dp"
     android:padding="5dp">
 
-
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            >
-
-
-
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,35 +22,54 @@
 
 
             <TextView
-                android:id="@+id/nazivArtiklaSearch"
+                android:id="@+id/extendedArtikalNaziv"
                 style="@style/TextAppearance.MaterialComponents.Headline6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Naziv artikla" />
 
-
             <TextView
-                android:id="@+id/opisArtiklaSearch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="2dp"
-                android:text="Ресторан домаће хране на добро познатој адреси " />
+                android:text="Коментарисано пута:"
+                android:textSize="12dp"/>
+
             <TextView
-                android:id="@+id/cenaArtiklaSearch"
+                android:id="@+id/extendedBrojKomentara"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#C0424E"
-                android:textSize="27dp"
+                android:textSize="15dp"
+                android:layout_marginLeft="5dp"
+                android:text="5 " />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Просечна оцена: "
+                android:textSize="12dp"/>
+            <TextView
+                android:id="@+id/extendedOcena"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#C0424E"
+                android:textSize="23dp"
+                android:layout_marginLeft="5dp"
                 android:layout_marginBottom="2dp"
-                android:text="5" />
+                android:text="4.50" />
+
+            <TextView
+                android:id="@+id/extendedCena"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="23dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="2dp"
+                android:text="500.00" />
 
         </LinearLayout>
 
 
     </com.google.android.material.card.MaterialCardView>
-       </LinearLayout>
-
-    </ScrollView>
-
 
 </LinearLayout>

@@ -24,6 +24,8 @@ public class PorudzbinaMapper {
                 .ocena(porudzbinaES.getOcena())
                 .satnica(porudzbinaES.getSatnica())
                 .komentar(porudzbinaES.getKomentar())
+                .cena(porudzbinaES.getCena())
+                .kupac(porudzbinaES.getKupac())
                 .build();
 
 

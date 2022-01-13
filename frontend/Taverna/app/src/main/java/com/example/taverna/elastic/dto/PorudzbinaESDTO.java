@@ -24,6 +24,14 @@ public class PorudzbinaESDTO {
     @Expose
     private String satnica;
 
+    @SerializedName("cena")
+    @Expose
+    private Double cena;
+
+    @SerializedName("kupac")
+    @Expose
+    private String kupac;
+
 
     public String getKomentar() {
         return komentar;
@@ -55,5 +63,22 @@ public class PorudzbinaESDTO {
 
     public void setSatnica(String satnica) {
         this.satnica = satnica;
+    }
+
+
+    public Double getCena() {
+        return cena;
+    }
+
+    public void setCena(Double cena) {
+        this.cena = cena;
+    }
+
+    public String getKupac() {
+        return kupac;
+    }
+
+    public void setKupac(String kupac) {
+        this.kupac = kupac;
     }
 }

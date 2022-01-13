@@ -1,7 +1,9 @@
 package com.ftn.Taverna.web.kontroleri;
 
 
+import com.ftn.Taverna.elastic.model.ArtikalES;
 import com.ftn.Taverna.elastic.model.PorudzbinaES;
+import com.ftn.Taverna.elastic.services.ArtikalESService;
 import com.ftn.Taverna.elastic.services.PorudzbinaESService;
 import com.ftn.Taverna.repository.ArtikalRepository;
 import com.ftn.Taverna.repository.PorudzbinaRepository;
@@ -49,6 +51,8 @@ public class PorudzbineKontroler {
     KorisnikServis korisnikServis;
     @Autowired
     PorudzbinaESService porudzbinaESService;
+    @Autowired
+    ArtikalESService artikalESService;
 
 
 
@@ -111,6 +115,8 @@ public class PorudzbineKontroler {
         porudzbina.setAnonimanKomentar(false);
         porudzbina.setAnonimanKomentar(false);
         porudzbinaServis.save(porudzbina);
+
+
         for (StavkaDTO stavkaDTO:porucivanjeDTO.getListaStavki()) {
 
                 Stavka stavka = new Stavka();
@@ -124,8 +130,11 @@ public class PorudzbineKontroler {
         porudzbina.setStavke(stavkas);
         porudzbinaServis.save(porudzbina);
 
+        PorudzbinaES porudzbinaES = new PorudzbinaES(porudzbina);
+        porudzbinaES.setCena(porudzbinaESService.getUkupnaCenaPorudzbine(porudzbinaES));
+        System.out.println("UKUPNA CENA " + porudzbinaES.getCena());
+        porudzbinaESService.index(porudzbinaES);
 
-        PorudzbinaES porudzbinaES = new PorudzbinaES();
 
         return new ResponseEntity<>(new PorudzbinaDTO2(porudzbina),HttpStatus.OK);
 
@@ -156,6 +165,20 @@ public class PorudzbineKontroler {
         porudzbina.setArhiviranKomentar(false);
         porudzbina.setOcena(komentarDTO.getOcena());
         porudzbinaServis.save(porudzbina);
+        PorudzbinaES porudzbinaES = porudzbinaESService.findById(porudzbina.getId());
+        porudzbinaES.setKomentar(komentarDTO.getKomentar());
+        porudzbinaES.setOcena(komentarDTO.getOcena());
+        porudzbinaES.setAnonimanKomentar(komentarDTO.isAnoniman());
+        porudzbinaESService.index(porudzbinaES);
+
+        List<Stavka> stavke = stavkaRepository.findByPorudzbina(porudzbina);
+        for(Stavka s: stavke){
+            ArtikalES artikalES = artikalESService.findByJpaID(s.getArtikal().getId());
+            artikalES.setKomentara(artikalESService.getBrojKomentara(artikalES));
+            artikalES.setRating(artikalESService.getRating(artikalES));
+            artikalESService.index(artikalES);
+        }
+
 
         //ovde
         return new ResponseEntity<>(new KomentarDTO(porudzbina),HttpStatus.OK);

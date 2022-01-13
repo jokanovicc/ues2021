@@ -8,22 +8,29 @@
         <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/activity_dodavanje_recenzije.xml" value="0.14184397163120568" />
         <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/activity_korisnici.xml" value="0.1796875" />
         <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/activity_main.xml" value="0.3442028985507246" />
+        <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/activity_search_artikal_broj_komentara.xml" value="0.22554347826086957" />
         <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/activity_search_artikal_price.xml" value="0.36666666666666664" />
+        <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/activity_search_by_artikal_ocena.xml" value="0.2552083333333333" />
         <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/activity_search_komentar.xml" value="0.338768115942029" />
-        <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/activity_search_menu.xml" value="0.36666666666666664" />
+        <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/activity_search_menu.xml" value="0.1850582590815627" />
         <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/activity_search_naziv.xml" value="0.20833333333333334" />
         <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/activity_search_naziv_price.xml" value="0.28442028985507245" />
+        <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/activity_search_porudzbina_cena.xml" value="0.371875" />
         <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/activity_search_rating_porudzbina.xml" value="0.3586278586278586" />
         <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/activity_search_tekst_rating.xml" value="0.20520833333333333" />
         <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/akcije_row.xml" value="0.3442028985507246" />
         <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/artikli_akcije_dodavanje_row.xml" value="0.3442028985507246" />
+        <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/artikli_extender_row.xml" value="0.371875" />
         <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/artikli_row.xml" value="0.3442028985507246" />
         <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/elastic_komentar_row.xml" value="0.338768115942029" />
         <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/elastic_naziv_row.xml" value="0.3442028985507246" />
         <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/komentar_upr_row.xml" value="0.3442028985507246" />
         <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/komentari_row.xml" value="0.1796875" />
         <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/korisnici_row.xml" value="0.36666666666666664" />
+        <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/porudzbina_extended_row.xml" value="0.371875" />
         <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/prodavci_row.xml" value="0.3442028985507246" />
+        <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/row_artikli_extended.xml" value="0.371875" />
+        <entry key="..\:/ues2021/frontend/Taverna/app/src/main/res/layout/search_by_artikal_ocena.xml" value="0.371875" />
       </map>
     </option>
   </component>

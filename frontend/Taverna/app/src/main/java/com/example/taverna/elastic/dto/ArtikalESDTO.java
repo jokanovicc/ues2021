@@ -20,6 +20,14 @@ public class ArtikalESDTO {
     @Expose
     public Double cena;
 
+    @SerializedName("rating")
+    @Expose
+    public Double rating;
+
+    @SerializedName("komentara")
+    @Expose
+    public Integer komentara;
+
 
     public String getNaziv() {
         return naziv;
@@ -43,5 +51,21 @@ public class ArtikalESDTO {
 
     public void setCena(Double cena) {
         this.cena = cena;
+    }
+
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
+    }
+
+    public Integer getKomentara() {
+        return komentara;
+    }
+
+    public void setKomentara(Integer komentara) {
+        this.komentara = komentara;
     }
 }

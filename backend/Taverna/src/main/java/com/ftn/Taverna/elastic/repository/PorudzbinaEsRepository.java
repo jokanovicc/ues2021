@@ -11,6 +11,7 @@ public interface PorudzbinaEsRepository extends ElasticsearchRepository<Porudzbi
 
 
     List<PorudzbinaES> findAllByKomentar(String tekst);
+    PorudzbinaES findByJpaId(Integer id);
 
 
 

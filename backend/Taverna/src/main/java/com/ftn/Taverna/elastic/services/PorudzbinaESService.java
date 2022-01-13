@@ -53,6 +53,14 @@ public class PorudzbinaESService {
     }
 
 
+    public void index(PorudzbinaES porudzbinaES){
+        porudzbinaEsRepository.save(porudzbinaES);
+    }
+
+    public PorudzbinaES findById(Integer id){
+        return porudzbinaEsRepository.findByJpaId(id);
+    }
+
 
     public List<PorudzbinaESDto> findByOcena(Double from, Double to){
         String range = from + "-" + to;

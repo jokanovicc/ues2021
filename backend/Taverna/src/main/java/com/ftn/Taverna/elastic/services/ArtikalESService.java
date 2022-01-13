@@ -5,7 +5,6 @@ import com.ftn.Taverna.elastic.controllers.dtoS.SimpleQueryES;
 import com.ftn.Taverna.elastic.mappers.ArtikalMapper;
 import com.ftn.Taverna.elastic.model.ArtikalES;
 import com.ftn.Taverna.elastic.repository.ArtikalEsRepository;
-import com.ftn.Taverna.model.Artikal;
 import com.ftn.Taverna.repository.ArtikalRepository;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
@@ -45,6 +44,7 @@ public class ArtikalESService {
     }
 
 
+
     public List<ArtikalES> findByNaziv(String naziv) {
         return artikalEsRepository.findAllByNaziv(naziv);
     }
@@ -57,6 +57,8 @@ public class ArtikalESService {
         }
         return artikalESDtos;
     }
+
+
 
     public Double getRating(ArtikalES artikalES) {
         if(artikalRepository.getRatingArtikla(artikalES.getJpaId()) != null){
